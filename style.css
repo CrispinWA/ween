@@ -1,0 +1,147 @@
+/* Color variables for consistent theming */
+:root {
+  --color-black: #28292A;
+  --color-blue: #569AD3;
+  --color-red: #ED6B4D;
+}
+
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Apply Outfit Medium to all text elements */
+body {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500; /* Medium */
+}
+
+/* Header container with horizontal layout */
+.header-container {
+  display: flex;
+  align-items: flex-end; /* Aligns items to their bottom edges */
+  padding: 60px;
+  will-change: transform; /* Optimizes for smooth animations */
+  transform: translateZ(0); /* Forces hardware acceleration */
+}
+
+/* Logo styling */
+.logo {
+  max-width: 160px;
+  width: 160px; /* Fixed width to prevent jittery resizing */
+  height: auto;
+  display: block;
+  flex-shrink: 0; /* Prevents the logo from shrinking */
+  will-change: transform; /* Optimizes for smooth animations */
+  transform: translateZ(0); /* Forces hardware acceleration */
+}
+
+/* Text stack */
+.text-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0; /* No spacing between texts */
+}
+
+/* Plan text with spanner icon hstack */
+.plan-hstack {
+  display: flex;
+  align-items: flex-end; /* Aligns text and icon to bottom edges */
+  gap: 12px; /* 12px spacing between text and icon */
+}
+
+/* Spanner icon styling */
+.spanner-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+/* Spacer between text and logo */
+.spacer {
+  flex: 1;
+}
+
+/* Combined section with investor pitch and get in touch */
+.combined-section {
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  margin-bottom: 8px; /* Space between combined section and video */
+}
+
+.section-spacer {
+  flex: 1; /* Takes up all available space between the two sections */
+}
+
+.get-in-touch-hstack {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 8px spacing between text and phone icon */
+}
+
+.get-in-touch-text {
+  color: var(--color-red);
+  margin: 0;
+}
+
+.phone-icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.investor-hstack {
+  display: flex;
+  align-items: center; /* Back to center alignment */
+  gap: 8px; /* 12px spacing between text and arrow */
+  cursor: pointer; /* Shows it's clickable */
+  transition: opacity 0.2s ease; /* Smooth hover effect */
+}
+
+.investor-hstack:hover {
+  opacity: 0.8; /* Slight fade on hover */
+}
+
+.investor-text {
+  color: var(--color-black);
+  margin: 0;
+}
+
+.arrow-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin-top: 16px; /* Moves just the arrow down relative to the text */
+}
+
+/* Video container */
+.video-container {
+  padding: 0 60px;
+  margin-top: 0; /* Removed top margin since investor pitch is above */
+  margin-bottom: 20px; /* Adds space below the video */
+}
+
+
+
+.beta-text {
+  font-size: 20px;
+  color: var(--color-blue);
+  margin: 0;
+  line-height: 1;
+}
+
+.plan-text {
+  font-size: 32px;
+  color: var(--color-black);
+  margin: 0;
+  line-height: 1;
+}
+
+h1, h2, button {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; /* Medium */
+  }
