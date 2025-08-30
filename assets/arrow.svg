@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 51.0441475 28">
+  <!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 152)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: none;
+      }
+
+      .st2 {
+        fill: #569ad3;
+      }
+
+      .st1 {
+        stroke: url(#New_Pattern_Swatch_2);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+    <pattern id="New_Pattern_Swatch_2" data-name="New Pattern Swatch 2" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-1860.6551361 -14755.4137726) scale(1 -1)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+      <g>
+        <rect class="st0" width="19.8620682" height="19.8620682"/>
+        <g>
+          <rect class="st0" width="19.8620682" height="19.8620682"/>
+          <rect class="st2" width="19.8620682" height="19.8620682"/>
+        </g>
+      </g>
+    </pattern>
+  </defs>
+  <path class="st1" d="M40,26v-.0000248c0-13.2548208-10.7451553-23.9999752-23.9999752-23.9999752H2"/>
+  <polyline class="st1" points="49.0441895 11.7302856 40 26 25.7303467 16.9558105"/>
+</svg>
