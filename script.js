@@ -60,5 +60,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // Mobile investor pitch button functionality
+  const mobileInvestorPitchButton = document.getElementById('mobile-investor-pitch-button');
+  if (mobileInvestorPitchButton && videoContainer) {
+    mobileInvestorPitchButton.addEventListener('click', function(e) {
+      console.log('Mobile investor pitch clicked!'); // Debug log
+      
+      // Scroll to center the video in the viewport
+      videoContainer.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center'
+      });
+    });
+  }
+  
+  // Mobile get-in-touch button functionality
+  const mobileGetInTouchButton = document.getElementById('mobile-get-in-touch-button');
+  if (mobileGetInTouchButton && contactForm && videoSection) {
+    mobileGetInTouchButton.addEventListener('click', function(e) {
+      if (!isContactFormOpen) {
+        // Open contact form
+        isContactFormOpen = true;
+        
+        // Hide video and mobile investor pitch button
+        videoSection.style.display = 'none';
+        document.querySelector('.mobile-investor-pitch').style.display = 'none';
+        
+        // Show contact form
+        contactForm.style.display = 'block';
+        
+        // Replace mobile get in touch with close button
+        mobileGetInTouchButton.innerHTML = `
+          <h2 class="get-in-touch-text">Close</h2>
+          <img src="assets/cross.svg" alt="Close Icon" class="close-icon">
+        `;
+      } else {
+        // Close contact form
+        isContactFormOpen = false;
+        
+        // Show video and mobile investor pitch button
+        videoSection.style.display = 'block';
+        document.querySelector('.mobile-investor-pitch').style.display = 'flex';
+        
+        // Hide contact form
+        contactForm.style.display = 'none';
+        
+        // Restore original mobile get in touch content
+        mobileGetInTouchButton.innerHTML = `
+          <h2 class="get-in-touch-text">Get in touch</h2>
+          <img src="assets/phone.svg" alt="Phone Icon" class="phone-icon">
+        `;
+      }
+    });
+  }
 
 });

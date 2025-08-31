@@ -14,7 +14,10 @@
 </head>
 <body>
 
-  <!-- Header with horizontal layout -->
+  <!-- Main container for mobile ordering -->
+  <div class="main-container">
+
+    <!-- Header with horizontal layout -->
   <div class="header-container">
     <!-- Text stack -->
     <div class="text-stack">
@@ -32,29 +35,41 @@
     <img src="assets/logo.svg" alt="Ween Logo" class="logo">
   </div>
 
-  <!-- Combined section with investor pitch and get in touch -->
-  <div class="combined-section">
-    <div class="investor-hstack">
+      <!-- Combined section with investor pitch and get in touch -->
+    <div class="combined-section">
+      <div class="investor-hstack">
+        <h2 class="investor-text">Investor pitch</h2>
+        <img src="assets/arrow.svg" alt="Arrow Icon" class="arrow-icon">
+      </div>
+      
+      <div class="section-spacer"></div>
+      
+      <div class="get-in-touch-hstack" id="get-in-touch-button">
+        <h2 class="get-in-touch-text">Get in touch</h2>
+        <img src="assets/phone.svg" alt="Phone Icon" class="phone-icon">
+      </div>
+    </div>
+
+    <!-- Mobile Investor Pitch Button -->
+    <div class="mobile-investor-pitch" id="mobile-investor-pitch-button">
       <h2 class="investor-text">Investor pitch</h2>
       <img src="assets/arrow.svg" alt="Arrow Icon" class="arrow-icon">
     </div>
-    
-    <div class="section-spacer"></div>
-    
-    <div class="get-in-touch-hstack" id="get-in-touch-button">
+
+    <!-- Embedded Video -->
+    <div class="video-container" id="video-section">
+      <div style="position:relative; width:1px; min-width:100%;padding-bottom:56.25%;">
+        <iframe allow="autoplay" class='spotlightr' allowtransparency="true" style="width:1px; min-width:100%; height: 100%; position:absolute; " allowfullscreen="true" src="https://videos.cdn.spotlightr.com/watch/MTg2Mzc2OA==?fallback=true" frameborder="0" scrolling="no" name="videoPlayer"> </iframe>
+      </div>
+    </div>
+
+    <!-- Mobile Get in Touch Button -->
+    <div class="mobile-get-in-touch" id="mobile-get-in-touch-button">
       <h2 class="get-in-touch-text">Get in touch</h2>
       <img src="assets/phone.svg" alt="Phone Icon" class="phone-icon">
     </div>
-  </div>
 
-  <!-- Embedded Video -->
-  <div class="video-container" id="video-section">
-    <div style="position:relative; width:1px; min-width:100%;padding-bottom:56.25%;">
-      <iframe allow="autoplay" class='spotlightr' allowtransparency="true" style="width:1px; min-width:100%; height: 100%; position:absolute; " allowfullscreen="true" src="https://videos.cdn.spotlightr.com/watch/MTg2Mzc2OA==?fallback=true" frameborder="0" scrolling="no" name="videoPlayer"> </iframe>
-    </div>
-  </div>
-
-  <!-- Contact Form -->
+    <!-- Contact Form -->
   <div class="contact-form-container" id="contact-form" style="display: none;">
     <div class="form-field">
       <label for="name">Name</label>
@@ -76,6 +91,8 @@
       <img src="assets/send.svg" alt="Send Icon" class="send-icon">
     </div>
   </div>
+
+    </div>
 
   <!-- Link to JS file -->
   <script src="script.js"></script>
