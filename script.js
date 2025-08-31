@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (videoContainer && investorHstack) {
     // Listen for clicks on the investor pitch hstack
     investorHstack.addEventListener('click', function(e) {
-      console.log('Investor pitch clicked!'); // Debug log
-      
       // Scroll to center the video in the viewport
       videoContainer.scrollIntoView({ 
         behavior: 'smooth', 
@@ -64,8 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileInvestorPitchButton = document.getElementById('mobile-investor-pitch-button');
   if (mobileInvestorPitchButton && videoContainer) {
     mobileInvestorPitchButton.addEventListener('click', function(e) {
-      console.log('Mobile investor pitch clicked!'); // Debug log
-      
       // Scroll to center the video in the viewport
       videoContainer.scrollIntoView({ 
         behavior: 'smooth', 
@@ -76,15 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Mobile get-in-touch button functionality
   const mobileGetInTouchButton = document.getElementById('mobile-get-in-touch-button');
+  
   if (mobileGetInTouchButton && contactForm && videoSection) {
     mobileGetInTouchButton.addEventListener('click', function(e) {
       if (!isContactFormOpen) {
         // Open contact form
         isContactFormOpen = true;
         
-        // Hide video and mobile investor pitch button
+        // Hide mobile investor pitch button directly
+        const mobileInvestorPitch = document.getElementById('mobile-investor-pitch-button');
+        if (mobileInvestorPitch) {
+          mobileInvestorPitch.style.display = 'none';
+          console.log('Mobile investor pitch hidden');
+        }
+        
+        // Hide video
         videoSection.style.display = 'none';
-        document.querySelector('.mobile-investor-pitch').style.display = 'none';
         
         // Show contact form
         contactForm.style.display = 'block';
@@ -98,9 +101,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close contact form
         isContactFormOpen = false;
         
-        // Show video and mobile investor pitch button
+        // Show mobile investor pitch button directly
+        const mobileInvestorPitch = document.getElementById('mobile-investor-pitch-button');
+        if (mobileInvestorPitch) {
+          mobileInvestorPitch.style.display = 'flex';
+        }
+        
+        // Show video
         videoSection.style.display = 'block';
-        document.querySelector('.mobile-investor-pitch').style.display = 'flex';
         
         // Hide contact form
         contactForm.style.display = 'none';

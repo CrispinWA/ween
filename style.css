@@ -27,8 +27,10 @@ body {
 /* Hide mobile buttons on desktop by default */
 .mobile-investor-pitch,
 .mobile-get-in-touch {
-  display: none !important;
+  display: none;
 }
+
+
 
 
 
@@ -264,12 +266,12 @@ h1, h2, button {
   
   /* Show individual mobile buttons */
   .mobile-investor-pitch {
-    display: flex !important;
+    display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
     transition: opacity 0.2s ease;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     padding: 0 clamp(20px, 5vw, 60px);
   }
   
@@ -278,7 +280,7 @@ h1, h2, button {
   }
   
   .mobile-get-in-touch {
-    display: flex !important;
+    display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
@@ -302,5 +304,15 @@ h1, h2, button {
   /* Increase button touch targets */
   .send-button {
     padding: 12px 0;
+  }
+  
+  /* Hide mobile investor pitch when contact form is open */
+  body.form-open .mobile-investor-pitch {
+    display: none !important;
+  }
+  
+  /* Hide mobile investor pitch when it has the hidden class */
+  .mobile-investor-pitch.hidden {
+    display: none !important;
   }
 }
