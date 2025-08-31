@@ -6,9 +6,7 @@
   <title>ween</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/w.svg" />
-  <link rel="icon" type="image/svg+xml" href="assets/w.svg" sizes="any" />
-  <link rel="shortcut icon" href="assets/w.svg" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
   <!-- Link to CSS file -->
   <link rel="stylesheet" href="style.css" />
@@ -43,16 +41,39 @@
     
     <div class="section-spacer"></div>
     
-    <div class="get-in-touch-hstack">
+    <div class="get-in-touch-hstack" id="get-in-touch-button">
       <h2 class="get-in-touch-text">Get in touch</h2>
       <img src="assets/phone.svg" alt="Phone Icon" class="phone-icon">
     </div>
   </div>
 
   <!-- Embedded Video -->
-  <div class="video-container">
+  <div class="video-container" id="video-section">
     <div style="position:relative; width:1px; min-width:100%;padding-bottom:56.25%;">
       <iframe allow="autoplay" class='spotlightr' allowtransparency="true" style="width:1px; min-width:100%; height: 100%; position:absolute; " allowfullscreen="true" src="https://videos.cdn.spotlightr.com/watch/MTg2Mzc2OA==?fallback=true" frameborder="0" scrolling="no" name="videoPlayer"> </iframe>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="contact-form-container" id="contact-form" style="display: none;">
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    
+    <div class="form-field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+    </div>
+    
+    <div class="send-button">
+      <h2 class="send-text">Send</h2>
+      <img src="assets/send.svg" alt="Send Icon" class="send-icon">
     </div>
   </div>
 

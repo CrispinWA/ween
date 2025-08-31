@@ -22,15 +22,15 @@ body {
 .header-container {
   display: flex;
   align-items: flex-end; /* Aligns items to their bottom edges */
-  padding: 60px;
+  padding: clamp(20px, 5vw, 60px); /* Responsive padding: 20px on mobile, 60px on desktop */
   will-change: transform; /* Optimizes for smooth animations */
   transform: translateZ(0); /* Forces hardware acceleration */
 }
 
 /* Logo styling */
 .logo {
-  max-width: 160px;
-  width: 160px; /* Fixed width to prevent jittery resizing */
+  max-width: clamp(120px, 15vw, 160px); /* Responsive width */
+  width: clamp(120px, 15vw, 160px);
   height: auto;
   display: block;
   flex-shrink: 0; /* Prevents the logo from shrinking */
@@ -55,8 +55,8 @@ body {
 
 /* Spanner icon styling */
 .spanner-icon {
-  width: 32px;
-  height: 32px;
+  width: clamp(24px, 3vw, 32px); /* Responsive icon size */
+  height: clamp(24px, 3vw, 32px);
   display: block;
 }
 
@@ -69,7 +69,7 @@ body {
 .combined-section {
   display: flex;
   align-items: center;
-  padding: 0 60px;
+  padding: 0 clamp(20px, 5vw, 60px); /* Responsive padding */
   margin-bottom: 8px; /* Space between combined section and video */
 }
 
@@ -81,23 +81,31 @@ body {
   display: flex;
   align-items: center;
   gap: 8px; /* 8px spacing between text and phone icon */
+  cursor: pointer; /* Shows it's clickable */
+  transition: opacity 0.2s ease; /* Smooth hover effect */
+}
+
+.get-in-touch-hstack:hover {
+  opacity: 0.8; /* Slight fade on hover */
 }
 
 .get-in-touch-text {
   color: var(--color-red);
   margin: 0;
+  white-space: nowrap; /* Prevents text wrapping */
+  font-size: clamp(14px, 2vw, 24px); /* Responsive font size */
 }
 
 .phone-icon {
-  width: 28px;
-  height: 28px;
+  width: clamp(20px, 2.5vw, 28px); /* Responsive icon size */
+  height: clamp(20px, 2.5vw, 28px);
   display: block;
 }
 
 .investor-hstack {
   display: flex;
   align-items: center; /* Back to center alignment */
-  gap: 8px; /* 12px spacing between text and arrow */
+  gap: 8px; /* 8px spacing between text and arrow */
   cursor: pointer; /* Shows it's clickable */
   transition: opacity 0.2s ease; /* Smooth hover effect */
 }
@@ -109,39 +117,161 @@ body {
 .investor-text {
   color: var(--color-black);
   margin: 0;
+  white-space: nowrap; /* Prevents text wrapping */
+  font-size: clamp(16px, 2vw, 24px); /* Responsive font size */
 }
 
 .arrow-icon {
-  width: 40px;
-  height: 40px;
+  width: clamp(24px, 3vw, 32px); /* Responsive icon size */
+  height: clamp(24px, 3vw, 32px);
   display: block;
-  margin-top: 16px; /* Moves just the arrow down relative to the text */
+}
+
+/* Close icon styling */
+.close-icon {
+  width: clamp(16px, 2vw, 20px); /* Responsive icon size */
+  height: clamp(16px, 2vw, 20px);
+  display: block;
 }
 
 /* Video container */
 .video-container {
-  padding: 0 60px;
-  margin-top: 0; /* Removed top margin since investor pitch is above */
+  padding: 0 clamp(20px, 5vw, 60px); /* Responsive padding */
+  margin-top: 20px; /* Removed top margin since investor pitch is above */
   margin-bottom: 20px; /* Adds space below the video */
+}
+
+/* Contact Form */
+.contact-form-container {
+  padding: 0 clamp(20px, 5vw, 60px); /* Responsive padding */
+  margin-bottom: 60px;
+}
+
+.form-field {
+  margin-bottom: 24px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-black);
+  font-size: 16px;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.send-button {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 8px spacing between text and icon */
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 8px; /* Space above the button */
+  width: fit-content; /* Only takes up the space it needs */
+}
+
+.send-button:hover {
+  opacity: 0.8;
+}
+
+.send-text {
+  color: var(--color-red);
+  margin: 0;
+  white-space: nowrap; /* Prevents text wrapping */
+  font-size: clamp(16px, 2vw, 24px); /* Responsive font size */
+}
+
+.send-icon {
+  width: clamp(20px, 2.5vw, 28px); /* Responsive icon size */
+  height: clamp(20px, 2.5vw, 28px);
+  display: block;
 }
 
 
 
 .beta-text {
-  font-size: 20px;
+  font-size: clamp(16px, 2.5vw, 20px); /* Responsive font size */
   color: var(--color-blue);
   margin: 0;
   line-height: 1;
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 .plan-text {
-  font-size: 32px;
+  font-size: clamp(24px, 4vw, 32px); /* Responsive font size */
   color: var(--color-black);
   margin: 0;
   line-height: 1;
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 h1, h2, button {
     font-family: 'Outfit', sans-serif;
     font-weight: 500; /* Medium */
   }
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  /* Stack header elements vertically on mobile */
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  /* Ensure logo appears above text on mobile */
+  .header-container .logo {
+    order: -1; /* Moves logo to the top */
+  }
+  
+  /* Move build your plan text to the bottom */
+  .text-stack {
+    order: 1; /* Moves build your plan text to the bottom */
+  }
+  
+  /* Move combined section (investor pitch + get in touch) above video */
+  .combined-section {
+    order: -1; /* Moves buttons before video */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0; /* Remove gap since we're controlling spacing with margins */
+  }
+  
+  /* Move investor pitch button above video */
+  .investor-hstack {
+    order: -1; /* Moves investor pitch before video */
+    margin-bottom: 20px; /* Add space below investor pitch */
+  }
+  
+  /* Move get in touch button below video */
+  .get-in-touch-hstack {
+    order: 1; /* Moves get in touch after video */
+    margin-top: 20px; /* Add space above get in touch */
+  }
+  
+  /* Make form fields more touch-friendly */
+  .form-field input,
+  .form-field textarea {
+    padding: 16px;
+    font-size: 18px; /* Larger text for mobile */
+  }
+  
+  /* Increase button touch targets */
+  .send-button {
+    padding: 12px 0;
+  }
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 44.00799 44">
+  <!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 152)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: none;
+      }
+
+      .st2 {
+        fill: #ed6b4d;
+      }
+
+      .st1 {
+        stroke: url(#New_Pattern_Swatch_4);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+    <pattern id="New_Pattern_Swatch_4" data-name="New Pattern Swatch 4" x="0" y="0" width="19.862069" height="19.862069" patternTransform="translate(7032.0036902 7917.3578833) scale(2.1052616)" patternUnits="userSpaceOnUse" viewBox="0 0 19.862069 19.862069">
+      <g>
+        <rect class="st0" width="19.862069" height="19.862069"/>
+        <rect class="st2" width="19.862069" height="19.862069"/>
+      </g>
+    </pattern>
+  </defs>
+  <path class="st1" d="M16.7368284,28.3157633l15.7894418-15.7894618"/>
+  <path class="st1" d="M13.5962628,12.9028911l15.4119035-7.2843527c6.4037837-3.0267346,9.6056776-4.5401022,11.6479927-3.0218925,2.0423151,1.5181881,1.4587351,4.9780598.291788,11.8977809l-2.0103118,11.919864c-.7629469,4.5246291-1.1446332,6.7867308-2.8307361,7.773259-1.6863158.9865241-3.8768378.2288415-8.257679-1.2865278l-13.4015254-4.6353637c-8.1928372-2.8338923-12.2892549-4.2507341-12.4433178-7.0309416-.154084-2.7802095,3.761239-4.6306917,11.5918861-8.3318256Z"/>
+  <path class="st1" d="M16.7368284,29.3683941v4.6892593c0,4.9970489,0,7.4955733,1.4951353,7.8941005,1.4951574.3983143,3.0696826-1.6804211,6.2187329-5.8383135l1.7597888-2.5345231"/>
+</svg>
