@@ -138,8 +138,7 @@ body {
 }
 
 .arrow-icon {
-  width: clamp(24px, 3vw, 32px); /* Responsive icon size */
-  height: clamp(24px, 3vw, 32px);
+  width: 36px; /* Fixed size for border.svg */
   display: block;
 }
 
@@ -196,8 +195,13 @@ body {
   gap: 8px; /* 8px spacing between text and icon */
   cursor: pointer;
   transition: opacity 0.2s ease;
-  margin-top: 8px; /* Space above the button */
+  margin-top: 4px; /* Reduced space above the button */
   width: fit-content; /* Only takes up the space it needs */
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .send-button:hover {
@@ -247,6 +251,7 @@ h1, h2, button {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    padding-top: 40px; /* Add more space between logo and top of page */
   }
   
   /* Ensure logo appears above text on mobile */
@@ -272,6 +277,7 @@ h1, h2, button {
     cursor: pointer;
     transition: opacity 0.2s ease;
     margin-bottom: 8px;
+    margin-top: 20px; /* Add more space between build your plan and investor pitch */
     padding: 0 clamp(20px, 5vw, 60px);
   }
   
@@ -303,7 +309,12 @@ h1, h2, button {
   
   /* Increase button touch targets */
   .send-button {
-    padding: 12px 0;
+    padding: 4px 0; /* Reduced padding on mobile */
+  }
+  
+  /* Reduce bottom margin of message field on mobile */
+  .form-field textarea {
+    margin-bottom: 4px;
   }
   
   /* Hide mobile investor pitch when contact form is open */

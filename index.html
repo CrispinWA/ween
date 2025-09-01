@@ -39,7 +39,7 @@
     <div class="combined-section">
       <div class="investor-hstack">
         <h2 class="investor-text">Investor pitch</h2>
-        <img src="assets/arrow.svg" alt="Arrow Icon" class="arrow-icon">
+        <img src="assets/border.svg" alt="Border Icon" class="arrow-icon">
       </div>
       
       <div class="section-spacer"></div>
@@ -53,7 +53,7 @@
     <!-- Mobile Investor Pitch Button -->
     <div class="mobile-investor-pitch" id="mobile-investor-pitch-button">
       <h2 class="investor-text">Investor pitch</h2>
-      <img src="assets/arrow.svg" alt="Arrow Icon" class="arrow-icon">
+      <img src="assets/border.svg" alt="Border Icon" class="arrow-icon">
     </div>
 
     <!-- Embedded Video -->
@@ -71,25 +71,30 @@
 
     <!-- Contact Form -->
   <div class="contact-form-container" id="contact-form" style="display: none;">
-    <div class="form-field">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    
-    <div class="form-field">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    
-    <div class="form-field">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="4" required></textarea>
-    </div>
-    
-    <div class="send-button">
-      <h2 class="send-text">Send</h2>
-      <img src="assets/send.svg" alt="Send Icon" class="send-icon">
-    </div>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="8f8bb164-1e3d-4ecf-b299-b7d6320dca5d">
+      <input type="hidden" name="subject" value="New Contact Form Submission from Ween Website">
+      
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+      
+      <button type="submit" class="send-button">
+        <h2 class="send-text">Send</h2>
+        <img src="assets/send.svg" alt="Send Icon" class="send-icon">
+      </button>
+    </form>
   </div>
 
     </div>
