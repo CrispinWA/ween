@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,96 +11,361 @@
 
   <!-- Link to CSS file -->
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <!-- Main container for mobile ordering -->
+  <!-- Main container -->
   <div class="main-container">
 
     <!-- Header with horizontal layout -->
-  <div class="header-container">
-    <!-- Text stack -->
-    <div class="text-stack">
-      <p class="beta-text">(BETA)</p>
-      <div class="plan-hstack">
-        <h1 class="plan-text">Build Your Plan</h1>
-        <img src="assets/spanner.svg" alt="Spanner Icon" class="spanner-icon">
-      </div>
-    </div>
+    <div class="header-container">
+      <!-- Logo on the left -->
+      <img src="assets/logo.svg" alt="Ween Logo" class="logo">
 
-    <!-- Spacer -->
-    <div class="spacer"></div>
+      <!-- Spacer -->
+      <div class="spacer"></div>
 
-    <!-- Logo -->
-    <img src="assets/logo.svg" alt="Ween Logo" class="logo">
-  </div>
-
-      <!-- Combined section with investor pitch and get in touch -->
-    <div class="combined-section">
-      <div class="investor-hstack">
-        <h2 class="investor-text">Investor pitch</h2>
-        <img src="assets/border.svg" alt="Border Icon" class="arrow-icon">
-      </div>
-      
-      <div class="section-spacer"></div>
-      
+      <!-- Get in touch button on the right -->
       <div class="get-in-touch-hstack" id="get-in-touch-button">
         <h2 class="get-in-touch-text">Get in touch</h2>
-        <img src="assets/phone.svg" alt="Phone Icon" class="phone-icon">
+        <img src="assets/mail.svg" alt="Mail Icon" class="mail-icon">
       </div>
     </div>
 
-    <!-- Mobile Investor Pitch Button -->
-    <div class="mobile-investor-pitch" id="mobile-investor-pitch-button">
-      <h2 class="investor-text">Investor pitch</h2>
-      <img src="assets/border.svg" alt="Border Icon" class="arrow-icon">
-    </div>
+    <!-- Content area -->
+    <div class="content">
+      <!-- Content container with proper spacing from header -->
+      <div class="content-container">
+        <!-- Get in Touch Form (initially hidden) -->
+        <div class="get-in-touch-form" id="get-in-touch-form">
+          <div class="form-content">
+            <div class="form-fields">
+              <div class="form-field">
+                <label for="name" class="field-label">Name</label>
+                <input type="text" id="name" name="name" class="field-input">
+              </div>
+              <div class="form-field">
+                <label for="email" class="field-label">Email</label>
+                <input type="email" id="email" name="email" class="field-input">
+              </div>
+              <div class="form-field">
+                <label for="message" class="field-label">Message</label>
+                <textarea id="message" name="message" class="field-input field-textarea"></textarea>
+              </div>
+            </div>
 
-    <!-- Embedded Video -->
-    <div class="video-container" id="video-section">
-      <div style="position:relative; width:1px; min-width:100%;padding-bottom:56.25%;">
-        <iframe allow="autoplay" class='spotlightr' allowtransparency="true" style="width:1px; min-width:100%; height: 100%; position:absolute; " allowfullscreen="true" src="https://videos.cdn.spotlightr.com/watch/MTg2Mzc2OA==?fallback=true" frameborder="0" scrolling="no" name="videoPlayer"> </iframe>
-      </div>
-    </div>
+            <div class="send-button-hstack">
+              <h3 class="send-text">Send</h3>
+              <img src="assets/send.svg" alt="Send Icon" class="send-icon">
+            </div>
+          </div>
+        </div>
 
-    <!-- Mobile Get in Touch Button -->
-    <div class="mobile-get-in-touch" id="mobile-get-in-touch-button">
-      <h2 class="get-in-touch-text">Get in touch</h2>
-      <img src="assets/phone.svg" alt="Phone Icon" class="phone-icon">
-    </div>
+        <!-- Build Your Plan button -->
+        <div class="build-plan-section">
+          <div class="beta-text">(BETA)</div>
+          <div class="build-plan-button">
+            <div class="build-plan-hstack">
+              <h2 class="build-plan-text">Build Your Plan</h2>
+              <img src="assets/spanner.svg" alt="Spanner Icon" class="spanner-icon">
+              <div class="spacer"></div>
+              <img src="assets/cross2.svg" alt="Cross Icon" class="cross-icon">
+            </div>
+          </div>
 
-    <!-- Contact Form -->
-  <div class="contact-form-container" id="contact-form" style="display: none;">
-    <form action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="8f8bb164-1e3d-4ecf-b299-b7d6320dca5d">
-      <input type="hidden" name="subject" value="New Contact Form Submission from Ween Website">
-      
-      <div class="form-field">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+          <!-- Plan Builder Dropdown Content (initially hidden) -->
+          <div class="plan-builder-dropdown" id="plan-builder-dropdown">
+            <div class="plan-headers">
+              <!-- Current Nicotine Usage Section -->
+              <div class="plan-section">
+                <h3 class="plan-header">Current Nicotine Usage</h3>
+                <div class="question-hstack">
+                  <p class="plan-question">do you smoke?</p>
+                  <div class="capsule-buttons">
+                    <button class="capsule-button" data-type="cigarettes">cigarettes</button>
+                    <button class="capsule-button" data-type="vapes">vapes</button>
+                    <button class="capsule-button" data-type="both">both</button>
+                  </div>
+                  <div class="spacer"></div>
+                  <div class="tick-box" id="tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- New hstack for cigarette options -->
+                <div class="cigarette-options-hstack hidden">
+                  <!-- First element: Text vstack -->
+                  <div class="cigarette-text-vstack">
+                    <p class="cigarette-question">how do you smoke cigarettes?</p>
+                    <p class="cigarette-subtext">select both if applicable</p>
+                  </div>
+
+                  <!-- Second element: Pouch vstack -->
+                  <div class="cigarette-option-vstack pouch-vstack">
+                    <div class="cigarette-option-box">
+                      <img src="assets/pouch-grey.svg" alt="Pouch Icon" class="cigarette-option-icon pouch-icon">
+                    </div>
+                    <p class="cigarette-option-text">pouch</p>
+                  </div>
+
+                  <!-- Third element: Carton vstack -->
+                  <div class="cigarette-option-vstack carton-vstack">
+                    <div class="cigarette-option-box">
+                      <img src="assets/carton-grey.svg" alt="Carton Icon" class="cigarette-option-icon carton-icon">
+                    </div>
+                    <p class="cigarette-option-text">cartons</p>
+                  </div>
+
+                  <!-- Fourth element: Spacer -->
+                  <div class="spacer"></div>
+
+                  <!-- Fifth element: Tick box (reusing existing) -->
+                  <div class="tick-box" id="cigarette-tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- New hstack for quantity question -->
+                <div class="quantity-options-hstack hidden">
+                  <!-- First element: Text vstack -->
+                  <div class="quantity-text-vstack">
+                    <p class="quantity-question">how many cigarettes do you smoke per day?</p>
+                  </div>
+
+                  <!-- Second element: Counter hstack -->
+                  <div class="counter-hstack">
+                    <button class="counter-capsule minus-capsule">−</button>
+                    <input type="text" class="counter-capsule middle-capsule" value="1" inputmode="numeric"
+                      pattern="[0-9]*">
+                    <button class="counter-capsule plus-capsule">+</button>
+                  </div>
+                  <div class="spacer"></div>
+                  <div class="tick-box" id="quantity-tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- New hstack for vape options -->
+              <div class="vape-options-hstack hidden">
+                <!-- First element: Text vstack -->
+                <div class="vape-text-vstack">
+                  <p class="vape-question">how do you vape?</p>
+                  <p class="vape-subtext">select both if applicable</p>
+                </div>
+
+                <!-- Second element: Refillable vstack -->
+                <div class="vape-option-vstack refillable-vstack">
+                  <div class="vape-option-box">
+                    <img src="assets/refillable-grey.svg" alt="Refillable Icon"
+                      class="vape-option-icon refillable-icon">
+                  </div>
+                  <p class="vape-option-text">refillable</p>
+                </div>
+
+                <!-- Third element: Pod-based vstack -->
+                <div class="vape-option-vstack pod-based-vstack">
+                  <div class="vape-option-box">
+                    <img src="assets/pod-based-grey.svg" alt="Pod-based Icon" class="vape-option-icon pod-based-icon">
+                  </div>
+                  <p class="vape-option-text">pods</p>
+                </div>
+
+                <!-- Fourth element: Spacer -->
+                <div class="spacer"></div>
+
+                <!-- Fifth element: Tick box -->
+                <div class="tick-box" id="vape-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- New hstack for bottle type definition -->
+              <div class="bottle-type-hstack hidden">
+                <!-- First element: Question text -->
+                <p class="bottle-type-question">please define the type of eliquid bottles:</p>
+
+                <!-- Second element: Strength hstack -->
+                <div class="strength-hstack">
+                  <span class="strength-label">strength</span>
+                  <input type="text" class="bottle-input strength-input" placeholder="20" inputmode="numeric"
+                    pattern="[0-9]*">
+                  <span class="strength-unit">mg/ml</span>
+                </div>
+
+                <!-- Third element: Bottle size hstack -->
+                <div class="bottle-size-hstack">
+                  <span class="bottle-size-label">bottle size</span>
+                  <input type="text" class="bottle-input size-input" placeholder="10" inputmode="numeric"
+                    pattern="[0-9]*">
+                  <span class="bottle-size-unit">ml</span>
+                </div>
+
+                <!-- Fourth element: Spacer -->
+                <div class="spacer"></div>
+
+                <!-- Fifth element: Tick box -->
+                <div class="tick-box" id="bottle-type-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- New hstack for bottle quantity question -->
+              <div class="bottle-quantity-hstack hidden">
+                <!-- First element: Text vstack -->
+                <div class="bottle-quantity-text-vstack">
+                  <p class="bottle-quantity-question">how many bottles do you use per week?</p>
+                </div>
+
+                <!-- Second element: Counter hstack -->
+                <div class="bottle-counter-hstack">
+                  <button class="bottle-counter-capsule minus-capsule">−</button>
+                  <input type="text" class="bottle-counter-capsule middle-capsule" value="1" inputmode="numeric"
+                    pattern="[0-9.]*">
+                  <button class="bottle-counter-capsule plus-capsule">+</button>
+                </div>
+                <div class="spacer"></div>
+                <div class="tick-box" id="bottle-quantity-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- New hstack for pod type definition -->
+            <div class="pod-type-hstack hidden">
+              <!-- First element: Question text -->
+              <p class="pod-type-question">please define the type of pods:</p>
+
+              <!-- Second element: Dropdown capsule -->
+              <div class="pod-dropdown-container">
+                <div class="pod-dropdown-capsule" id="pod-dropdown-capsule">
+                  <svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)" />
+                  </svg>
+                </div>
+
+                <!-- Dropdown list (initially hidden) -->
+                <div class="pod-dropdown-list" id="pod-dropdown-list">
+                  <div class="pod-dropdown-item" data-value="Juul">Juul</div>
+                  <div class="pod-dropdown-item" data-value="Vuse">Vuse</div>
+                  <div class="pod-dropdown-item" data-value="Lost Mary">Lost Mary</div>
+                  <div class="pod-dropdown-item" data-value="Elf Bar">Elf Bar</div>
+                </div>
+              </div>
+
+              <!-- Third element: Other capsule container -->
+              <div class="pod-other-container">
+                <div class="pod-other-capsule" id="pod-other-capsule">
+                  <span class="pod-other-text">Other</span>
+                </div>
+
+                <!-- Second dropdown list (initially hidden) -->
+                <div class="pod-second-dropdown-list" id="pod-second-dropdown-list">
+                  <!-- Vuse options -->
+                  <div class="pod-second-dropdown-item" data-value="Ultra" data-parent="Vuse">Ultra</div>
+                  <div class="pod-second-dropdown-item" data-value="Pro" data-parent="Vuse">Pro</div>
+                  <div class="pod-second-dropdown-item" data-value="Reload" data-parent="Vuse">Reload</div>
+                  <!-- Lost Mary options -->
+                  <div class="pod-second-dropdown-item" data-value="BM600" data-parent="Lost Mary">BM600</div>
+                  <div class="pod-second-dropdown-item" data-value="BM6000" data-parent="Lost Mary">BM6000</div>
+                  <!-- Elf Bar options -->
+                  <div class="pod-second-dropdown-item" data-value="600" data-parent="Elf Bar">600</div>
+                  <div class="pod-second-dropdown-item" data-value="AF5500" data-parent="Elf Bar">AF5500</div>
+                </div>
+              </div>
+
+              <!-- Fourth element: Strength hstack (initially hidden, shown when "Other" selected) -->
+              <div class="pod-strength-hstack" id="pod-strength-hstack">
+                <span class="pod-strength-label">strength</span>
+                <input type="text" class="bottle-input pod-strength-input" placeholder="20" inputmode="numeric"
+                  pattern="[0-9]*">
+                <span class="pod-strength-unit">mg/ml</span>
+              </div>
+
+              <!-- Fifth element: Pod size hstack (initially hidden, shown when "Other" or "Vuse" selected) -->
+              <div class="pod-bottle-size-hstack" id="pod-bottle-size-hstack">
+                <span class="bottle-size-label">pod size</span>
+                <input type="text" class="bottle-input pod-bottle-size-input" placeholder="10" inputmode="numeric"
+                  pattern="[0-9]*">
+                <span class="pod-bottle-size-unit">ml</span>
+              </div>
+
+              <!-- Sixth element: Spacer -->
+              <div class="spacer"></div>
+
+              <!-- Seventh element: Tick box (initially hidden, activated based on conditions) -->
+              <div class="tick-box" id="pod-type-tick-box">
+                <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                    stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- New hstack for pod quantity question -->
+            <div class="pod-quantity-hstack hidden">
+              <!-- First element: Text vstack -->
+              <div class="pod-quantity-text-vstack">
+                <p class="pod-quantity-question">how many pods do you use per week?</p>
+              </div>
+
+              <!-- Second element: Counter hstack -->
+              <div class="pod-counter-hstack">
+                <button class="pod-counter-capsule minus-capsule">−</button>
+                <input type="text" class="pod-counter-capsule middle-capsule" value="1" inputmode="numeric"
+                  pattern="[0-9.]*">
+                <button class="pod-counter-capsule plus-capsule">+</button>
+              </div>
+              <div class="spacer"></div>
+              <div class="tick-box" id="pod-quantity-tick-box">
+                <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                    stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Target Usage Section -->
+            <div class="target-usage-section">
+              <h3 class="target-usage-header">Target Usage</h3>
+              <!-- Content will be added here later -->
+            </div>
+
+          </div>
+
+        </div>
       </div>
-      
-      <div class="form-field">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      
-      <div class="form-field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-      </div>
-      
-      <button type="submit" class="send-button">
-        <h2 class="send-text">Send</h2>
-        <img src="assets/send.svg" alt="Send Icon" class="send-icon">
-      </button>
-    </form>
+
+
+    </div>
+  </div>
+  </div>
+  </div>
   </div>
 
-    </div>
+  </div>
 
   <!-- Link to JS file -->
   <script src="script.js"></script>
 </body>
+
 </html>

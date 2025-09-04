@@ -1,8 +1,32 @@
+/* Font face declaration for local Outfit font */
+@font-face {
+  font-family: 'Outfit';
+  src: url('assets/Outfit-VariableFont_wght.ttf') format('truetype');
+  font-weight: 440;
+  font-style: medium;
+}
+
 /* Color variables for consistent theming */
 :root {
   --color-black: #28292A;
+  --color-black-5: rgba(40, 41, 42, 0.05);
   --color-blue: #569AD3;
   --color-red: #ED6B4D;
+  --color-red-5: rgba(237, 107, 77, 0.05);
+  --color-light-gray: #FBFBFB;
+  --color-dark-gray: #6E7072;
+  --color-cigarette: #DC9646;
+  --color-vapes: #47C6AC;
+  --color-both: #C6CC15;
+  --color-mid-gray: #D5D6D7;
+  --color-green: #91DC29;
+  --font-size-large: 28px;
+  --font-size-medium: 24px;
+  --font-size-small: 18px;
+  --icon-size-large: 28px;
+  --icon-size-medium: 24px;
+  --icon-size-small: 18px;
+  --header-height: clamp(80px, 15vw, 140px); /* Approximate header height */
 }
 
 /* Reset default margins and padding */
@@ -15,315 +39,1586 @@
 /* Apply Outfit Medium to all text elements */
 body {
   font-family: 'Outfit', sans-serif;
-  font-weight: 500; /* Medium */
+  font-weight: 440; /* Medium */
 }
-
-/* Main container for mobile ordering */
-.main-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Hide mobile buttons on desktop by default */
-.mobile-investor-pitch,
-.mobile-get-in-touch {
-  display: none;
-}
-
-
-
-
 
 /* Header container with horizontal layout */
 .header-container {
   display: flex;
-  align-items: flex-end; /* Aligns items to their bottom edges */
-  padding: clamp(20px, 5vw, 60px); /* Responsive padding: 20px on mobile, 60px on desktop */
-  will-change: transform; /* Optimizes for smooth animations */
-  transform: translateZ(0); /* Forces hardware acceleration */
+  align-items: center;
+  padding: clamp(20px, 5vw, 60px); /* 20px mobile, 60px desktop */
+  background-color: var(--color-light-gray); /* Light gray background */
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--color-black-5); /* Using CSS variable */
+  position: relative;
+  z-index: 10; /* Higher than form */
 }
 
 /* Logo styling */
 .logo {
-  max-width: clamp(120px, 15vw, 160px); /* Responsive width */
-  width: clamp(120px, 15vw, 160px);
-  height: auto;
-  display: block;
-  flex-shrink: 0; /* Prevents the logo from shrinking */
-  will-change: transform; /* Optimizes for smooth animations */
-  transform: translateZ(0); /* Forces hardware acceleration */
-}
-
-/* Text stack */
-.text-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0; /* No spacing between texts */
-}
-
-/* Plan text with spanner icon hstack */
-.plan-hstack {
-  display: flex;
-  align-items: flex-end; /* Aligns text and icon to bottom edges */
-  gap: 12px; /* 12px spacing between text and icon */
-}
-
-/* Spanner icon styling */
-.spanner-icon {
-  width: clamp(24px, 3vw, 32px); /* Responsive icon size */
-  height: clamp(24px, 3vw, 32px);
+  height: 40px; /* Fixed height for logo */
+  width: auto;
   display: block;
 }
 
-/* Spacer between text and logo */
+/* Spacer between logo and get in touch */
 .spacer {
   flex: 1;
 }
 
-/* Combined section with investor pitch and get in touch */
-.combined-section {
-  display: flex;
-  align-items: center;
-  padding: 0 clamp(20px, 5vw, 60px); /* Responsive padding */
-  margin-bottom: 8px; /* Space between combined section and video */
-}
-
-.section-spacer {
-  flex: 1; /* Takes up all available space between the two sections */
-}
-
+/* Get in touch button hstack */
 .get-in-touch-hstack {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* 8px spacing between text and phone icon */
-  cursor: pointer; /* Shows it's clickable */
-  transition: opacity 0.2s ease; /* Smooth hover effect */
-}
-
-.get-in-touch-hstack:hover {
-  opacity: 0.8; /* Slight fade on hover */
-}
-
-.get-in-touch-text {
-  color: var(--color-red);
-  margin: 0;
-  white-space: nowrap; /* Prevents text wrapping */
-  font-size: clamp(20px, 2vw, 24px); /* Responsive font size */
-}
-
-.phone-icon {
-  width: clamp(24px, 2.5vw, 28px); /* Responsive icon size */
-  height: clamp(24px, 2.5vw, 28px);
-  display: block;
-}
-
-.investor-hstack {
-  display: flex;
-  align-items: center; /* Back to center alignment */
-  gap: 8px; /* 8px spacing between text and arrow */
-  cursor: pointer; /* Shows it's clickable */
-  transition: opacity 0.2s ease; /* Smooth hover effect */
-}
-
-.investor-hstack:hover {
-  opacity: 0.8; /* Slight fade on hover */
-}
-
-.investor-text {
-  color: var(--color-black);
-  margin: 0;
-  white-space: nowrap; /* Prevents text wrapping */
-  font-size: clamp(20px, 2vw, 24px); /* Responsive font size */
-}
-
-.arrow-icon {
-  width: 36px; /* Fixed size for border.svg */
-  display: block;
-}
-
-/* Close icon styling */
-.close-icon {
-  width: clamp(16px, 2vw, 20px); /* Responsive icon size */
-  height: clamp(16px, 2vw, 20px);
-  display: block;
-}
-
-/* Video container */
-.video-container {
-  padding: 0 clamp(20px, 5vw, 60px); /* Responsive padding */
-  margin-top: 20px; /* Removed top margin since investor pitch is above */
-  margin-bottom: 20px; /* Adds space below the video */
-}
-
-/* Contact Form */
-.contact-form-container {
-  padding: 0 clamp(20px, 5vw, 60px); /* Responsive padding */
-  margin-bottom: 60px;
-}
-
-.form-field {
-  margin-bottom: 24px;
-}
-
-.form-field label {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--color-black);
-  font-size: 16px;
-}
-
-.form-field input,
-.form-field textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.form-field textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.send-button {
   display: flex;
   align-items: center;
   gap: 8px; /* 8px spacing between text and icon */
   cursor: pointer;
-  transition: opacity 0.2s ease;
-  margin-top: 4px; /* Reduced space above the button */
-  width: fit-content; /* Only takes up the space it needs */
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  font-size: inherit;
 }
 
-.send-button:hover {
-  opacity: 0.8;
+/* Get in touch text */
+.get-in-touch-text {
+  color: var(--color-red);
+  margin: 0;
+  font-size: var(--font-size-large); /* 28px */
+  white-space: nowrap;
+}
+
+/* Mail icon */
+.mail-icon {
+  height: var(--icon-size-large); /* 28px */
+  width: auto;
+  display: block;
+}
+
+/* Build Your Plan section */
+.build-plan-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Margin between beta text and button */
+}
+
+.beta-text {
+  color: var(--color-blue);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0 0 0 24px; /* Top, right, bottom, left margins */
+  align-self: flex-start; /* Left aligned */
+}
+
+/* Build Your Plan button */
+.build-plan-button {
+  background-color: var(--color-light-gray); /* Light gray background */
+  border-radius: 12px;
+  width: 100%; /* Full width within container */
+  display: flex;
+  align-items: center;
+  margin-bottom: clamp(20px, 5vw, 60px); /* Bottom margin: 20px mobile, 60px desktop */
+  cursor: pointer; /* Make the button clickable */
+  transition: background-color 0.3s ease; /* Smooth transition for color changes */
+}
+
+.build-plan-button.active {
+  background-color: color-mix(in srgb, var(--color-blue) 20%, transparent); /* Blue with 20% opacity */
+}
+
+/* Plan Builder Dropdown */
+.plan-builder-dropdown {
+  background-color: var(--color-light-gray); /* Light gray background */
+  border-radius: 12px;
+  width: 100%;
+  margin-top: 8px; /* Reduced gap between button and dropdown */
+  padding: 24px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.plan-builder-dropdown.show {
+  max-height: 5000px; /* Allow dropdown to expand */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.plan-headers {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Gap between plan sections */
+}
+
+.plan-header {
+  color: var(--color-black);
+  font-size: var(--font-size-large); /* 28px on desktop */
+  font-weight: 440;
+  margin: 0;
+}
+
+.plan-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Gap between header and question */
+}
+
+.question-hstack {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Gap between question and buttons */
+  margin-top: 16px; /* Space above the question hstack */
+}
+
+/* Cigarette Options HStack */
+.cigarette-options-hstack {
+  display: flex;
+  align-items: center;
+  margin-top: 16px; /* Space from the question above */
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  position: relative;
+  z-index: 5;
+}
+
+.cigarette-options-hstack.hidden {
+  margin: 0;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.cigarette-options-hstack.visible {
+  margin-top: 16px;
+  padding: 0;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Individual spacing for elements */
+.cigarette-text-vstack {
+  margin-right: 32px; /* Space after text */
+}
+
+.pouch-vstack {
+  margin-right: 0px; /* No space after pouch */
+}
+
+.carton-vstack {
+  margin-left: 0px; /* No space before carton */
+}
+
+.tick-box {
+  margin-left: 0px; /* No space before tick box */
+}
+
+/* Cigarette Text VStack */
+.cigarette-text-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Reduced gap between question and subtext */
+}
+
+.cigarette-question {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cigarette-subtext {
+  color: var(--color-mid-gray);
+  font-size: var(--font-size-small); /* 18px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Cigarette Option VStack */
+.cigarette-option-vstack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px; /* Gap between box and text */
+}
+
+.cigarette-option-box {
+  width: 180px;
+  height: 160px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cigarette-option-icon {
+  display: block;
+}
+
+.cigarette-option-icon.pouch-icon {
+  width: 132px;
+  height: auto;
+}
+
+.cigarette-option-icon.carton-icon {
+  width: auto;
+  height: 101px;
+}
+
+.cigarette-option-text {
+  color: var(--color-mid-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  text-align: center;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Active states for pouch and carton */
+.pouch-vstack.active .cigarette-option-text {
+  color: var(--color-blue);
+}
+
+.carton-vstack.active .cigarette-option-text {
+  color: var(--color-blue);
+}
+
+/* Active states for tick box */
+.pouch-vstack.active ~ .tick-box,
+.carton-vstack.active ~ .tick-box {
+  border-color: var(--color-green);
+  background-color: rgba(145, 220, 41, 0.5);
+}
+
+.pouch-vstack.active ~ .tick-box .tick-path,
+.carton-vstack.active ~ .tick-box .tick-path {
+  stroke-dashoffset: 0;
+}
+
+/* Quantity Options HStack */
+.quantity-options-hstack {
+  display: flex;
+  align-items: center;
+  margin-top: 16px; /* Space from the cigarette options above */
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  position: relative;
+  z-index: 4;
+}
+
+.quantity-options-hstack.hidden {
+  margin: 0;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.quantity-options-hstack.visible {
+  margin-top: 16px;
+  padding: 0;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Quantity Text VStack */
+.quantity-text-vstack {
+  display: flex;
+  flex-direction: column;
+  margin-right: 32px; /* Space after text */
+}
+
+.quantity-question {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Counter HStack */
+.counter-hstack {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Gap between capsules and tickbox */
+}
+
+/* Counter Capsules */
+.counter-capsule {
+  width: 100px;
+  height: 32px;
+  border: 3px solid var(--color-mid-gray);
+  background-color: transparent;
+  border-radius: 16px; /* Half height for capsule shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--font-size-medium);
+  font-weight: 440;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.counter-capsule.minus-capsule,
+.counter-capsule.plus-capsule {
+  color: var(--color-mid-gray);
+  border-color: var(--color-mid-gray);
+}
+
+.counter-capsule.middle-capsule {
+  color: var(--color-mid-gray);
+  border-color: var(--color-mid-gray);
+  cursor: text; /* Clickable for typing */
+  transition: border-color 0.3s ease; /* Smooth border color transition */
+  text-align: center;
+  outline: none; /* Remove default input outline */
+  -webkit-appearance: none; /* Remove default styling on webkit browsers */
+  -moz-appearance: none; /* Remove default styling on Firefox */
+  appearance: none; /* Remove default styling */
+}
+
+.counter-capsule.minus-capsule:hover,
+.counter-capsule.plus-capsule:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Vape Options HStack */
+.vape-options-hstack {
+  display: flex;
+  align-items: center;
+  margin-top: 16px; /* Space from the quantity options above */
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  position: relative;
+  z-index: 3;
+}
+
+.vape-options-hstack.hidden {
+  margin: 0;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.vape-options-hstack.visible {
+  margin-top: 16px;
+  padding: 0;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Vape Text VStack */
+.vape-text-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Reduced gap between question and subtext */
+  margin-right: 32px; /* Space after text */
+}
+
+.vape-question {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.vape-subtext {
+  color: var(--color-mid-gray);
+  font-size: var(--font-size-small); /* 18px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Vape Option VStack */
+.vape-option-vstack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px; /* Gap between box and text */
+}
+
+.vape-option-box {
+  width: 180px;
+  height: 160px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vape-option-icon {
+  display: block;
+}
+
+.vape-option-icon.refillable-icon {
+  width: auto;
+  height: 110px;
+}
+
+.vape-option-icon.pod-based-icon {
+  width: auto;
+  height: 118px;
+}
+
+.vape-option-text {
+  color: var(--color-mid-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  text-align: center;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Active states for vape options */
+.refillable-vstack.active .vape-option-text {
+  color: var(--color-blue);
+}
+
+.pod-based-vstack.active .vape-option-text {
+  color: var(--color-blue);
+}
+
+/* Active states for vape tick box */
+.refillable-vstack.active ~ .tick-box,
+.pod-based-vstack.active ~ .tick-box {
+  border-color: var(--color-green);
+  background-color: rgba(145, 220, 41, 0.5);
+}
+
+.refillable-vstack.active ~ .tick-box .tick-path,
+.pod-based-vstack.active ~ .tick-box .tick-path {
+  stroke-dashoffset: 0;
+}
+
+/* Bottle Type Question */
+.bottle-type-question {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Strength HStack */
+.strength-hstack {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 8px spacing between elements */
+}
+
+.strength-label {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.strength-unit {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Bottle Size HStack */
+.bottle-size-hstack {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 8px spacing between elements */
+}
+
+.bottle-size-label {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.bottle-size-unit {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Bottle Input Fields */
+.bottle-input {
+  width: 100px;
+  height: 32px;
+  border: 3px solid var(--color-mid-gray);
+  background-color: transparent;
+  border-radius: 16px; /* Half height for capsule shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--font-size-medium);
+  font-weight: 440;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: var(--color-mid-gray); /* Initial text color */
+}
+
+.bottle-input:focus {
+  border-color: var(--color-dark-gray);
+  color: var(--color-dark-gray);
+}
+
+/* Placeholder styling */
+.bottle-input::placeholder {
+  color: var(--color-mid-gray);
+  opacity: 1; /* Ensure placeholder is visible */
+}
+
+/* Bottle Quantity Text VStack */
+.bottle-quantity-text-vstack {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottle-quantity-question {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Bottle Counter HStack */
+.bottle-counter-hstack {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Gap between capsules and tickbox */
+}
+
+/* Bottle Counter Capsules */
+.bottle-counter-capsule {
+  width: 100px;
+  height: 32px;
+  border: 3px solid var(--color-mid-gray);
+  background-color: transparent;
+  border-radius: 16px; /* Half height for capsule shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--font-size-medium);
+  font-weight: 440;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.bottle-counter-capsule.minus-capsule,
+.bottle-counter-capsule.plus-capsule {
+  color: var(--color-mid-gray);
+  border-color: var(--color-mid-gray);
+}
+
+.bottle-counter-capsule.middle-capsule {
+  color: var(--color-mid-gray);
+  border-color: var(--color-mid-gray);
+  cursor: text; /* Clickable for typing */
+  text-align: center;
+  outline: none; /* Remove default input outline */
+}
+
+  .bottle-counter-capsule.minus-capsule:hover,
+  .bottle-counter-capsule.plus-capsule:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Bottle Type HStack */
+  .bottle-type-hstack {
+    display: flex;
+    align-items: center;
+    margin-top: 32px; /* Space from the vape options above */
+    margin-bottom: 0px;
+    gap: 32px; /* 32px spacing between elements */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative; /* Create stacking context */
+    z-index: 5; /* Between pod type and pod quantity */
+  }
+
+  .bottle-type-hstack.hidden {
+    margin: 0; /* Remove all margins when hidden */
+    padding: 0; /* Also remove padding to be safe */
+    height: 0; /* Collapse the element completely */
+    overflow: hidden; /* Hide any content that might overflow */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+
+  /* Bottle Quantity HStack */
+  .bottle-quantity-hstack {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px; /* Space from the bottle type above */
+    gap: 32px; /* 32px spacing between question and counter */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative; /* Create stacking context */
+    z-index: 3; /* Lower than bottle type section */
+  }
+
+  .bottle-quantity-hstack.hidden {
+    margin: 0; /* Remove all margins when hidden */
+    padding: 0; /* Also remove padding to be safe */
+    height: 0; /* Collapse the element completely */
+    overflow: hidden; /* Hide any content that might overflow */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+  
+  /* Pod Type HStack */
+  .pod-type-hstack {
+    display: flex; /* Back to flex for horizontal layout */
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    gap: 32px; /* 32px spacing between elements */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative; /* Create stacking context */
+    z-index: 10; /* Higher than pod quantity section */
+  }
+  
+  .pod-type-hstack.hidden {
+    margin: 0; /* Remove all margins when hidden */
+    padding: 0; /* Also remove padding to be safe */
+    height: 0; /* Collapse the element completely */
+    overflow: hidden; /* Hide any content that might overflow */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+  
+  /* Pod Type Question */
+  .pod-type-question {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium); /* 24px on desktop */
+    font-weight: 440;
+    margin: 0;
+    white-space: nowrap;
+  }
+  
+  /* Pod Dropdown Container */
+  .pod-dropdown-container {
+    position: relative;
+  }
+  
+  /* Pod Dropdown Capsule */
+  .pod-dropdown-capsule {
+    width: 140px;
+    height: 32px;
+    border: 3px solid var(--color-mid-gray);
+    background-color: transparent;
+    border-radius: 16px; /* Half height for capsule shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .pod-dropdown-capsule:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pod-dropdown-capsule.selected {
+    border-color: var(--color-dark-gray);
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+  }
+  
+  /* Pod Dropdown Triangle */
+  .pod-dropdown-triangle {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Rotate triangle when dropdown is open */
+  .pod-dropdown-capsule.open .pod-dropdown-triangle {
+    transform: rotate(180deg);
+  }
+  
+  /* Rotate second dropdown triangle when open */
+  .pod-other-capsule.open .pod-dropdown-triangle {
+    transform: rotate(180deg);
+  }
+  
+  /* Pod Dropdown List */
+  .pod-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 140px;
+    background-color: white;
+    border: 3px solid var(--color-mid-gray);
+    border-radius: 12px;
+    margin-top: 8px;
+    padding: 8px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100; /* Higher than pod type section */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .pod-dropdown-list.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Pod Dropdown Items */
+  .pod-dropdown-item {
+    padding: 8px 16px;
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium); /* 24px on desktop */
+    font-weight: 440;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .pod-dropdown-item:hover {
+    background-color: var(--color-light-gray);
+  }
+  
+  /* Pod Other Container */
+  .pod-other-container {
+    position: relative;
+  }
+  
+  /* Pod Other Capsule */
+  .pod-other-capsule {
+    width: 140px;
+    height: 32px;
+    border: 3px solid var(--color-mid-gray);
+    background-color: transparent;
+    border-radius: 16px; /* Half height for capsule shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+  }
+  
+  .pod-other-capsule.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .pod-other-capsule.selected {
+    border-color: var(--color-dark-gray);
+  }
+  
+  .pod-other-capsule.selected .pod-other-text {
+    color: var(--color-dark-gray);
+  }
+  
+  /* Selected option text styling */
+  .pod-other-capsule.selected span {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+  }
+  
+  /* Pod Other Text */
+  .pod-other-text {
+    color: var(--color-mid-gray);
+    font-size: var(--font-size-medium); /* 24px on desktop */
+    font-weight: 440;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+  
+  /* Pod Strength HStack */
+  .pod-strength-hstack {
+    display: none;
+    align-items: center;
+    gap: 8px; /* 8px spacing between elements */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+  }
+  
+  .pod-strength-hstack.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .pod-strength-label {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+    white-space: nowrap;
+  }
+  
+
+  
+  .pod-strength-unit {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+    white-space: nowrap;
+  }
+  
+  /* Pod Size HStack */
+  .pod-bottle-size-hstack {
+    display: none;
+    align-items: center;
+    gap: 8px; /* 8px spacing between elements */
+    margin-right: -32px; /* Reduce right space to align tickbox with other questions */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+  }
+  
+  .pod-bottle-size-hstack.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .pod-bottle-size-label {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+    white-space: nowrap;
+  }
+  
+
+  
+  .pod-bottle-size-unit {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+    white-space: nowrap;
+  }
+  
+  /* Spacer - Pushes tickboxes to the right */
+  .spacer {
+    flex: 1;
+    min-width: 16px;
+  }
+  
+  /* Pod Type Tickbox - Uses Default Tickbox Behavior */
+  #pod-type-tick-box {
+    /* Inherits default .tick-box styles for consistent alignment */
+  }
+  
+
+  
+  /* Pod Second Dropdown List */
+  .pod-second-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 140px;
+    background-color: white;
+    border: 3px solid var(--color-mid-gray);
+    border-radius: 12px;
+    margin-top: 8px;
+    padding: 8px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 101; /* Higher than first dropdown */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .pod-second-dropdown-list.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Pod Second Dropdown Items */
+  .pod-second-dropdown-item {
+    padding: 8px 16px;
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium); /* 24px on desktop */
+    font-weight: 440;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .pod-second-dropdown-item:hover {
+    background-color: var(--color-light-gray);
+  }
+  
+  /* Pod Quantity HStack */
+  .pod-quantity-hstack {
+    display: flex; /* Back to flex for horizontal layout */
+    align-items: center;
+    margin-bottom: 32px; /* Normal margin when visible */
+    gap: 32px; /* 32px spacing between question and counter */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, margin 0.4s ease, height 0.4s ease;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative; /* Create stacking context */
+    z-index: 1; /* Lower than pod type section */
+  }
+  
+  .pod-quantity-hstack.hidden {
+    margin: 0; /* Remove all margins when hidden */
+    padding: 0; /* Also remove padding to be safe */
+    height: 0; /* Collapse the element completely */
+    overflow: hidden; /* Hide any content that might overflow */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+  
+  /* Pod Quantity Text VStack */
+  .pod-quantity-text-vstack {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pod-quantity-question {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium); /* 24px on desktop */
+    font-weight: 440;
+    margin: 0;
+    white-space: nowrap;
+  }
+  
+  /* Pod Counter HStack */
+  .pod-counter-hstack {
+    display: flex;
+    align-items: center;
+    gap: 32px; /* Gap between capsules and tickbox */
+  }
+  
+  /* Pod Counter Capsules */
+  .pod-counter-capsule {
+    width: 100px;
+    height: 32px;
+    border: 3px solid var(--color-mid-gray);
+    background-color: transparent;
+    border-radius: 16px; /* Half height for capsule shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .pod-counter-capsule.minus-capsule,
+  .pod-counter-capsule.plus-capsule {
+    color: var(--color-mid-gray);
+    border-color: var(--color-mid-gray);
+  }
+  
+  .pod-counter-capsule.middle-capsule {
+    color: var(--color-mid-gray);
+    border-color: var(--color-mid-gray);
+    cursor: text; /* Clickable for typing */
+    text-align: center;
+    outline: none; /* Remove default input outline */
+  }
+  
+  .pod-counter-capsule.minus-capsule:hover,
+  .pod-counter-capsule.plus-capsule:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Target Usage Section */
+  .target-usage-section {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-mid-gray);
+  }
+  
+  .target-usage-header {
+    color: var(--color-black);
+    font-size: var(--font-size-large);
+    font-weight: 440;
+    margin: 0;
+  }
+  
+  /* Test Question Section */
+  .test-question-hstack {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    gap: 32px;
+  }
+  
+  .test-question {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-medium);
+    font-weight: 440;
+    margin: 0;
+    white-space: nowrap;
+  }
+  
+  .plan-question {
+  color: var(--color-dark-gray);
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.capsule-buttons {
+  display: flex;
+  gap: 32px; /* Gap between capsule buttons */
+}
+
+.capsule-button {
+  width: 140px;
+  height: 32px;
+  border: 3px solid var(--color-mid-gray);
+  background-color: white;
+  color: var(--color-mid-gray);
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--font-size-medium);
+  font-weight: 440;
+  border-radius: 16px; /* Half height for capsule shape */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.capsule-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.capsule-button.active[data-type="cigarettes"] {
+  border-color: var(--color-cigarette);
+  background-color: rgba(220, 150, 70, 0.5); /* 50% opacity */
+  color: white;
+}
+
+.capsule-button.active[data-type="vapes"] {
+  border-color: var(--color-vapes);
+  background-color: rgba(71, 198, 172, 0.5); /* 50% opacity */
+  color: white;
+}
+
+.capsule-button.active[data-type="both"] {
+  border-color: var(--color-both);
+  background-color: rgba(198, 204, 21, 0.5); /* 50% opacity */
+  color: white;
+}
+
+/* Tick Box */
+.tick-box {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-mid-gray);
+  background-color: white;
+  border-radius: 50%; /* Perfect circle */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Prevent shrinking */
+  position: relative; /* For absolute positioning of tick mark */
+  z-index: 1; /* Ensure proper stacking context */
+}
+
+.tick-box.active {
+  border-color: var(--color-green);
+  background-color: rgba(145, 220, 41, 0.5); /* 50% opacity green fill */
+}
+
+/* Tick Mark SVG */
+.tick-mark {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Much higher z-index to ensure it's above everything */
+  pointer-events: none; /* Prevent interference with circle clicks */
+  transform: translate(4px, -8px); /* Move 4px right, 8px up */
+}
+
+/* Tick Path Animation */
+.tick-path {
+  stroke: var(--color-black); /* Ensure black color */
+  stroke-width: 3; /* Ensure 3px stroke width */
+  stroke-dasharray: 40; /* Total path length for new coordinates */
+  stroke-dashoffset: 40; /* Start with path hidden */
+  transition: stroke-dashoffset 1s; /* Draw entire path with delay */
+}
+
+.tick-box.active .tick-path {
+  stroke-dashoffset: 0; /* Reveal full path */
+}
+
+.build-plan-hstack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 100%;
+}
+
+.build-plan-text {
+  color: var(--color-black);
+  margin: 0;
+  font-size: var(--font-size-large); /* 28px on desktop */
+  white-space: nowrap;
+}
+
+.spanner-icon {
+  height: var(--icon-size-large); /* 28px on desktop */
+  width: auto;
+  display: block;
+}
+
+.cross-icon {
+  height: var(--icon-size-large); /* 28px on desktop */
+  width: auto;
+  display: block;
+  transform: rotate(45deg); /* Start as plus (cross rotated 45 degrees) */
+  margin-right: 24px; /* Right margin of 24px */
+  transition: transform 0.3s ease; /* Smooth rotation transition */
+}
+
+/* Content container with proper spacing from header */
+.content-container {
+  margin: clamp(20px, 5vw, 60px) clamp(20px, 5vw, 60px) 0 clamp(20px, 5vw, 60px); /* Top, right, bottom, left margins */
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* No gap when form is hidden */
+  transition: gap 0.3s ease; /* Smooth transition for gap changes */
+}
+
+/* When form is visible, add gap between form and button */
+.content-container.has-form {
+  gap: 60px; /* Spacing between form and button when visible */
+}
+
+/* Get in Touch Form */
+.get-in-touch-form {
+  background-color: var(--color-red-5); /* Red with 5% opacity */
+  border-radius: 12px;
+  width: 100%; /* Full width within container */
+  display: flex;
+  align-items: center;
+  transform: translateY(-100%);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.get-in-touch-form.show {
+  transform: translateY(0);
+  opacity: 1;
+  max-height: 1000px; /* Allow form to expand but with a reasonable cap */
+}
+
+.form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Gap between form fields and send button */
+  padding: 24px;
+}
+
+.form-fields {
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field:last-child {
+  margin-bottom: 0;
+}
+
+.field-label {
+  display: block;
+  color: var(--color-red);
+  opacity: 0.5; /* 50% opacity */
+  font-size: var(--font-size-medium); /* 24px on desktop */
+  margin-bottom: 8px;
+  font-weight: 440;
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px;
+  border: none; /* Remove black border */
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--font-size-small);
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.field-textarea {
+  min-height: 100px;
+  max-height: 600px; /* Cap the maximum height of the textarea */
+  resize: vertical;
+}
+
+
+
+/* Send Button */
+.send-button-hstack {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Gap between text and icon */
+  justify-content: flex-start; /* Left aligned */
 }
 
 .send-text {
   color: var(--color-red);
   margin: 0;
-  white-space: nowrap; /* Prevents text wrapping */
-  font-size: clamp(20px, 2vw, 24px); /* Responsive font size */
+  font-size: var(--font-size-large); /* 28px on desktop */
+  white-space: nowrap;
 }
 
 .send-icon {
-  width: clamp(24px, 2.5vw, 28px); /* Responsive icon size */
-  height: clamp(24px, 2.5vw, 28px);
+  height: var(--icon-size-large); /* 28px on desktop */
+  width: auto;
   display: block;
 }
 
-
-
-.beta-text {
-  font-size: clamp(16px, 2.5vw, 20px); /* Responsive font size */
-  color: var(--color-blue);
-  margin: 0;
-  line-height: 1;
-  white-space: nowrap; /* Prevents text wrapping */
-}
-
-.plan-text {
-  font-size: clamp(24px, 4vw, 32px); /* Responsive font size */
-  color: var(--color-black);
-  margin: 0;
-  line-height: 1;
-  white-space: nowrap; /* Prevents text wrapping */
-}
-
-h1, h2, button {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 500; /* Medium */
-  }
-
-/* Mobile-specific adjustments */
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  /* Stack header elements vertically on mobile */
-  .header-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding-top: 40px; /* Add more space between logo and top of page */
+  /* Reduce logo height on mobile */
+  .logo {
+    height: 30px; /* Smaller logo for mobile */
   }
   
-  /* Ensure logo appears above text on mobile */
-  .header-container .logo {
-    order: -1; /* Moves logo to the top */
+  /* Change mail icon to medium size on mobile */
+  .mail-icon {
+    height: var(--icon-size-medium); /* 24px on mobile */
   }
   
-  /* Move build your plan text to the bottom */
-  .text-stack {
-    order: 1; /* Moves build your plan text to the bottom */
-  }
-  
-  /* Hide combined section on mobile */
-  .combined-section {
+  /* Hide get in touch text on mobile */
+  .get-in-touch-text {
     display: none;
   }
   
-  /* Show individual mobile buttons */
-  .mobile-investor-pitch {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-    margin-bottom: 8px;
-    margin-top: 20px; /* Add more space between build your plan and investor pitch */
-    padding: 0 clamp(20px, 5vw, 60px);
+  /* Remove gap on mobile since there's no text */
+  .get-in-touch-hstack {
+    gap: 0;
   }
   
-  .mobile-investor-pitch:hover {
-    opacity: 0.8;
+  /* Build Your Plan button mobile adjustments */
+  .build-plan-text {
+    font-size: var(--font-size-medium); /* 24px on mobile */
   }
   
-  .mobile-get-in-touch {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-    margin-top: 20px;
-    padding: 0 clamp(20px, 5vw, 60px);
-    justify-content: flex-end; /* Align to the right */
+  .spanner-icon {
+    height: var(--icon-size-medium); /* 24px on mobile */
   }
   
-  .mobile-get-in-touch:hover {
-    opacity: 0.8;
+  .cross-icon {
+    height: var(--icon-size-medium); /* 24px on mobile */
   }
   
-  /* Make form fields more touch-friendly */
-  .form-field input,
-  .form-field textarea {
-    padding: 16px;
-    font-size: 18px; /* Larger text for mobile */
+  /* Send button mobile adjustments */
+  .send-text {
+    font-size: var(--font-size-medium); /* 24px on mobile */
   }
   
-  /* Increase button touch targets */
-  .send-button {
-    padding: 4px 0; /* Reduced padding on mobile */
+  .send-icon {
+    height: var(--icon-size-medium); /* 24px on mobile */
   }
   
-  /* Reduce bottom margin of message field on mobile */
-  .form-field textarea {
-    margin-bottom: 4px;
+  /* Field labels mobile adjustments */
+  .field-label {
+    font-size: var(--font-size-small); /* 18px on mobile */
   }
   
-  /* Hide mobile investor pitch when contact form is open */
-  body.form-open .mobile-investor-pitch {
-    display: none !important;
+  /* Beta text mobile adjustments */
+  .beta-text {
+    font-size: var(--font-size-small); /* 18px on mobile */
   }
   
-  /* Hide mobile investor pitch when it has the hidden class */
-  .mobile-investor-pitch.hidden {
-    display: none !important;
+  /* Plan headers mobile adjustments */
+  .plan-header {
+    font-size: var(--font-size-medium); /* 24px on mobile */
+  }
+  
+  /* Plan question mobile adjustments */
+  .plan-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Capsule buttons mobile adjustments */
+  .capsule-button {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Cigarette options mobile adjustments */
+  .cigarette-options-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .cigarette-option-box {
+    width: 140px;
+    height: 120px;
+  }
+  
+  .cigarette-option-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cigarette-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .cigarette-subtext {
+    font-size: 14px; /* Smaller than small for mobile */
+  }
+  
+  .cigarette-option-text {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Quantity options mobile adjustments */
+  .quantity-options-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .quantity-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .counter-capsule {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Vape options mobile adjustments */
+  .vape-options-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .vape-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .vape-subtext {
+    font-size: 14px; /* Smaller than small for mobile */
+  }
+  
+  .vape-option-box {
+    width: 140px;
+    height: 120px;
+  }
+  
+  .vape-option-icon.refillable-icon {
+    width: 100px;
+  }
+  
+  .vape-option-icon.pod-based-icon {
+    height: 80px;
+  }
+  
+  .vape-option-text {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Bottle type mobile adjustments */
+  .bottle-type-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .bottle-type-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .strength-label,
+  .strength-unit,
+  .bottle-size-label,
+  .bottle-size-unit {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .bottle-input {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Bottle quantity mobile adjustments */
+  .bottle-quantity-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .bottle-quantity-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .bottle-counter-capsule {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Pod type mobile adjustments */
+  .pod-type-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .pod-type-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .pod-dropdown-capsule,
+  .pod-other-capsule {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .pod-strength-label,
+  .pod-strength-unit,
+  .pod-pod-size-label,
+  .pod-pod-size-unit {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .pod-strength-input,
+  .pod-pod-size-input {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Pod quantity mobile adjustments */
+  .pod-quantity-hstack {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .pod-quantity-question {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  .pod-counter-capsule {
+    font-size: var(--font-size-small); /* 18px on mobile */
+  }
+  
+  /* Mobile adjustments for spacers */
+  .spacer {
+    min-width: 8px; /* Smaller minimum width on mobile */
+  }
+  
+  /* Mobile adjustments for plan sections */
+  .plan-section {
+    gap: 12px; /* Reduced gap on mobile */
+  }
+  
+  /* Mobile adjustments for plan headers container */
+  .plan-headers {
+    gap: 12px; /* Reduced gap between sections on mobile */
+  }
+  
+  /* Mobile adjustments for pod input hstacks */
+  .pod-strength-hstack.show,
+  .pod-bottle-size-hstack.show {
+    display: flex; /* Ensure proper display on mobile */
   }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 38 38">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 36 36">
   <!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 152)  -->
   <defs>
     <style>
@@ -18,32 +18,44 @@
       .st1, .st2 {
         stroke-linecap: round;
         stroke-miterlimit: 10;
-        stroke-width: 6px;
+        stroke-width: 5px;
       }
 
       .st2 {
         stroke: url(#New_Pattern_Swatch_41);
       }
     </style>
-    <pattern id="New_Pattern_Swatch_4" data-name="New Pattern Swatch 4" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-4960.9998372 -11601.6345293) scale(.8 -.8)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+    <pattern id="New_Pattern_Swatch_4" data-name="New Pattern Swatch 4" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-11881.9032257 -16450.0660217) scale(.6 -.6)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
       <g>
         <rect class="st0" width="19.8620682" height="19.8620682"/>
         <g>
           <rect class="st0" width="19.8620682" height="19.8620682"/>
-          <rect class="st3" width="19.8620682" height="19.8620682"/>
+          <g>
+            <rect class="st0" width="19.8620682" height="19.8620682"/>
+            <g>
+              <rect class="st0" width="19.8620682" height="19.8620682"/>
+              <rect class="st3" width="19.8620682" height="19.8620682"/>
+            </g>
+          </g>
         </g>
       </g>
     </pattern>
-    <pattern id="New_Pattern_Swatch_41" data-name="New Pattern Swatch 41" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-29597.1930496 -11601.6345293) rotate(-180) scale(.8)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+    <pattern id="New_Pattern_Swatch_41" data-name="New Pattern Swatch 41" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-11.2574203 -4.2735718) rotate(-180) scale(.6)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
       <g>
         <rect class="st0" width="19.8620682" height="19.8620682"/>
         <g>
           <rect class="st0" width="19.8620682" height="19.8620682"/>
-          <rect class="st3" width="19.8620682" height="19.8620682"/>
+          <g>
+            <rect class="st0" width="19.8620682" height="19.8620682"/>
+            <g>
+              <rect class="st0" width="19.8620682" height="19.8620682"/>
+              <rect class="st3" width="19.8620682" height="19.8620682"/>
+            </g>
+          </g>
         </g>
       </g>
     </pattern>
   </defs>
-  <line class="st1" x1="3" y1="3" x2="35" y2="35"/>
-  <line class="st2" x1="35" y1="3" x2="3" y2="35"/>
+  <line class="st1" x1="6" y1="6" x2="30" y2="30"/>
+  <line class="st2" x1="30" y1="6" x2="6" y2="30"/>
 </svg>
