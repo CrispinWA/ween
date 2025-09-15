@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 62.5340919 105">
+  <!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 152)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2 {
+        fill: none;
+      }
+
+      .st3 {
+        fill: #d5d6d7;
+      }
+
+      .st1 {
+        stroke-linecap: round;
+      }
+
+      .st1, .st2 {
+        stroke: url(#New_Pattern_Swatch_8);
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+    </style>
+    <pattern id="New_Pattern_Swatch_8" data-name="New Pattern Swatch 8" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(1222.852845 2419.4787587) scale(1.1477273)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+      <g>
+        <rect class="st0" width="19.8620682" height="19.8620682"/>
+        <g>
+          <rect class="st0" width="19.8620682" height="19.8620682"/>
+          <g>
+            <rect class="st0" width="19.8620682" height="19.8620682"/>
+            <g>
+              <rect class="st0" width="19.8620682" height="19.8620682"/>
+              <g>
+                <rect class="st0" width="19.8620682" height="19.8620682"/>
+                <rect class="st3" width="19.8620682" height="19.8620682"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </pattern>
+  </defs>
+  <polyline class="st2" points="20.9400005 6.5900002 60.5299988 6.5900002 60.5299988 103 2 103 2 6.5900002 9.46 6.5900002"/>
+  <path class="st1" d="M9.1968126,19.2159081H2v30.988636h58.5340919v-30.988636h-7.1968231v10.7532864c0,3.8032246-3.0831375,6.8863659-6.886364,6.8863659h-30.3677177c-3.8032246,0-6.8863754-3.0831413-6.8863754-6.8863659,0,0,0-10.7532883.000001-10.7532864Z"/>
+  <path class="st1" d="M9.460228,29.5454559V2h11.477272v34.4318161h-4.5909081c-3.8032227,0-6.886364-3.0831413-6.886364-6.8863602Z"/>
+  <path class="st1" d="M20.9375,36.4318161V13.477272h10.3295441v22.9545441h-10.3295441Z"/>
+  <path class="st1" d="M31.267046,36.4318161v-17.2159081h11.4772701v17.2159081s-11.477272,0-11.4772701,0Z"/>
+  <path class="st1" d="M53.073864,29.5454559v-10.3295441h-10.3295479v17.2159119h3.4431839c3.8032265,0,6.886364-3.0831413,6.886364-6.8863678Z"/>
+</svg>

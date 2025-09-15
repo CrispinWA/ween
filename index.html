@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ween</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Link to CSS file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Main container -->
+  <div class="main-container">
+
+    <!-- Header with horizontal layout -->
+    <div class="header-container">
+      <!-- Logo on the left -->
+      <img src="assets/logo.svg" alt="Ween Logo" class="logo">
+
+      <!-- Spacer -->
+      <div class="spacer"></div>
+
+      <!-- Get in touch button on the right -->
+      <div class="get-in-touch-hstack" id="get-in-touch-button">
+        <h2 class="get-in-touch-text">Get in touch</h2>
+        <img src="assets/mail.svg" alt="Mail Icon" class="mail-icon">
+      </div>
+    </div>
+
+    <!-- Content area -->
+    <div class="content">
+      <!-- Content container with proper spacing from header -->
+      <div class="content-container">
+        <!-- Get in Touch Form (initially hidden) -->
+        <div class="get-in-touch-form" id="get-in-touch-form">
+          <div class="form-content">
+            <div class="form-fields">
+              <div class="form-field">
+                <label for="name" class="field-label">Name</label>
+                <input type="text" id="name" name="name" class="field-input">
+              </div>
+              <div class="form-field">
+                <label for="email" class="field-label">Email</label>
+                <input type="email" id="email" name="email" class="field-input">
+              </div>
+              <div class="form-field">
+                <label for="message" class="field-label">Message</label>
+                <textarea id="message" name="message" class="field-input field-textarea"></textarea>
+              </div>
+            </div>
+
+            <div class="send-button-hstack">
+              <h3 class="send-text">Send</h3>
+              <img src="assets/send.svg" alt="Send Icon" class="send-icon">
+            </div>
+          </div>
+        </div>
+
+        <!-- Build Your Plan button -->
+        <div class="build-plan-section">
+          <div class="beta-text">(BETA)</div>
+          <div class="build-plan-button">
+            <div class="build-plan-hstack">
+              <h2 class="build-plan-text">Build Your Plan</h2>
+              <img src="assets/spanner.svg" alt="Spanner Icon" class="spanner-icon">
+              <div class="spacer"></div>
+              <img src="assets/cross2.svg" alt="Cross Icon" class="cross-icon">
+            </div>
+          </div>
+
+          <!-- Plan Builder Dropdown Content (initially hidden) -->
+          <div class="plan-builder-dropdown" id="plan-builder-dropdown">
+            <div class="plan-headers">
+              <!-- Current Nicotine Usage Section -->
+              <div class="plan-section">
+                <div class="current-nicotine-header-hstack">
+                  <h3 class="plan-header">Current Nicotine Usage</h3>
+                  <div class="spacer"></div>
+                  <!-- Status container (initially hidden) -->
+                  <div class="current-nicotine-status-container hidden" id="current-nicotine-status-container">
+                    <!-- Edit button -->
+                    <button class="edit-button" id="edit-button">edit</button>
+                    <!-- Display rectangle -->
+                    <div class="status-rectangle"></div>
+                  </div>
+                  <div class="tick-box" id="current-nicotine-tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="question-hstack">
+                  <!-- Desktop layout: question - options - spacer - tickbox -->
+                  <div class="question-desktop-layout">
+                    <p class="plan-question">Do you smoke?</p>
+                    <div class="capsule-buttons">
+                      <button class="capsule-button" data-type="cigarettes">Cigarettes</button>
+                      <button class="capsule-button" data-type="vapes">Vapes</button>
+                      <button class="capsule-button" data-type="both">Both</button>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="tick-box" id="tick-box">
+                      <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                          stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <!-- Mobile layout: question - spacer - tickbox (line 1), options (line 2) -->
+                  <div class="question-mobile-layout">
+                    <div class="question-mobile-line1">
+                      <p class="plan-question">Do you smoke?</p>
+                      <div class="spacer"></div>
+                      <div class="tick-box" id="tick-box-mobile">
+                        <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                            stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="question-mobile-line2">
+                      <div class="capsule-buttons">
+                        <button class="capsule-button" data-type="cigarettes">Cigarettes</button>
+                        <button class="capsule-button" data-type="vapes">Vapes</button>
+                        <button class="capsule-button" data-type="both">Both</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- New hstack for cigarette options -->
+                <div class="cigarette-options-hstack hidden">
+                  <!-- First element: Text vstack -->
+                  <div class="cigarette-text-vstack">
+                    <p class="cigarette-question">How do you smoke cigarettes?</p>
+                    <p class="cigarette-subtext">Select both if applicable</p>
+                  </div>
+
+                  <!-- Second element: Pouch vstack -->
+                  <div class="cigarette-option-vstack pouch-vstack">
+                    <div class="cigarette-option-box">
+                      <img src="assets/pouch-grey.svg" alt="Pouch Icon" class="cigarette-option-icon pouch-icon">
+                    </div>
+                    <p class="cigarette-option-text">Pouch</p>
+                  </div>
+
+                  <!-- Third element: Carton vstack -->
+                  <div class="cigarette-option-vstack carton-vstack">
+                    <div class="cigarette-option-box">
+                      <img src="assets/carton-grey.svg" alt="Carton Icon" class="cigarette-option-icon carton-icon">
+                    </div>
+                    <p class="cigarette-option-text">Cartons</p>
+                  </div>
+
+                  <!-- Fourth element: Spacer -->
+                  <div class="spacer"></div>
+
+                  <!-- Fifth element: Tick box (reusing existing) -->
+                  <div class="tick-box" id="cigarette-tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- New hstack for quantity question -->
+                <div class="quantity-options-hstack hidden">
+                  <!-- First element: Text vstack -->
+                  <div class="quantity-text-vstack">
+                    <p class="quantity-question">How many cigarettes do you smoke per day?</p>
+                  </div>
+
+                  <!-- Second element: Counter hstack -->
+                  <div class="counter-hstack">
+                    <button class="counter-capsule minus-capsule">−</button>
+                    <input type="text" class="counter-capsule middle-capsule" value="15" inputmode="numeric"
+                      pattern="[0-9]*">
+                    <button class="counter-capsule plus-capsule">+</button>
+                  </div>
+                  <div class="spacer"></div>
+                  <div class="tick-box" id="quantity-tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- New hstack for vape options -->
+              <div class="vape-options-hstack hidden">
+                <!-- First element: Text vstack -->
+                <div class="vape-text-vstack">
+                  <p class="vape-question">How do you vape?</p>
+                </div>
+
+                <!-- Second element: Refillable vstack -->
+                <div class="vape-option-vstack refillable-vstack">
+                  <div class="vape-option-box">
+                    <img src="assets/refillable-grey.svg" alt="Refillable Icon"
+                      class="vape-option-icon refillable-icon">
+                  </div>
+                  <p class="vape-option-text">Refillable</p>
+                </div>
+
+                <!-- Third element: Pod-based vstack -->
+                <div class="vape-option-vstack pod-based-vstack">
+                  <div class="vape-option-box">
+                    <img src="assets/pod-based-grey.svg" alt="Pod-based Icon" class="vape-option-icon pod-based-icon">
+                  </div>
+                  <p class="vape-option-text">Pods</p>
+                </div>
+
+                <!-- Fourth element: Spacer -->
+                <div class="spacer"></div>
+
+                <!-- Fifth element: Tick box -->
+                <div class="tick-box" id="vape-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- New hstack for bottle type definition -->
+              <div class="bottle-type-hstack hidden">
+                <!-- First element: Question text -->
+                <p class="bottle-type-question">Please define the type of eliquid bottles:</p>
+
+                <!-- Second element: Strength hstack -->
+                <div class="strength-hstack">
+                  <span class="strength-label">Strength</span>
+                  <input type="text" class="bottle-input strength-input" placeholder="20" inputmode="numeric"
+                    pattern="[0-9]*">
+                  <span class="strength-unit">mg/ml</span>
+                </div>
+
+                <!-- Third element: Bottle size hstack -->
+                <div class="bottle-size-hstack">
+                  <span class="bottle-size-label">Bottle size</span>
+                  <input type="text" class="bottle-input size-input" placeholder="10" inputmode="numeric"
+                    pattern="[0-9]*">
+                  <span class="bottle-size-unit">ml</span>
+                </div>
+
+                <!-- Fourth element: Spacer -->
+                <div class="spacer"></div>
+
+                <!-- Fifth element: Tick box -->
+                <div class="tick-box" id="bottle-type-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- New hstack for bottle quantity question -->
+              <div class="bottle-quantity-hstack hidden">
+                <!-- First element: Text vstack -->
+                <div class="bottle-quantity-text-vstack">
+                  <p class="bottle-quantity-question">How many bottles do you use per week?</p>
+                </div>
+
+                <!-- Second element: Counter hstack -->
+                <div class="bottle-counter-hstack">
+                  <button class="bottle-counter-capsule minus-capsule">−</button>
+                  <input type="text" class="bottle-counter-capsule middle-capsule" value="1" inputmode="numeric"
+                    pattern="[0-9.]*">
+                  <button class="bottle-counter-capsule plus-capsule">+</button>
+                </div>
+                <div class="spacer"></div>
+                <div class="tick-box" id="bottle-quantity-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- New hstack for pod type definition -->
+            <div class="pod-type-hstack hidden">
+              <!-- First element: Question text -->
+              <p class="pod-type-question">Please define the type of pods:</p>
+
+              <!-- Second element: Dropdown capsule -->
+              <div class="pod-dropdown-container">
+                <div class="pod-dropdown-capsule" id="pod-dropdown-capsule">
+                  <svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)" />
+                  </svg>
+                </div>
+
+                <!-- Dropdown list (initially hidden) -->
+                <div class="pod-dropdown-list" id="pod-dropdown-list">
+                  <div class="pod-dropdown-item" data-value="Juul">Juul</div>
+                  <div class="pod-dropdown-item" data-value="Vuse">Vuse</div>
+                  <div class="pod-dropdown-item" data-value="Lost Mary">Lost Mary</div>
+                  <div class="pod-dropdown-item" data-value="Elf Bar">Elf Bar</div>
+                </div>
+              </div>
+
+              <!-- Third element: Other capsule container -->
+              <div class="pod-other-container">
+                <div class="pod-other-capsule" id="pod-other-capsule">
+                  <span class="pod-other-text">Other</span>
+                </div>
+
+                <!-- Second dropdown list (initially hidden) -->
+                <div class="pod-second-dropdown-list" id="pod-second-dropdown-list">
+                  <!-- Vuse options -->
+                  <div class="pod-second-dropdown-item" data-value="Ultra" data-parent="Vuse">Ultra</div>
+                  <div class="pod-second-dropdown-item" data-value="Pro" data-parent="Vuse">Pro</div>
+                  <div class="pod-second-dropdown-item" data-value="Reload" data-parent="Vuse">Reload</div>
+                  <!-- Lost Mary options -->
+                  <div class="pod-second-dropdown-item" data-value="BM600" data-parent="Lost Mary">BM600</div>
+                  <div class="pod-second-dropdown-item" data-value="BM6000" data-parent="Lost Mary">BM6000</div>
+                  <!-- Elf Bar options -->
+                  <div class="pod-second-dropdown-item" data-value="600" data-parent="Elf Bar">600</div>
+                  <div class="pod-second-dropdown-item" data-value="AF5500" data-parent="Elf Bar">AF5500</div>
+                </div>
+              </div>
+
+              <!-- Fourth element: Strength hstack (initially hidden, shown when "Other" selected) -->
+              <div class="pod-strength-hstack" id="pod-strength-hstack">
+                <span class="pod-strength-label">Strength</span>
+                <input type="text" class="bottle-input pod-strength-input" placeholder="20" inputmode="numeric"
+                  pattern="[0-9]*">
+                <span class="pod-strength-unit">mg/ml</span>
+              </div>
+
+              <!-- Fifth element: Pod size hstack (initially hidden, shown when "Other" or "Vuse" selected) -->
+              <div class="pod-bottle-size-hstack" id="pod-bottle-size-hstack">
+                <span class="bottle-size-label">Pod size</span>
+                <input type="text" class="bottle-input pod-bottle-size-input" placeholder="2" inputmode="numeric"
+                  pattern="[0-9]*">
+                <span class="pod-bottle-size-unit">ml</span>
+              </div>
+
+              <!-- Sixth element: Spacer -->
+              <div class="spacer"></div>
+
+              <!-- Seventh element: Tick box (initially hidden, activated based on conditions) -->
+              <div class="tick-box" id="pod-type-tick-box">
+                <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                    stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- New hstack for pod quantity question -->
+            <div class="pod-quantity-hstack hidden">
+              <!-- First element: Text vstack -->
+              <div class="pod-quantity-text-vstack">
+                <p class="pod-quantity-question">How many pods do you use per week?</p>
+              </div>
+
+              <!-- Second element: Counter hstack -->
+              <div class="pod-counter-hstack">
+                <button class="pod-counter-capsule minus-capsule">−</button>
+                <input type="text" class="pod-counter-capsule middle-capsule" value="5" placeholder="5"
+                  inputmode="numeric" pattern="[0-9.]*">
+                <button class="pod-counter-capsule plus-capsule">+</button>
+              </div>
+              <div class="spacer"></div>
+              <div class="tick-box" id="pod-quantity-tick-box">
+                <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                    stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Confirm Button (initially hidden) -->
+            <div class="confirm-button-container hidden" id="confirm-button-container">
+              <button class="confirm-button" id="confirm-button">
+                <span class="confirm-text">Confirm</span>
+              </button>
+            </div>
+
+            <!-- Target Usage Section -->
+            <div class="target-usage-section">
+              <div class="target-usage-header-hstack">
+                <h3 class="target-usage-header">Target Usage</h3>
+                <div class="spacer"></div>
+                <!-- Status container (initially hidden) -->
+                <div class="target-usage-status-container hidden" id="target-usage-status-container">
+                  <!-- Edit button -->
+                  <button class="edit-button" id="target-usage-edit-button">edit</button>
+                  <!-- Display rectangle -->
+                  <div class="target-usage-status-rectangle"></div>
+                </div>
+                <div class="tick-box" id="target-usage-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <p class="target-usage-subtitle hidden">Please specify your target usage:</p>
+              <p class="target-usage-recommendation hidden">We suggest aiming for <span class="level-4-text">Level
+                  4</span>,
+                but if you'd rather take it slower, you can reduce usage level by level.</p>
+
+              <!-- Target Usage Picker -->
+              <div class="target-usage-picker hidden">
+                <div class="target-usage-picker-content">
+                  <div class="target-usage-top-rectangle">
+                    <div class="target-usage-levels-hstack">
+                      <div class="target-usage-level level-1">
+                        <span class="level-text">18mg <span class="level-unit">/day</span></span>
+                      </div>
+                      <div class="target-usage-level level-2">
+                        <span class="level-text">8mg <span class="level-unit">/day</span></span>
+                      </div>
+                      <div class="target-usage-level level-3">
+                        <span class="level-text">3mg <span class="level-unit">/day</span></span>
+                      </div>
+                      <div class="target-usage-level level-4">
+                        <span class="level-text">1mg <span class="level-unit">/day</span></span>
+                        <p class="quit-level-text">Quit Level</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="target-usage-bottom-rectangle">
+                    <div class="target-usage-gradient-rectangle hidden"></div>
+                    <div class="target-usage-progress-rectangle hidden" id="target-usage-progress"></div>
+                    <div class="target-usage-slider hidden" id="target-usage-slider">
+                      <div class="slider-vstack">
+                        <div class="slider-rectangle">
+                          <span class="slider-level-text" id="slider-level-text">Level 1</span>
+                        </div>
+                        <div class="slider-percentage-hstack" id="slider-percentage-hstack">
+                          <span class="slider-percentage-text" id="slider-percentage-text">Reduces usage by <span class="slider-percentage-value" id="slider-percentage-value">0%</span></span>
+                          <img src="assets/reduce.svg" alt="Reduce Icon" class="slider-reduce-icon">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile-only percentage text below target-usage-picker -->
+            <div class="mobile-percentage-hstack hidden" id="mobile-percentage-hstack">
+              <span class="mobile-percentage-text" id="mobile-percentage-text">Reduces usage by <span class="mobile-percentage-value" id="mobile-percentage-value">0%</span></span>
+              <img src="assets/reduce.svg" alt="Reduce Icon" class="mobile-reduce-icon">
+            </div>
+
+            <!-- Target Usage Confirm Button (initially hidden) -->
+            <div class="target-usage-confirm-button-container hidden" id="target-usage-confirm-button-container">
+              <button class="confirm-button" id="target-usage-confirm-button">
+                <span class="confirm-text">Confirm</span>
+              </button>
+            </div>
+
+            <!-- Plan Duration Section -->
+            <div class="target-usage-section">
+              <div class="target-usage-header-hstack">
+                <h3 class="target-usage-header">Plan Duration</h3>
+                <div class="spacer"></div>
+                <!-- Status container (initially hidden) -->
+                <div class="plan-duration-status-container hidden" id="plan-duration-status-container">
+                  <!-- Edit button -->
+                  <button class="edit-button" id="plan-duration-edit-button">edit</button>
+                  <!-- Display rectangle -->
+                  <div class="plan-duration-status-rectangle"></div>
+                </div>
+                <div class="tick-box" id="plan-duration-tick-box">
+                  <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                      stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <p class="plan-duration-subtitle">Please choose a plan duration:</p>
+              <p class="plan-duration-recommendation">Based upon your current and target usage, we recommend a plan duration of <span class="plan-duration-weeks" id="plan-duration-weeks">X weeks</span>.</p>
+              
+              <!-- Plan Duration Input Section -->
+              <div class="plan-duration-input-hstack">
+                <!-- Left VStack - Duration Adjustment -->
+                <div class="plan-duration-left-vstack">
+                  <div class="plan-duration-capsules-hstack">
+                    <div class="plan-duration-capsule plan-duration-capsule-small plan-duration-minus" id="plan-duration-minus">-</div>
+                    <div class="plan-duration-capsule plan-duration-capsule-medium" id="plan-duration-display">X weeks</div>
+                    <div class="plan-duration-capsule plan-duration-capsule-small plan-duration-plus" id="plan-duration-plus">+</div>
+                  </div>
+                  <div class="plan-duration-slider-container" id="plan-duration-slider-container">
+                    <div class="plan-duration-slider-track" id="plan-duration-slider-track">
+                      <div class="plan-duration-slider-thumb" id="plan-duration-slider-thumb"></div>
+                      <div class="plan-duration-slider-min-label" id="plan-duration-slider-min-label">Min</div>
+                      <div class="plan-duration-slider-max-label" id="plan-duration-slider-max-label">Max</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Right VStack - Specific Date -->
+                <div class="plan-duration-right-vstack">
+                  <p class="plan-duration-date-label">Or select a specific date to reach your target:</p>
+                  <div class="plan-duration-date-capsules-hstack">
+                    <div class="plan-duration-date-capsule" id="plan-duration-day-capsule" contenteditable="true">Day</div>
+                    <div class="plan-duration-date-capsule plan-duration-month-container" id="plan-duration-month-capsule">
+                      <div class="plan-duration-month-arrow plan-duration-month-arrow-left">‹</div>
+                      <span class="plan-duration-month-text">Month</span>
+                      <div class="plan-duration-month-arrow plan-duration-month-arrow-right">›</div>
+                    </div>
+                    <div class="plan-duration-date-capsule plan-duration-year-container" id="plan-duration-year-capsule">
+                      <div class="plan-duration-year-arrow plan-duration-year-arrow-left">‹</div>
+                      <span class="plan-duration-year-text">Year</span>
+                      <div class="plan-duration-year-arrow plan-duration-year-arrow-right">›</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan Duration Confirm Button (initially visible) -->
+            <div class="plan-duration-confirm-button-container" id="plan-duration-confirm-button-container">
+              <button class="confirm-button" id="plan-duration-confirm-button">
+                <span class="confirm-text">Confirm</span>
+              </button>
+            </div>
+          </div>
+
+        <!-- Your Plan Section -->
+        <div class="your-plan-section hidden" id="your-plan-section">
+          <div class="your-plan-header-hstack">
+            <h2 class="your-plan-header">Your Plan</h2>
+            <img src="assets/plan.svg" alt="Plan Icon" class="your-plan-header-icon">
+          </div>
+            
+            <!-- Your Plan Content Layout -->
+            <div class="your-plan-content-hstack">
+          <!-- Left VStack (2/3 width) -->
+          <div class="your-plan-left-vstack">
+            <div class="your-plan-rectangle your-plan-small-rectangle">
+              <h3 class="your-plan-title" id="your-plan-title">
+                <span class="your-plan-title-main" id="your-plan-title-main">Nicotine Allowance</span>
+                <span class="your-plan-title-sub" id="your-plan-title-sub"> throughout plan</span>
+              </h3>
+            </div>
+            <div class="your-plan-rectangle your-plan-large-rectangle">
+              <!-- Math Graph Container -->
+              <div class="plot-rect">
+                <svg id="graph" class="plot-svg" viewBox="0 0 100 30" preserveAspectRatio="none" aria-label="Function plot">
+                  <!-- Gradient definition -->
+                  <defs>
+                    <linearGradient id="curveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style="stop-color:var(--color-blue);stop-opacity:0" />
+                      <stop offset="100%" style="stop-color:var(--color-blue);stop-opacity:0.2" />
+                    </linearGradient>
+                    <!-- Clip path to mask elements to graph boundaries -->
+                    <clipPath id="graphClip">
+                      <rect x="0" y="0" width="100" height="30" />
+                    </clipPath>
+                  </defs>
+                  <!-- Group that flips the Y axis so (0,0) is bottom-left and +y is up -->
+                  <g id="math-space" transform="scale(1,-1) translate(0,-30)">
+                    <!-- The gradient fill area under the curve -->
+                    <path id="curve-fill" d="" fill="url(#curveGradient)" class="non-scaling" />
+                    <!-- Background red curve (full curve, always visible) -->
+                    <path id="curve-background" d="" fill="none" stroke="var(--color-red)" stroke-width="2" class="non-scaling" />
+                    <!-- The function curve (progressive, only up to hover position) -->
+                    <path id="curve" d="" fill="none" stroke="var(--color-blue)" stroke-width="8" stroke-linecap="round" class="non-scaling" />
+                  </g>
+                  
+                </svg>
+                <!-- Hover indicator circle (CSS-based, fixed size) -->
+                <div id="hover-circle" class="hover-circle" style="display: none;"></div>
+                
+                <!-- Red spending line (CSS-based, simple approach) -->
+                <svg id="spending-line" class="spending-line" style="display: none;">
+                  <path id="spending-path" d="" stroke="var(--color-red)" stroke-width="2" fill="none" 
+                        stroke-dasharray="1000" stroke-dashoffset="-1000" 
+                        style="transition: stroke-dashoffset 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);"/>
+                </svg>
+                
+           <!-- Arms and labels (CSS-based, fixed size, not affected by SVG scaling) -->
+           <svg id="baseline-arm" class="graph-arm-svg" style="display: none;">
+             <path d="" stroke="var(--color-mid-gray)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+           </svg>
+           <svg id="target-arm" class="graph-arm-svg" style="display: none;">
+             <path d="" stroke="var(--color-mid-gray)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+           </svg>
+                <div id="baseline-label" class="graph-label-css" style="display: none;">Baseline: 0mg /day</div>
+                <div id="target-level-label" class="graph-label-css graph-level-label-css graph-label-right" style="display: none;">Level 1</div>
+                <div id="target-label" class="graph-label-css graph-label-right" style="display: none;">Target: 0mg /day</div>
+                
+                <!-- Tooltip for showing coordinates -->
+                <div id="curve-tooltip" class="curve-tooltip" style="display: none;">
+                  <div id="tooltip-day">Day 0</div>
+                  <div id="tooltip-allowance">Allowance: 0mg</div>
+                </div>
+                
+                <!-- Current Spending Toggle (top right corner) -->
+                <div class="spending-toggle-hstack">
+                  <img src="assets/show-mid.svg" alt="Show Spending" class="spending-toggle-icon" id="spending-toggle-icon">
+                  <span class="spending-toggle-text">Current spending</span>
+                  <div class="spending-toggle-box" id="spending-toggle-box">
+                    <span class="spending-toggle-value" id="spending-toggle-value">£0.00</span>
+                  </div>
+                  <span class="spending-toggle-unit" id="spending-toggle-unit">/week</span>
+                </div>
+              </div>
+              
+              <!-- X-axis labels -->
+              <div class="x-axis-labels">
+                <div id="x-axis-today" class="x-axis-label x-axis-label-left">Today</div>
+                <div id="x-axis-week" class="x-axis-label x-axis-label-right">Week 0</div>
+                <div id="x-axis-hover-date" class="x-axis-label x-axis-hover-date" style="display: none;">4th Mar 2026</div>
+              </div>
+            </div>
+          </div>
+              
+              <!-- Right VStack (1/3 width) -->
+              <div class="your-plan-right-vstack">
+                <div class="your-plan-rectangle your-plan-small-rectangle your-plan-clickable-rectangle" id="right-top-rectangle">
+                  <div class="your-plan-white-rectangle" id="white-rectangle"></div>
+                  
+                  <!-- Content Container -->
+                  <div class="your-plan-content-container">
+                    <!-- Top spacer -->
+                    <div class="your-plan-vertical-spacer"></div>
+                    
+                    <!-- Content row -->
+                    <div class="your-plan-content-row">
+                      <!-- Left half (Nicotine) -->
+                      <div class="your-plan-left-half">
+                        <div class="your-plan-inner-content-hstack">
+                          <span class="your-plan-content-text nicotine-text">Nicotine</span>
+                          <img src="assets/nicotine.svg" alt="Nicotine Icon" class="your-plan-content-icon nicotine-icon">
+                        </div>
+                      </div>
+                      
+                      <!-- Right half (Costing) -->
+                      <div class="your-plan-right-half">
+                        <div class="your-plan-inner-content-hstack">
+                          <span class="your-plan-content-text costing-text">Costing</span>
+                          <img src="assets/costing-white.svg" alt="Costing Icon" class="your-plan-content-icon costing-icon">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Bottom spacer -->
+                    <div class="your-plan-vertical-spacer"></div>
+                  </div>
+                </div>
+                <div class="your-plan-rectangle your-plan-large-rectangle">
+                  <!-- Current Spending Display -->
+                  <div style="padding: 16px; color: var(--color-dark-gray); font-size: var(--font-size-medium);">
+                    <div><strong>Current Spending:</strong> <span id="current-spending-display">£0 /week</span></div>
+                  </div>
+                  
+                  <!-- Bottom Rectangle VStack -->
+                  <div class="bottom-rectangle-vstack">
+                    <!-- Graph Metrics HStack -->
+                    <div class="graph-metrics-hstack">
+                      <div class="graph-metric-rectangle">
+                        <div class="graph-metric-content">
+                          <div class="graph-metric-top-text" id="left-metric-top">Baseline</div>
+                          <div class="graph-metric-bottom-text" id="left-metric-bottom">0mg /day</div>
+                        </div>
+                      </div>
+                      <div class="graph-metric-rectangle">
+                        <div class="graph-metric-content">
+                          <div class="graph-metric-top-text" id="right-metric-top">Target Level 1</div>
+                          <div class="graph-metric-bottom-text" id="right-metric-bottom">0mg /day</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Spacer -->
+                    <div class="bottom-rectangle-spacer"></div>
+                    
+                    <!-- New HStacks VStack -->
+                    <div class="new-hstacks-vstack">
+                      <!-- New HStack 1 -->
+                      <div class="new-hstack-1">
+                        <img src="assets/reduce-metric.svg" alt="Reduce" class="new-hstack-icon">
+                        <div class="new-hstack-text">
+                          <span class="new-hstack-text-gray">Reduces usage by <span class="new-hstack-text-dark" id="reduction-percentage">0%</span></span>
+                        </div>
+        <!-- Costing Mode Content -->
+        <div class="costing-hstack-1-content hidden">
+          <span class="costing-text-medium">Average bill</span>
+          <span class="costing-text-large" id="average-bill-amount">£0.00</span>
+          <span class="costing-text-medium">/week</span>
+        </div>
+                      </div>
+                      
+                      <!-- New HStack 2 -->
+                      <div class="new-hstack-2">
+                        <img src="assets/calendar-metric.svg" alt="Calendar" class="new-hstack-icon">
+                        <div class="new-hstack-text">
+                          <span class="new-hstack-text-gray">By <span class="new-hstack-text-dark" id="target-date">1st Jan 2024</span></span>
+                        </div>
+                        <!-- Costing Mode Content -->
+                        <div class="costing-hstack-2-content hidden">
+                          <span class="costing-text-medium">Savings made</span>
+                          <div class="savings-vstack">
+                            <span class="savings-amount" id="savings-amount">£0.00</span>
+                            <span class="savings-label">vs current spending</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Spacer -->
+                    <div class="bottom-rectangle-spacer"></div>
+                    
+                    <!-- Order Button -->
+                    <div class="order-button">
+                      <div class="order-button-hstack">
+                        <div class="order-button-vstack">
+                          <div class="order-button-title-hstack">
+                            <div class="order-button-title">Order</div>
+                            <img src="assets/order-arrow.svg" alt="Arrow" class="order-button-arrow">
+                          </div>
+                          <div class="order-button-subtitle">Starter Pack</div>
+                        </div>
+                        <div class="order-button-spacer"></div>
+                        <div class="order-button-right-hstack">
+                          <div class="order-button-price">£12.99</div>
+                          <img src="assets/order.svg" alt="Order" class="order-button-icon">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  </div>
+
+  <!-- Link to JS file -->
+  <script src="script.js"></script>
+</body>
+
+</html>
