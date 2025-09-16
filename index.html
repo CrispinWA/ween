@@ -38,29 +38,33 @@
       <!-- Content container with proper spacing from header -->
       <div class="content-container">
         <!-- Get in Touch Form (initially hidden) -->
-        <div class="get-in-touch-form" id="get-in-touch-form">
+        <form class="get-in-touch-form" id="get-in-touch-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="8f8bb164-1e3d-4ecf-b299-b7d6320dca5d">
+          <input type="hidden" name="subject" value="New Contact Form Submission">
+          <input type="hidden" name="from_name" value="Website Contact Form">
+          
           <div class="form-content">
             <div class="form-fields">
               <div class="form-field">
                 <label for="name" class="field-label">Name</label>
-                <input type="text" id="name" name="name" class="field-input">
+                <input type="text" id="name" name="name" class="field-input" required>
               </div>
               <div class="form-field">
                 <label for="email" class="field-label">Email</label>
-                <input type="email" id="email" name="email" class="field-input">
+                <input type="email" id="email" name="email" class="field-input" required>
               </div>
               <div class="form-field">
                 <label for="message" class="field-label">Message</label>
-                <textarea id="message" name="message" class="field-input field-textarea"></textarea>
+                <textarea id="message" name="message" class="field-input field-textarea" required></textarea>
               </div>
             </div>
 
-            <div class="send-button-hstack">
+            <button type="submit" class="send-button-hstack" id="send-button">
               <h3 class="send-text">Send</h3>
               <img src="assets/send.svg" alt="Send Icon" class="send-icon">
-            </div>
+            </button>
           </div>
-        </div>
+        </form>
 
         <!-- Build Your Plan button -->
         <div class="build-plan-section">
@@ -97,42 +101,19 @@
                   </div>
                 </div>
                 <div class="question-hstack">
-                  <!-- Desktop layout: question - options - spacer - tickbox -->
-                  <div class="question-desktop-layout">
-                    <p class="plan-question">Do you smoke?</p>
-                    <div class="capsule-buttons">
-                      <button class="capsule-button" data-type="cigarettes">Cigarettes</button>
-                      <button class="capsule-button" data-type="vapes">Vapes</button>
-                      <button class="capsule-button" data-type="both">Both</button>
-                    </div>
-                    <div class="spacer"></div>
-                    <div class="tick-box" id="tick-box">
-                      <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
-                          stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </div>
+                  <!-- Single layout with CSS order for responsive behavior -->
+                  <p class="plan-question">Do you smoke?</p>
+                  <div class="capsule-buttons">
+                    <button class="capsule-button" data-type="cigarettes">Cigarettes</button>
+                    <button class="capsule-button" data-type="vapes">Vapes</button>
+                    <button class="capsule-button" data-type="both">Both</button>
                   </div>
-                  
-                  <!-- Mobile layout: question - spacer - tickbox (line 1), options (line 2) -->
-                  <div class="question-mobile-layout">
-                    <div class="question-mobile-line1">
-                      <p class="plan-question">Do you smoke?</p>
-                      <div class="spacer"></div>
-                      <div class="tick-box" id="tick-box-mobile">
-                        <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
-                            stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="question-mobile-line2">
-                      <div class="capsule-buttons">
-                        <button class="capsule-button" data-type="cigarettes">Cigarettes</button>
-                        <button class="capsule-button" data-type="vapes">Vapes</button>
-                        <button class="capsule-button" data-type="both">Both</button>
-                      </div>
-                    </div>
+                  <div class="spacer"></div>
+                  <div class="tick-box" id="tick-box">
+                    <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
+                        stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
                   </div>
                 </div>
 
@@ -163,7 +144,7 @@
                   <!-- Fourth element: Spacer -->
                   <div class="spacer"></div>
 
-                  <!-- Fifth element: Tick box (reusing existing) -->
+                  <!-- Fifth element: Tick box -->
                   <div class="tick-box" id="cigarette-tick-box">
                     <svg class="tick-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path class="tick-path" d="M 1.5,14.5 L 7.5,22.5 L 22.5,1.5" stroke="var(--color-black)"
@@ -747,6 +728,24 @@
         </div>
       </div>
 
+      <!-- Investor Pitch Section -->
+      <div class="investor-pitch-section hidden" id="investor-pitch-section">
+        <div class="investor-pitch-rectangle">
+          <div class="investor-pitch-vstack">
+            <!-- Header HStack -->
+            <div class="investor-pitch-header-hstack">
+              <h2 class="investor-pitch-title">Investor Pitch</h2>
+              <div class="investor-pitch-spacer"></div>
+              <img src="assets/border.svg" alt="Border" class="investor-pitch-icon">
+            </div>
+            
+            <!-- Video Container -->
+            <div class="investor-pitch-video-container">
+              <div style="position:relative; width:1px; min-width:100%;padding-bottom:56.25%;"><iframe allow="autoplay" class='spotlightr' allowtransparency="true" style="width:1px; min-width:100%; height: 100%; position:absolute; " allowfullscreen="true" src="https://videos.cdn.spotlightr.com/watch/MTg2Mzc2OA==?fallback=true" frameborder="0" scrolling="no" name="videoPlayer" > </iframe></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>

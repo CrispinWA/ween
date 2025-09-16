@@ -73,6 +73,66 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
+  // Form submission handling
+  getInTouchForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+    
+    const formData = new FormData(getInTouchForm);
+    const sendButton = document.getElementById('send-button');
+    const sendText = sendButton.querySelector('.send-text');
+    const sendIcon = sendButton.querySelector('.send-icon');
+    
+    // Show loading state
+    sendText.textContent = 'Sending...';
+    sendButton.disabled = true;
+    sendButton.style.opacity = '0.6';
+    
+    // Submit to Web3Forms
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Success state
+        sendText.textContent = 'Sent!';
+        sendIcon.style.display = 'none'; // Hide the icon
+        
+        // Clear form
+        getInTouchForm.reset();
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+          sendText.textContent = 'Send';
+          sendIcon.src = 'assets/send.svg';
+          sendIcon.alt = 'Send Icon';
+          sendIcon.style.display = 'block'; // Show the icon again
+          sendButton.disabled = false;
+          sendButton.style.opacity = '1';
+        }, 3000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Error state
+      sendText.textContent = 'Error';
+      sendIcon.src = 'assets/cross.svg';
+      sendIcon.alt = 'Error Icon';
+      
+      // Reset button after 3 seconds
+      setTimeout(() => {
+        sendText.textContent = 'Send';
+        sendIcon.src = 'assets/send.svg';
+        sendIcon.alt = 'Send Icon';
+        sendButton.disabled = false;
+        sendButton.style.opacity = '1';
+      }, 3000);
+    });
+  });
+  
   // Plan Builder Functionality
   const buildPlanButton = document.querySelector('.build-plan-button');
   const planBuilderDropdown = document.getElementById('plan-builder-dropdown');
@@ -123,7 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Capsule Button Functionality
   const capsuleButtons = document.querySelectorAll('.capsule-button');
   const tickBox = document.getElementById('tick-box');
-  const tickBoxMobile = document.getElementById('tick-box-mobile');
   
   capsuleButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -169,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Activate both tick boxes (desktop and mobile)
       if (tickBox) tickBox.classList.add('active');
-      if (tickBoxMobile) tickBoxMobile.classList.add('active');
       
       // Add has-selection class to target usage section to add top margin
       const targetUsageSection = document.querySelector('.target-usage-section');
@@ -249,9 +307,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const isCartonActive = cartonVstack.classList.contains('active');
     
     if (isPouchActive || isCartonActive) {
-      cigaretteTickBox.classList.add('active');
+      if (cigaretteTickBox) cigaretteTickBox.classList.add('active');
+      if (cigaretteTickBoxMobile) cigaretteTickBoxMobile.classList.add('active');
     } else {
-      cigaretteTickBox.classList.remove('active');
+      if (cigaretteTickBox) cigaretteTickBox.classList.remove('active');
+      if (cigaretteTickBoxMobile) cigaretteTickBoxMobile.classList.remove('active');
     }
   }
   
@@ -3311,6 +3371,53 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
+    // Touch events for mobile dragging
+    sliderThumb.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startLeft = parseInt(sliderThumb.style.left) || 0;
+      e.preventDefault();
+    });
+    
+    document.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      
+      const deltaX = e.touches[0].clientX - startX;
+      const newLeft = startLeft + deltaX;
+      const minLeft = -borderWidth; // Allow left border to align with track edge
+      const maxLeft = trackWidth - thumbWidth - borderWidth; // Allow right border to align with track edge
+      
+      // Constrain movement within track bounds
+      const constrainedLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+      sliderThumb.style.left = constrainedLeft + 'px';
+      
+      // Don't update values during dragging - just move the thumb smoothly
+      e.preventDefault();
+    });
+    
+    document.addEventListener('touchend', function() {
+      if (isDragging) {
+        isDragging = false;
+        
+        // Calculate final position and snap to nearest week value
+        const finalPosition = parseInt(sliderThumb.style.left) || -borderWidth;
+        const adjustedPosition = finalPosition + borderWidth; // Add border offset back
+        const positionPercentage = adjustedPosition / availableWidth;
+        const currentWeeks = Math.round(minWeeks + (positionPercentage * (maxWeeks - minWeeks)));
+        
+        // Update display with final value
+        displayCapsule.dataset.currentWeeks = currentWeeks;
+        displayCapsule.textContent = currentWeeks + ' weeks';
+        sliderContainer.dataset.currentWeeks = currentWeeks;
+        
+        // Update date capsules
+        updateDateCapsules(currentWeeks);
+        
+        // Snap to exact position for the calculated value
+        snapSliderToValue();
+      }
+    });
+    
     // Add click-to-position functionality on track
     sliderTrack.addEventListener('click', function(e) {
       if (e.target === sliderThumb) return; // Don't interfere with thumb dragging
@@ -4342,6 +4449,13 @@ function updateArmsAndLabels(xUnits, yUnits, a, b, c) {
   let targetStartX, targetStartY, targetEndX, targetEndY;
   let baselineValue, targetValue, levelValue;
   
+  // Check if we're in mobile mode
+  const isMobile = window.innerWidth <= 768;
+  
+  // Set arm heights based on mode - in mobile: start arm shorter (30px), end arm taller (70px)
+  const baselineArmHeight = isMobile ? 30 : 40; // Start arm: 30px on mobile, 40px on desktop
+  const targetArmHeight = isMobile ? 120 : 60;   // End arm: 70px on mobile, 60px on desktop
+  
   if (graphConfig.isCostingMode) {
     // Costing mode - use cost curve endpoints
     const costingParams = calculateCostingParams(a, b, c);
@@ -4350,47 +4464,47 @@ function updateArmsAndLabels(xUnits, yUnits, a, b, c) {
     // Calculate cost at Week 1 (initial cost)
     const initialCost = C(1, ac, bc, cc);
     
-    // Baseline arm: from (0, initialCost) to (0, initialCost+40px) to (24px, initialCost+40px) - moved up 12px, height 40px
+    // Baseline arm: from (0, initialCost) to (0, initialCost+height) to (24px, initialCost+height) - moved up 12px
     baselineStartX = 1; // Start 1px from left edge to ensure visibility
     baselineStartY = rectHeight - (initialCost / yUnits) * rectHeight - 12; // Convert to screen coordinates, move up 12px
     baselineEndX = 24; // 24px from left
-    baselineEndY = baselineStartY - 40; // 40px up
+    baselineEndY = baselineStartY - baselineArmHeight; // Use dynamic height
     
-    // Target arm: from (cc, ac) to (cc, ac+60px) to (cc-24px, ac+60px) - moved up 12px, height 60px
+    // Target arm: from (cc, ac) to (cc, ac+height) to (cc-24px, ac+height) - moved up 12px
     targetStartX = (cc / xUnits) * rectWidth - 1; // Convert to screen coordinates, move 1px left to ensure visibility
     targetStartY = rectHeight - (ac / yUnits) * rectHeight - 12; // Convert to screen coordinates, move up 12px
     targetEndX = targetStartX - 24; // 24px left
-    targetEndY = targetStartY - 60; // 60px up
+    targetEndY = targetStartY - targetArmHeight; // Use dynamic height
     
     baselineValue = initialCost; // Use Week 1 cost instead of Week 0
     targetValue = ac;
     levelValue = getTargetLevelFromUsage(a); // Level is still based on nicotine target
   } else {
     // Nicotine mode - use nicotine curve endpoints
-    // Baseline arm: from (0, b) to (0, b+40px) to (24px, b+40px) - moved up 12px, height 40px
+    // Baseline arm: from (0, b) to (0, b+height) to (24px, b+height) - moved up 12px
     baselineStartX = 1; // Start 1px from left edge to ensure visibility
     baselineStartY = rectHeight - (b / yUnits) * rectHeight - 12; // Convert to screen coordinates, move up 12px
     baselineEndX = 24; // 24px from left
-    baselineEndY = baselineStartY - 40; // 40px up
+    baselineEndY = baselineStartY - baselineArmHeight; // Use dynamic height
     
-    // Target arm: from (c, a) to (c, a+60px) to (c-24px, a+60px) - moved up 12px, height 60px
+    // Target arm: from (c, a) to (c, a+height) to (c-24px, a+height) - moved up 12px
     targetStartX = (c / xUnits) * rectWidth - 1; // Convert to screen coordinates, move 1px left to ensure visibility
     targetStartY = rectHeight - (a / yUnits) * rectHeight - 12; // Convert to screen coordinates, move up 12px
     targetEndX = targetStartX - 24; // 24px left
-    targetEndY = targetStartY - 60; // 60px up
+    targetEndY = targetStartY - targetArmHeight; // Use dynamic height
     
     baselineValue = b;
     targetValue = a;
     levelValue = getTargetLevelFromUsage(a);
   }
   
-  // Create curved baseline arm path (up 40px, then right 24px with 12px radius curve)
+  // Create curved baseline arm path (up dynamic height, then right 24px with 12px radius curve)
   const baselineArmPath = `M ${baselineStartX} ${baselineStartY} L ${baselineStartX} ${baselineEndY + 12} Q ${baselineStartX} ${baselineEndY} ${baselineStartX + 12} ${baselineEndY} L ${baselineEndX} ${baselineEndY}`;
   const baselinePathElement = graphElements.baselineArm.querySelector('path');
   baselinePathElement.setAttribute('d', baselineArmPath);
   // Don't override display setting - it's already set correctly above based on spending line visibility
   
-  // Create curved target arm path (up 60px, then left 24px with 12px radius curve)
+  // Create curved target arm path (up dynamic height, then left 24px with 12px radius curve)
   const targetArmPath = `M ${targetStartX} ${targetStartY} L ${targetStartX} ${targetEndY + 12} Q ${targetStartX} ${targetEndY} ${targetStartX - 12} ${targetEndY} L ${targetEndX} ${targetEndY}`;
   const targetPathElement = graphElements.targetArm.querySelector('path');
   targetPathElement.setAttribute('d', targetArmPath);
@@ -4749,9 +4863,14 @@ function buildProgressiveCurvePath(xUnits, yUnits, a, b, c, samples, maxX) {
 function setupCurveHover() {
   if (!graphElements.svg || !graphElements.curve) return;
   
-  // Add mouse move event listener to the SVG
+  // Add mouse move event listener to the SVG (desktop)
   graphElements.svg.addEventListener('mousemove', handleCurveHover);
   graphElements.svg.addEventListener('mouseleave', hideCurveHover);
+  
+  // Add touch event listeners for mobile
+  graphElements.svg.addEventListener('touchstart', handleTouchStart);
+  graphElements.svg.addEventListener('touchmove', handleTouchMove);
+  graphElements.svg.addEventListener('touchend', handleTouchEnd);
 }
 
 // Handle curve hover
@@ -4932,6 +5051,184 @@ function hideCurveHover() {
   }
 }
 
+// Touch event handlers for mobile
+let isTouching = false;
+
+function handleTouchStart(event) {
+  if (!graphElements.curve || !graphElements.hoverCircle || !graphElements.tooltip) return;
+  
+  // Disable hover during animation
+  if (graphConfig.isAnimating) return;
+  
+  isTouching = true;
+  event.preventDefault(); // Prevent scrolling
+  
+  // Use the same logic as mouse hover but with touch coordinates
+  handleTouchMove(event);
+}
+
+function handleTouchMove(event) {
+  if (!isTouching || !graphElements.curve || !graphElements.hoverCircle || !graphElements.tooltip) return;
+  
+  // Disable hover during animation
+  if (graphConfig.isAnimating) return;
+  
+  event.preventDefault(); // Prevent scrolling
+  
+  const { a, b, c, xUnits, yUnits } = graphConfig;
+  if (a <= 0 || b <= 0 || c <= 0) return; // No valid data yet
+  
+  // Get touch position relative to SVG
+  const rect = graphElements.svg.getBoundingClientRect();
+  const touch = event.touches[0]; // Get first touch point
+  const touchX = touch.clientX - rect.left;
+  const touchY = touch.clientY - rect.top;
+  
+  // Convert to SVG coordinates
+  const svgX = (touchX / rect.width) * xUnits;
+  const svgY = (touchY / rect.height) * yUnits;
+  
+  // Convert to mathematical coordinates (accounting for the flipped Y-axis)
+  const mathX = svgX;
+  const mathY = yUnits - svgY;
+  
+  // Clamp x to valid range based on mode
+  let clampedX, actualY;
+  if (graphConfig.isCostingMode) {
+    // Costing mode - snap to discrete week points
+    const costingParams = calculateCostingParams(a, b, c);
+    const { ac, bc, cc } = costingParams;
+    
+    // Convert touch position to week number (1 to cc)
+    const weekNumber = Math.round(mathX);
+    
+    // Clamp to valid week range (1 to cc, skip week 0)
+    const clampedWeek = Math.max(1, Math.min(cc, weekNumber));
+    
+    // If touch is in week 0 range, snap to week 1
+    if (mathX < 0.5) {
+      clampedX = 1;
+    } else {
+      clampedX = clampedWeek;
+    }
+    
+    actualY = C(clampedX, ac, bc, cc);
+  } else {
+    // Nicotine mode - use days and nicotine curve (continuous)
+    clampedX = Math.max(0, Math.min(c, mathX));
+    actualY = N(clampedX, a, b, c);
+  }
+  
+  // Update the current hover position for progressive curve
+  graphConfig.currentHoverX = clampedX;
+  
+  // Convert back to screen coordinates for CSS positioning
+  const screenX = (clampedX / xUnits) * rect.width;
+  const screenY = ((yUnits - actualY) / yUnits) * rect.height;
+  
+  // Update hover circle position (CSS-based, positioned relative to the plot-rect container)
+  const plotRect = document.querySelector('.plot-rect');
+  const plotRectRect = plotRect.getBoundingClientRect();
+  
+  const circleX = screenX;
+  const circleY = screenY;
+  
+  graphElements.hoverCircle.style.left = `${circleX}px`;
+  graphElements.hoverCircle.style.top = `${circleY}px`;
+  graphElements.hoverCircle.style.display = 'block';
+  
+  // Update hover date label position and content
+  updateHoverDateLabel(circleX, clampedX);
+  
+  // Fade out arms and labels on touch
+  fadeOutArmsAndLabels();
+  
+  // Update circle color based on mode
+  if (graphConfig.isCostingMode) {
+    graphElements.hoverCircle.style.borderColor = 'var(--color-green)';
+  } else {
+    graphElements.hoverCircle.style.borderColor = 'var(--color-blue)';
+  }
+  
+  // Update tooltip content based on mode
+  if (graphConfig.isCostingMode) {
+    // Costing mode - show weeks and cost
+    const week = Math.round(clampedX);
+    const cost = Math.round(actualY * 100) / 100; // Round to 2 decimal places for currency
+    
+    graphElements.tooltipDay.textContent = `Week ${week}`;
+    graphElements.tooltipAllowance.textContent = `Cost: £${cost}`;
+  } else {
+    // Nicotine mode - show days and allowance
+    const day = Math.round(clampedX);
+    const allowance = Math.round(actualY * 10) / 10; // Round to 1 decimal place
+    
+    graphElements.tooltipDay.textContent = `Day ${day}`;
+    graphElements.tooltipAllowance.textContent = `Allowance: ${allowance}mg`;
+  }
+  
+  // Position tooltip above the circle with 32px gap and invisible wall constraints
+  const tooltipY = circleY - 32; // 32px above the circle
+  
+  // First, make the tooltip visible to get accurate dimensions
+  graphElements.tooltip.style.display = 'block';
+  graphElements.tooltip.style.left = `${circleX}px`;
+  graphElements.tooltip.style.top = `${tooltipY}px`;
+  
+  // Get tooltip dimensions for invisible wall constraints (after making it visible)
+  let tooltipX = circleX; // Default to centered above circle
+  
+  try {
+    const tooltipRect = graphElements.tooltip.getBoundingClientRect();
+    const tooltipWidth = tooltipRect.width;
+    const tooltipHalfWidth = tooltipWidth / 2;
+    
+    // Get graph container dimensions for boundaries
+    const plotRect = document.querySelector('.plot-rect');
+    if (plotRect) {
+      const plotRectRect = plotRect.getBoundingClientRect();
+      const graphLeft = 0;
+      const graphRight = plotRectRect.width;
+      
+      // Apply invisible wall constraints
+      const tooltipLeftEdge = circleX - tooltipHalfWidth;
+      const tooltipRightEdge = circleX + tooltipHalfWidth;
+      
+      // Constrain to left boundary
+      if (tooltipLeftEdge < graphLeft) {
+        tooltipX = graphLeft + tooltipHalfWidth;
+      }
+      // Constrain to right boundary
+      else if (tooltipRightEdge > graphRight) {
+        tooltipX = graphRight - tooltipHalfWidth;
+      }
+    }
+  } catch (error) {
+    console.log('Tooltip positioning error:', error);
+    // Fallback to simple positioning if there's an error
+    tooltipX = circleX;
+  }
+  
+  // Apply the final position
+  graphElements.tooltip.style.left = `${tooltipX}px`;
+  
+  // Update the progressive curve only in nicotine mode (costing mode shows full curve always)
+  if (!graphConfig.isCostingMode) {
+    const progressivePath = buildProgressiveCurvePath(xUnits, yUnits, a, b, c, graphConfig.samples, clampedX);
+    graphElements.curve.setAttribute('d', progressivePath);
+  }
+}
+
+function handleTouchEnd(event) {
+  if (!isTouching) return;
+  
+  isTouching = false;
+  event.preventDefault(); // Prevent scrolling
+  
+  // Hide tooltip and reset graph (same as mouse leave)
+  hideCurveHover();
+}
+
 // Apply scale to SVG
 function applyGraphScale(xUnits, yUnits) {
   if (!graphElements.svg || !graphElements.mathSpace) return;
@@ -5031,10 +5328,43 @@ function animateGraphReveal() {
   if (!yourPlanSection) return;
   
   // Step 1: Scroll to the Your Plan section
-  yourPlanSection.scrollIntoView({ 
-    behavior: 'smooth', 
-    block: 'start' 
-  });
+  // Check if we're in mobile mode (screen width <= 768px)
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // For mobile, scroll so the bottom edge of plan builder aligns with top of screen
+    const planBuilderDropdown = document.getElementById('plan-builder-dropdown');
+    if (planBuilderDropdown) {
+      const rect = planBuilderDropdown.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetPosition = rect.bottom + scrollTop;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      // Fallback to centering Your Plan header if plan builder not found
+      const yourPlanHeader = yourPlanSection.querySelector('.your-plan-header');
+      if (yourPlanHeader) {
+        yourPlanHeader.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      } else {
+        yourPlanSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }
+    }
+  } else {
+    // For desktop, center the section
+    yourPlanSection.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center' 
+    });
+  }
   
   // Step 2: After scroll completes, animate the curves
   setTimeout(() => {
@@ -6419,4 +6749,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Make updateGraphMetrics globally accessible
   window.updateGraphMetrics = updateGraphMetrics;
   
+});
+
+// Investor Pitch Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const investorPitchIcon = document.querySelector('.investor-pitch-icon');
+  const investorPitchVideoContainer = document.querySelector('.investor-pitch-video-container');
+  
+  if (investorPitchIcon && investorPitchVideoContainer) {
+    investorPitchIcon.addEventListener('click', function() {
+      // Scroll to the video container with smooth behavior
+      investorPitchVideoContainer.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center' // Center the video in the viewport
+      });
+    });
+  }
 });

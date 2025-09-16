@@ -26,10 +26,12 @@
   --font-size-large: 28px;
   --font-size-medium: 24px;
   --font-size-small: 20px;
+  --font-size-xsmall: 16px;
   --icon-size-xlarge: 32px;
   --icon-size-large: 28px;
   --icon-size-medium: 24px;
   --icon-size-small: 20px;
+  --icon-size-xsmall: 16px;
   --header-height: clamp(80px, 15vw, 140px); /* Approximate header height */
 }
 
@@ -157,6 +159,11 @@ body {
   opacity: 0 !important;
   transform: translateY(-20px) !important;
   transition: all 0.3s ease !important;
+}
+
+/* Adjust Your Plan section margin when plan builder is hidden */
+.plan-builder-dropdown:not(.show) + .your-plan-section {
+  margin-top: -100px !important;
 }
 
 /* Your Plan Header HStack */
@@ -903,6 +910,9 @@ body {
 .current-nicotine-status-container.hidden {
   opacity: 0;
   visibility: hidden;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Status Rectangle */
@@ -920,6 +930,7 @@ body {
   @media (max-width: 768px) {
     .status-rectangle {
       font-size: var(--font-size-medium);
+      height: 40px; /* Reduced from 52px by 12px */
     }
   }
 
@@ -1046,21 +1057,6 @@ body {
   transform: translateY(0);
 }
 
-/* Desktop layout - show by default */
-.question-desktop-layout {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  width: 100%;
-}
-
-/* Mobile layout - hidden by default */
-.question-mobile-layout {
-  display: none;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-}
 
 .question-mobile-line1 {
   display: flex;
@@ -2537,6 +2533,9 @@ body {
   .target-usage-status-container.hidden {
     opacity: 0;
     visibility: hidden;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   /* Target Usage Status Rectangle */
@@ -3029,6 +3028,11 @@ body {
   align-items: center;
   gap: 8px; /* Gap between text and icon */
   justify-content: flex-start; /* Left aligned */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .send-text {
@@ -3048,7 +3052,7 @@ body {
 @media (max-width: 768px) {
   /* Reduce logo height on mobile */
   .logo {
-    height: 30px; /* Smaller logo for mobile */
+    height: 24px; /* Smaller logo for mobile */
   }
   
   /* Change mail icon to medium size on mobile */
@@ -3103,13 +3107,260 @@ body {
     font-size: var(--font-size-medium); /* 24px on mobile */
   }
   
+  /* Current nicotine header mobile layout */
+  .current-nicotine-header-hstack {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0px; /* Reduced gap to help fit text and tickbox on same row */
+  }
+  
+  /* Mobile order for current nicotine header: text, spacer, tickbox (line 1), then status container (line 2) */
+  .current-nicotine-header-hstack .plan-header { 
+    order: 1; 
+    margin: 0 !important; /* Remove margins */
+    padding: 0 !important; /* Remove padding */
+  }
+  .current-nicotine-header-hstack .spacer { order: 2; }
+  .current-nicotine-header-hstack .tick-box { 
+    order: 3; 
+    margin: 0; /* Remove margins */
+    padding: 0; /* Remove padding */
+  }
+  .current-nicotine-header-hstack .current-nicotine-status-container { order: 4; }
+  
+  /* Fix order within status container: display box first, then edit button */
+  .current-nicotine-status-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .current-nicotine-status-container .status-rectangle { 
+    order: 1; 
+    margin-top: 16px; /* Add top margin to display box in mobile */
+    margin-bottom: 12px;
+  }
+  .current-nicotine-status-container .edit-button { 
+    order: 2;
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+  
+  /* Set heights and margins to 0 for hidden elements */
+  .current-nicotine-status-container.hidden,
+  .current-nicotine-status-container.hidden *,
+  #current-nicotine-tick-box.hidden {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
   /* Target usage mobile adjustments */
   .target-usage-header {
     font-size: var(--font-size-medium); /* 24px on mobile */
   }
   
+  /* Target usage header mobile layout */
+  .target-usage-header-hstack {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0px; /* No gap to help fit text and tickbox on same row */
+  }
+  
+  /* Mobile order for target usage header: text, spacer, tickbox (line 1), then status container (line 2) */
+  .target-usage-header-hstack .target-usage-header { 
+    order: 1; 
+    margin: 0 !important; /* Remove margins */
+    padding: 0 !important; /* Remove padding */
+  }
+  .target-usage-header-hstack .spacer { order: 2; }
+  .target-usage-header-hstack .tick-box { 
+    order: 3; 
+    margin: 0; /* Remove margins */
+    padding: 0; /* Remove padding */
+  }
+  .target-usage-header-hstack .target-usage-status-container { order: 4; }
+  
+  /* Fix order within target usage status container: display box first, then edit button */
+  .target-usage-status-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .target-usage-status-container .target-usage-status-rectangle { 
+    order: 1; 
+    margin-top: 16px; /* Add top margin to display box in mobile */
+    margin-bottom: 4px;
+  }
+  .target-usage-status-container .edit-button { 
+    order: 2;
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
+  
+  /* Mobile styles for target usage status rectangle */
+  .target-usage-status-rectangle {
+    font-size: var(--font-size-medium);
+    height: 40px; /* Reduced from 52px by 12px */
+  }
+  
+  /* Override inline font-size for text inside status rectangles in mobile */
+  .status-rectangle span,
+  .target-usage-status-rectangle span {
+    font-size: var(--font-size-medium) !important;
+  }
+  
+  /* Set heights and margins to 0 for hidden elements */
+  .target-usage-status-container.hidden,
+  .target-usage-status-container.hidden *,
+  #target-usage-tick-box.hidden {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Plan duration header mobile layout - same as current/target usage */
+  .target-usage-header-hstack:has(.plan-duration-status-container) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0px; /* No gap to help fit text and tickbox on same row */
+  }
+  
+  /* Mobile order for plan duration header: text, spacer, tickbox (line 1), then status container (line 2) */
+  .target-usage-header-hstack:has(.plan-duration-status-container) .target-usage-header { 
+    order: 1; 
+    margin: 0 !important; /* Remove margins */
+    padding: 0 !important; /* Remove padding */
+  }
+  .target-usage-header-hstack:has(.plan-duration-status-container) .spacer { order: 2; }
+  .target-usage-header-hstack:has(.plan-duration-status-container) .tick-box { 
+    order: 3; 
+    margin: 0; /* Remove margins */
+    padding: 0; /* Remove padding */
+  }
+  .target-usage-header-hstack:has(.plan-duration-status-container) .plan-duration-status-container { order: 4; }
+  
+  /* Fix order within plan duration status container: display box first, then edit button */
+  .plan-duration-status-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .plan-duration-status-container .plan-duration-status-rectangle { 
+    order: 1; 
+    margin-top: 16px; /* Add top margin to display box in mobile */
+    margin-bottom: 4px;
+  }
+  .plan-duration-status-container .edit-button { 
+    order: 2;
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
+  
+  /* Mobile styles for plan duration status rectangle */
+  .plan-duration-status-rectangle {
+    font-size: var(--font-size-medium);
+    height: 40px; /* Reduced from 52px by 12px */
+  }
+  
+  /* Override inline font-size for text inside plan duration status rectangle in mobile */
+  .plan-duration-status-rectangle span {
+    font-size: var(--font-size-medium) !important;
+  }
+  
+  /* Set heights and margins to 0 for hidden plan duration elements */
+  .plan-duration-status-container.hidden,
+  .plan-duration-status-container.hidden *,
+  #plan-duration-tick-box.hidden {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Reduce bottom margin of plan builder section in mobile */
+  .plan-builder-dropdown {
+    margin-bottom: 24px; /* Reduced from 60px to bring Your Plan section closer */
+  }
+  
+  /* Adjust Your Plan section margin when plan builder is hidden - mobile version */
+  .plan-builder-dropdown:not(.show) + .your-plan-section {
+    margin-top: -44px !important; /* Reduced from -100px for mobile */
+  }
+  
+  /* Plan duration mobile layout */
+  .plan-duration-input-hstack {
+    flex-direction: column; /* Stack vertically in mobile */
+    align-items: stretch; /* Full width for both sections */
+    gap: 40px; /* Reduced gap between minus/display/plus and slider */
+  }
+  
+  .plan-duration-left-vstack,
+  .plan-duration-right-vstack {
+    flex: none; /* Remove flex: 1 to allow natural sizing */
+    width: 100%; /* Full width for both sections */
+  }
+  
+  /* Reduce gap between minus/display/plus capsules and slider in mobile */
+  .plan-duration-left-vstack {
+    gap: 12px; /* Reduced from 24px */
+  }
+  
+  /* Plan duration text mobile adjustments */
+  .plan-duration-recommendation {
+    font-size: var(--font-size-xsmall); /* "Based upon your current and target usage..." text */
+  }
+  
+  .plan-duration-date-label {
+    font-size: var(--font-size-small); /* "Or select a specific date..." text */
+  }
+  
+  /* Plan duration capsule text mobile adjustments */
+  .plan-duration-capsule-medium {
+    font-size: var(--font-size-small); /* Red text showing number of weeks */
+  }
+  
+  /* Slider min/max labels mobile adjustments */
+  .plan-duration-slider-min-label,
+  .plan-duration-slider-max-label {
+    font-size: var(--font-size-small); /* "Min" and "Max" text at slider ends */
+  }
+  
+  /* Date capsule text mobile adjustments */
+  .plan-duration-date-capsule {
+    font-size: var(--font-size-small); /* Date values in capsules */
+    flex: 1; /* Make capsules wider to reduce gaps */
+  }
+  
+  /* Reduce gap between date capsules in mobile */
+  .plan-duration-date-capsules-hstack {
+    gap: 8px; /* Reduced from 24px */
+  }
+  
+  /* Make arrows always visible in mobile (no hover) */
+  .plan-duration-month-arrow,
+  .plan-duration-year-arrow {
+    opacity: 1 !important;
+  }
+  
+  /* Spread out arrows more in mobile */
+  .plan-duration-month-arrow-left,
+  .plan-duration-year-arrow-left {
+    left: 0px; /* Reduced from 8px */
+  }
+  
+  .plan-duration-month-arrow-right,
+  .plan-duration-year-arrow-right {
+    right: 0px; /* Reduced from 8px */
+  }
+  
   .target-usage-subtitle {
     font-size: var(--font-size-small); /* 18px on mobile */
+  }
+
+  .target-usage-recommendation {
+    font-size: var(--font-size-xsmall); /* 16px for mobile */
   }
 
   .plan-duration-subtitle {
@@ -3185,7 +3436,14 @@ body {
   
   /* Level text mobile adjustments */
   .level-text {
-    font-size: var(--font-size-medium); /* 24px on mobile */
+    font-size: var(--font-size-small); /* 20px on mobile */
+    text-align: center; /* Center text in mobile mode */
+  }
+  
+  /* Center level content in mobile mode */
+  .target-usage-level {
+    justify-content: center; /* Center content instead of flex-end */
+    padding-right: 0; /* Remove right padding */
   }
   
   /* Hide /day unit on mobile */
@@ -3195,7 +3453,7 @@ body {
   
   /* Slider level text mobile adjustments */
   .slider-level-text {
-    font-size: var(--font-size-small); /* 18px on mobile */
+    font-size: var(--font-size-xsmall); /* 16px on mobile */
   }
   
   /* Plan question mobile adjustments */
@@ -3207,6 +3465,7 @@ body {
   .capsule-button {
     font-size: var(--font-size-small); /* 18px on mobile */
     width: 120px; /* Reduced width on mobile (from 140px) */
+    padding: 0 4px; /* Add 8px left and right padding for text */
   }
   
   .capsule-buttons {
@@ -3216,14 +3475,38 @@ body {
   
   /* Cigarette options mobile adjustments */
   .cigarette-options-hstack {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;
   }
+  
   
   .cigarette-option-box {
     width: 140px;
     height: 120px;
+  }
+  
+  .cigarette-option-icon.pouch-icon {
+    width: 115px; /* Mobile height for pouch icon */
+  }
+  
+  .cigarette-option-icon.carton-icon {
+    height: 90px; /* Mobile height for carton icon */
+  }
+  
+  /* Mobile question text adjustment */
+  .cigarette-question {
+    font-size: 0 !important; /* Hide the original text */
+  }
+  
+  .cigarette-question::before {
+    content: "How do you smoke?";
+    font-size: var(--font-size-small) !important; /* Restore font size */
+    color: var(--color-dark-gray);
+    font-weight: 440;
+    white-space: nowrap;
   }
   
   .cigarette-option-icon {
@@ -3231,13 +3514,47 @@ body {
     height: 60px;
   }
   
-  .cigarette-question {
-    font-size: var(--font-size-small); /* 18px on mobile */
+  .cigarette-subtext {
+    font-size: var(--font-size-xsmall); /* 16px for mobile */
   }
   
-  .cigarette-subtext {
-    font-size: 14px; /* Smaller than small for mobile */
+  /* Do you smoke question mobile layout using flexbox order */
+  .question-hstack {
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
+  
+  /* Mobile order for "Do you smoke?": question, spacer, tickbox (line 1), then options (line 2) */
+  .question-hstack .plan-question { order: 1; }
+  .question-hstack .spacer { order: 2; }
+  .question-hstack .tick-box { order: 3; }
+  .question-hstack .capsule-buttons { order: 4; }
+  
+  /* Cigarette question mobile layout using flexbox order */
+  .cigarette-options-hstack {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  /* Mobile order for cigarette options: text, spacer, tickbox (line 1), then pouch, carton (line 2) */
+  .cigarette-options-hstack .cigarette-text-vstack { order: 1; }
+  .cigarette-options-hstack .spacer { order: 2; }
+  .cigarette-options-hstack .tick-box { order: 3; }
+  .cigarette-options-hstack .pouch-vstack { order: 4; }
+  .cigarette-options-hstack .carton-vstack { order: 5; }
+  
+  /* Vape question mobile layout using flexbox order */
+  .vape-options-hstack {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  /* Mobile order for vape options: text, spacer, tickbox (line 1), then refillable, pod-based (line 2) */
+  .vape-options-hstack .vape-text-vstack { order: 1; }
+  .vape-options-hstack .spacer { order: 2; }
+  .vape-options-hstack .tick-box { order: 3; }
+  .vape-options-hstack .refillable-vstack { order: 4; }
+  .vape-options-hstack .pod-based-vstack { order: 5; }
   
   .cigarette-option-text {
     font-size: var(--font-size-small); /* 18px on mobile */
@@ -3245,25 +3562,32 @@ body {
   
   /* Quantity options mobile adjustments */
   .quantity-options-hstack {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
   }
   
   .quantity-question {
     font-size: var(--font-size-small); /* 18px on mobile */
+    white-space: normal; /* Allow text wrapping */
+    line-height: 1.3; /* Better line spacing for wrapped text */
+    flex: 1;
+    min-width: 0; /* Allow flex item to shrink below content size */
   }
   
   .counter-capsule {
     font-size: var(--font-size-small); /* 18px on mobile */
+    width: 60px; /* Reduced width for mobile */
+    height: 32px; /* Slightly reduced height */
   }
   
-  /* Vape options mobile adjustments */
-  .vape-options-hstack {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+  .counter-hstack {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Reduced gap between counter elements */
   }
+  
+  /* Vape options mobile adjustments - removed conflicting flex-direction: column */
   
   .vape-question {
     font-size: var(--font-size-small); /* 18px on mobile */
@@ -3279,26 +3603,41 @@ body {
   }
   
   .vape-option-icon.refillable-icon {
-    width: 100px;
+    height: 90px;
   }
   
   .vape-option-icon.pod-based-icon {
-    height: 80px;
+    height: 95px;
   }
   
   .vape-option-text {
     font-size: var(--font-size-small); /* 18px on mobile */
   }
   
+  /* Reduce margin for vape text vstack in mobile */
+  .vape-text-vstack {
+    margin-right: 16px; /* Reduced from 32px for mobile */
+  }
+  
   /* Bottle type mobile adjustments */
   .bottle-type-hstack {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
   }
   
   .bottle-type-question {
     font-size: var(--font-size-small); /* 18px on mobile */
+    white-space: normal; /* Allow text wrapping */
+    line-height: 1.3; /* Better line spacing for wrapped text */
+    flex: 1 1 100%; /* Take full width and force wrapping */
+    min-width: 0; /* Allow flex item to shrink below content size */
+  }
+  
+  /* Force strength and bottle size elements to wrap to new lines */
+  .strength-hstack,
+  .bottle-size-hstack {
+    flex: 0 0 auto; /* Fixed size, don't grow or shrink */
   }
   
   .strength-label,
@@ -3314,28 +3653,68 @@ body {
   
   /* Bottle quantity mobile adjustments */
   .bottle-quantity-hstack {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
   }
   
   .bottle-quantity-question {
     font-size: var(--font-size-small); /* 18px on mobile */
+    white-space: normal; /* Allow text wrapping */
+    line-height: 1.3; /* Better line spacing for wrapped text */
+    flex: 1;
+    min-width: 0; /* Allow flex item to shrink below content size */
   }
   
   .bottle-counter-capsule {
     font-size: var(--font-size-small); /* 18px on mobile */
+    width: 60px; /* Reduced width for mobile */
+    height: 32px; /* Slightly reduced height */
+  }
+  
+  .bottle-counter-hstack {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Reduced gap between counter elements */
   }
   
   /* Pod type mobile adjustments */
   .pod-type-hstack {
-    flex-direction: column;
-    gap: 20px;
+    flex-wrap: wrap;
     align-items: flex-start;
+    gap: 16px;
   }
+  
+  /* Mobile order for pod type: question, spacer, tickbox (line 1), then all options (line 2+) */
+  .pod-type-hstack .pod-type-question { order: 1; }
+  .pod-type-hstack .spacer { order: 2; }
+  .pod-type-hstack .tick-box { order: 3; }
+  .pod-type-hstack .pod-dropdown-container { order: 4; }
+  .pod-type-hstack .pod-other-container { order: 5; }
+  .pod-type-hstack .pod-strength-hstack { order: 6; }
+  .pod-type-hstack .pod-bottle-size-hstack { order: 7; }
   
   .pod-type-question {
     font-size: var(--font-size-small); /* 18px on mobile */
+    white-space: normal; /* Allow text wrapping */
+    line-height: 1.3; /* Better line spacing for wrapped text */
+    flex: 1;
+    min-width: calc(100% - 80px); /* Allow flex item to shrink below content size */
+    max-width: calc(100%); /* Reserve more space for spacer and tickbox */
+  }
+  
+  /* Force spacer and tickbox to stay on same line as question */
+  .pod-type-hstack .spacer,
+  .pod-type-hstack .tick-box {
+    flex: 0 0 auto; /* Fixed size, don't grow or shrink */
+  }
+  
+  /* Force all option elements to wrap to new lines */
+  .pod-type-hstack .pod-dropdown-container,
+  .pod-type-hstack .pod-other-container,
+  .pod-type-hstack .pod-strength-hstack,
+  .pod-type-hstack .pod-bottle-size-hstack {
+    flex: 0 0 auto; /* Fixed size, don't grow or shrink */
   }
   
   .pod-dropdown-capsule,
@@ -3357,17 +3736,29 @@ body {
   
   /* Pod quantity mobile adjustments */
   .pod-quantity-hstack {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
   }
   
   .pod-quantity-question {
     font-size: var(--font-size-small); /* 18px on mobile */
+    white-space: normal; /* Allow text wrapping */
+    line-height: 1.3; /* Better line spacing for wrapped text */
+    flex: 1;
+    min-width: 0; /* Allow flex item to shrink below content size */
   }
   
   .pod-counter-capsule {
     font-size: var(--font-size-small); /* 18px on mobile */
+    width: 60px; /* Reduced width for mobile */
+    height: 32px; /* Slightly reduced height */
+  }
+  
+  .pod-counter-hstack {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Reduced gap between counter elements */
   }
   
   /* Mobile adjustments for spacers */
@@ -3401,6 +3792,23 @@ body {
     font-size: var(--font-size-small); /* 18px on mobile */
     top: -40px; /* 44px gap above the level 4 rectangle on mobile */
   }
+  
+  /* Level picker gradient mobile adjustments - solid fill instead of gradient */
+  .target-usage-level.active {
+    background: var(--color-blue) !important; /* Override JavaScript gradient for level 1 */
+  }
+  
+  .target-usage-level.level-2.active {
+    background: var(--color-level-2) !important; /* Override JavaScript gradient for level 2 */
+  }
+  
+  .target-usage-level.level-3.active {
+    background: var(--color-level-3) !important; /* Override JavaScript gradient for level 3 */
+  }
+  
+  .target-usage-level.level-4.active {
+    background: var(--color-green) !important; /* Override JavaScript gradient for level 4 */
+  }
 
   /* Target usage picker mobile adjustments */
   .target-usage-picker {
@@ -3412,30 +3820,237 @@ body {
   .your-plan-content-hstack {
     flex-direction: column;
     gap: 24px; /* Reduced gap on mobile */
+    margin-top: 16px; /* Reduced gap between header and graph in mobile */
   }
 
   .your-plan-left-vstack,
   .your-plan-right-vstack {
     flex: 1; /* Equal width on mobile */
   }
+  
+  /* Increase gap between text and graph in mobile */
+  .your-plan-left-vstack {
+    gap: 20px; /* Increased from 24px to create more space between text and graph */
+  }
+  
+  /* Make entire header text smaller in mobile */
+  .your-plan-title {
+    font-size: var(--font-size-small); /* Smaller font for entire header text */
+  }
+  
+  /* Make graph arm labels smaller in mobile */
+  #baseline-label, #target-label, #target-level-label {
+    font-size: var(--font-size-xsmall) !important; /* Smaller font for graph arm labels */
+  }
+  
+  .graph-level-label-css {
+    font-size: var(--font-size-xsmall); /* Smaller font for graph level labels */
+  }
+  
+  .graph-label {
+    font-size: var(--font-size-xsmall); /* Smaller font for graph labels */
+  }
+  
+  .graph-level-label {
+    font-size: calc(var(--font-size-xsmall) * 0.9); /* Smaller font for graph level labels */
+  }
+  
+  /* Graph arm height adjustments will be handled in JavaScript for mobile mode */
+  
+  /* Make x-axis date labels smaller in mobile */
+  .x-axis-label {
+    font-size: var(--font-size-small); /* Smaller font for date labels at bottom of graph */
+  }
+  
+  /* Make nicotine/costing picker text and icons smaller in mobile */
+  .your-plan-content-text {
+    font-size: var(--font-size-small); /* Smaller font for 'Nicotine' and 'Costing' text */
+  }
+  
+  .your-plan-content-icon {
+    height: var(--icon-size-small); /* Smaller icons for nicotine.svg and costing.svg */
+  }
+  
+  /* Reduce gap between text and icons in nicotine/costing picker */
+  .your-plan-inner-content-hstack {
+    gap: 8px; /* Reduced from 12px to 8px for tighter spacing */
+  }
+  
+  /* Add top margin to nicotine/costing picker container */
+  .your-plan-clickable-rectangle {
+    margin-top: 32px; /* Add top margin to the picker container */
+  }
+  
+  /* Reduce tooltip transparency in mobile for better visibility */
+  .curve-tooltip {
+    background-color: rgba(255, 255, 255, 0.9); /* Increased from 0.5 to 0.9 for better visibility */
+  }
 
   .your-plan-small-rectangle {
     height: 48px; /* Slightly smaller on mobile */
   }
 
+  /* Set default height for all large rectangles in mobile */
   .your-plan-large-rectangle {
-    height: 300px; /* Smaller on mobile */
-  }
-
-  /* Question layout mobile adjustments */
-  .question-desktop-layout {
-    display: none; /* Hide desktop layout on mobile */
+    height: 300px; /* Default height for mobile */
   }
   
-  .question-mobile-layout {
-    display: flex; /* Show mobile layout on mobile */
+  /* Override height specifically for right vstack in mobile */
+  .your-plan-right-vstack .your-plan-large-rectangle {
+    height: 375px; /* Increased by 25% from 300px to 375px on mobile - only for right vstack */
+  }
+  
+  /* Make current spending toggle elements smaller in mobile */
+  .spending-toggle-text {
+    font-size: var(--font-size-small) !important; /* Smaller font for "Current spending" text */
+  }
+  
+  .spending-toggle-value {
+    font-size: var(--font-size-small) !important; /* Smaller font for £0.00 value */
+  }
+  
+  .spending-toggle-unit {
+    font-size: var(--font-size-small) !important; /* Smaller font for "/week" text */
+  }
+  
+  .spending-toggle-icon {
+    width: var(--icon-size-medium) !important; /* Smaller icons for show/hide buttons */
+    height: auto;
+  }
+  
+  .spending-toggle-box {
+    height: 36px !important; /* Reduced from 44px to 36px for smaller box */
+  }
+  
+  .spending-toggle-box.visible {
+    width: 84px !important; /* Reduced from 100px to 84px for smaller box */
+    border-width: 2px !important; /* Reduced from 3px to 2px for thinner stroke */
+  }
+  
+  /* Reduce gap between icon and text in mobile */
+  .spending-toggle-hstack {
+    gap: 4px !important; /* Reduced from 8px to 4px in mobile */
+  }
+  
+  /* Graph metrics mobile adjustments */
+  .graph-metric-top-text {
+    font-size: var(--font-size-xsmall) !important; /* Smaller font for 'Baseline', 'Target Level X' */
+  }
+  
+  .graph-metric-bottom-text {
+    font-size: var(--font-size-small) !important; /* Smaller font for 'Xmg /day', '£X' */
+  }
+  
+  /* New hstacks mobile adjustments */
+  .new-hstack-text {
+    font-size: var(--font-size-small) !important; /* Smaller font for hstack text */
+  }
+  
+  .new-hstack-icon {
+    width: var(--icon-size-small) !important; /* Smaller icons for hstacks */
+  }
+  
+  .new-hstack-2 .new-hstack-icon {
+    width: var(--icon-size-small) !important; /* Smaller icons for hstack 2 */
+  }
+  
+  /* Ensure icons are hidden in costing mode in mobile */
+  .new-hstack-1 .new-hstack-icon[style*="width: 0"],
+  .new-hstack-2 .new-hstack-icon[style*="width: 0"] {
+    width: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Costing mode text mobile adjustments */
+  .costing-text-medium {
+    font-size: var(--font-size-small) !important; /* Smaller font for 'Average bill', '/week', 'Savings made' */
+  }
+  
+  .costing-text-large {
+    font-size: var(--font-size-small) !important; /* Smaller font for '£X' values */
+  }
+  
+  .savings-amount {
+    font-size: var(--font-size-small) !important; /* Smaller font for savings amount */
+  }
+  
+  .savings-label {
+    font-size: var(--font-size-xsmall) !important; /* Smaller font for 'vs current spending' */
+  }
+  
+  /* Investor Pitch mobile adjustments */
+  .investor-pitch-title {
+    font-size: var(--font-size-small) !important; /* Smaller font for mobile */
+  }
+  
+  .investor-pitch-icon {
+    display: none !important; /* Hide icon in mobile */
   }
 
+}
+
+/* Investor Pitch Section */
+.investor-pitch-section {
+  width: 100%;
+  padding: 0 clamp(20px, 5vw, 60px); /* Match main screen padding: 20px mobile, 60px desktop */
+  margin-top: 24px; /* Space from Your Plan section */
+  margin-bottom: 60px; /* Space from Your Plan section */
+  transition: all 0.3s ease;
+}
+
+.investor-pitch-rectangle {
+  width: 100%;
+  background-color: color-mix(in srgb, var(--color-blue) 20%, transparent);
+  border-radius: 12px;
+  padding: 12px; /* 12px gap around all edges */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Investor Pitch VStack */
+.investor-pitch-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Investor Pitch Header HStack */
+.investor-pitch-header-hstack {
+  display: flex;
+  align-items: center;
+  padding: 0px 12px;
+  width: 100%;
+}
+
+/* Investor Pitch Title */
+.investor-pitch-title {
+  font-size: var(--font-size-large);
+  color: var(--color-blue);
+  font-family: var(--font-family);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Investor Pitch Spacer */
+.investor-pitch-spacer {
+  flex: 1;
+}
+
+/* Investor Pitch Icon */
+.investor-pitch-icon {
+  height: var(--icon-size-large);
+  width: auto;
+  cursor: pointer; /* Show clickable cursor on hover */
+}
+
+/* Investor Pitch Video Container */
+.investor-pitch-video-container {
+  width: 100%;
+  flex: 1;
 }
 
 /* Current Spending Toggle Styles */
