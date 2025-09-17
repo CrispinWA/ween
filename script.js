@@ -1613,16 +1613,16 @@ document.addEventListener('DOMContentLoaded', function() {
       mobilePercentageHstack.classList.remove('hidden');
     }
     
-    // Add level-selected class to target-usage-picker to increase bottom margin
-    const targetUsagePicker = document.querySelector('.target-usage-picker');
-    if (targetUsagePicker) {
-      targetUsagePicker.classList.add('level-selected');
-    }
-    
     // Show the target usage confirm button when a level is selected
     const targetUsageConfirmButtonContainer = document.getElementById('target-usage-confirm-button-container');
     if (targetUsageConfirmButtonContainer) {
       targetUsageConfirmButtonContainer.classList.remove('hidden');
+    }
+    
+    // Add level-selected class to target-usage-picker to increase bottom margin
+    const targetUsagePicker = document.querySelector('.target-usage-picker');
+    if (targetUsagePicker) {
+      targetUsagePicker.classList.add('level-selected');
     }
     
     // Update quit level text opacity based on selection
@@ -1856,7 +1856,12 @@ document.addEventListener('DOMContentLoaded', function() {
         slider.style.left = snapResult.point + 'px';
         updateProgressWidth();
         updateLevelBorderRadius(snapResult.index);
-        updateLevelColors(snapResult.index);
+        
+        // Only update colors (which shows confirm button) if target usage is not completed
+        const targetUsageTickBox = document.getElementById('target-usage-tick-box');
+        if (!targetUsageTickBox || !targetUsageTickBox.classList.contains('active')) {
+          updateLevelColors(snapResult.index);
+        }
       }
     }
     
@@ -3142,6 +3147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+
   // Function to hide target usage content elements (but keep header)
   function hideTargetUsageContentElements() {
     const targetUsageSubtitle = document.querySelector('.target-usage-subtitle');
@@ -3881,6 +3887,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize the target usage confirm button
   initializeTargetUsageConfirmButton();
+  
   
   // Initialize the plan duration controls
   initializePlanDurationControls();
@@ -5338,19 +5345,15 @@ function animateGraphReveal() {
   const isMobile = window.innerWidth <= 768;
   
   if (isMobile) {
-    // For mobile, scroll so the bottom edge of plan builder aligns with top of screen
-    const planBuilderDropdown = document.getElementById('plan-builder-dropdown');
-    if (planBuilderDropdown) {
-      const rect = planBuilderDropdown.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const targetPosition = rect.bottom + scrollTop;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
+    // For mobile, center the graph in the middle of the screen
+    const graphContainer = document.querySelector('.your-plan-left-vstack');
+    if (graphContainer) {
+      graphContainer.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
       });
     } else {
-      // Fallback to centering Your Plan header if plan builder not found
+      // Fallback to centering Your Plan header if graph container not found
       const yourPlanHeader = yourPlanSection.querySelector('.your-plan-header');
       if (yourPlanHeader) {
         yourPlanHeader.scrollIntoView({ 

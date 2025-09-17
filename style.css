@@ -3407,11 +3407,25 @@ body {
     margin-top: 0px;
     margin-bottom: 16px; /* 16px bottom margin on mobile */
     padding-right: 12px; /* Align with target-usage-picker padding */
+    position: fixed; /* Make it stationary in mobile */
+    bottom: 160px; /* Position from bottom of screen */
+    right: 24px; /* Position from right of screen */
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+    padding: 8px 16px; /* Add padding for better visibility */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1000; /* Ensure it's above other elements */
   }
 
   /* Hide mobile percentage text when hidden class is applied */
   .mobile-percentage-hstack.hidden {
     display: none !important;
+  }
+
+  /* Target usage confirm button mobile adjustments */
+  .target-usage-confirm-button-container {
+    margin-top: 72px; /* Add top margin in mobile */
+    margin-bottom: 24px; /* Reduce bottom margin in mobile */
   }
 
   .mobile-percentage-text {
