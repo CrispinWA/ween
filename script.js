@@ -1608,12 +1608,14 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePercentageReduction(activeLevelIndex);
     
     // Show mobile percentage text when a level is selected
+    // (This should always show when a level is selected in target usage section)
     const mobilePercentageHstack = document.querySelector('.mobile-percentage-hstack');
     if (mobilePercentageHstack) {
       mobilePercentageHstack.classList.remove('hidden');
     }
     
     // Show the target usage confirm button when a level is selected
+    // (This should always show when a level is selected, regardless of current usage completion)
     const targetUsageConfirmButtonContainer = document.getElementById('target-usage-confirm-button-container');
     if (targetUsageConfirmButtonContainer) {
       targetUsageConfirmButtonContainer.classList.remove('hidden');
@@ -1862,6 +1864,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!targetUsageTickBox || !targetUsageTickBox.classList.contains('active')) {
           updateLevelColors(snapResult.index);
         }
+        
+        // Check if mobile elements should be visible after resize
+        checkMobileElementsVisibility();
       }
     }
     
@@ -3193,9 +3198,64 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Show mobile percentage text if a level is selected
+    // (This should always show when edit is clicked and a level is selected)
     const mobilePercentageHstack = document.querySelector('.mobile-percentage-hstack');
     if (slider && !slider.classList.contains('hidden') && mobilePercentageHstack) {
       mobilePercentageHstack.classList.remove('hidden');
+    }
+    
+    // Show the target usage confirm button when edit button is clicked
+    // (This should always show when edit is clicked, regardless of current usage completion)
+    const targetUsageConfirmButtonContainer = document.getElementById('target-usage-confirm-button-container');
+    if (targetUsageConfirmButtonContainer) {
+      targetUsageConfirmButtonContainer.classList.remove('hidden');
+    }
+  }
+
+  // Function to check if mobile elements should be visible after resize
+  function checkMobileElementsVisibility() {
+    const mobilePercentageHstack = document.querySelector('.mobile-percentage-hstack');
+    const targetUsageConfirmButtonContainer = document.getElementById('target-usage-confirm-button-container');
+    const targetUsageTickBox = document.getElementById('target-usage-tick-box');
+    const slider = document.getElementById('target-usage-slider');
+    
+    // Check if we're in mobile mode
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // In mobile mode, check if elements should be visible
+      
+      // Mobile percentage text should only be visible if:
+      // 1. Target usage is not completed (tickbox not active)
+      // 2. A level is selected (slider is visible)
+      if (mobilePercentageHstack) {
+        if ((!targetUsageTickBox || !targetUsageTickBox.classList.contains('active')) && 
+            slider && !slider.classList.contains('hidden')) {
+          mobilePercentageHstack.classList.remove('hidden');
+        } else {
+          mobilePercentageHstack.classList.add('hidden');
+        }
+      }
+      
+      // Confirm button should only be visible if:
+      // 1. Target usage is not completed (tickbox not active)
+      // 2. A level is selected (slider is visible)
+      if (targetUsageConfirmButtonContainer) {
+        if ((!targetUsageTickBox || !targetUsageTickBox.classList.contains('active')) && 
+            slider && !slider.classList.contains('hidden')) {
+          targetUsageConfirmButtonContainer.classList.remove('hidden');
+        } else {
+          targetUsageConfirmButtonContainer.classList.add('hidden');
+        }
+      }
+    } else {
+      // In desktop mode, hide mobile elements
+      if (mobilePercentageHstack) {
+        mobilePercentageHstack.classList.add('hidden');
+      }
+      if (targetUsageConfirmButtonContainer) {
+        targetUsageConfirmButtonContainer.classList.add('hidden');
+      }
     }
   }
 
@@ -3887,6 +3947,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize the target usage confirm button
   initializeTargetUsageConfirmButton();
+  
+  // Check mobile elements visibility on page load
+  checkMobileElementsVisibility();
   
   
   // Initialize the plan duration controls
