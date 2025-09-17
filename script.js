@@ -3112,6 +3112,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetUsageEditButton = document.getElementById('target-usage-edit-button');
     if (targetUsageEditButton) {
       targetUsageEditButton.addEventListener('click', function() {
+        // Only proceed if the target usage section is actually visible/open
+        const targetUsageSection = document.querySelector('.target-usage-section');
+        if (!targetUsageSection || targetUsageSection.classList.contains('hidden')) {
+          return; // Don't show elements if target usage section is not open
+        }
+        
         // Hide the target usage status container
         const targetUsageStatusContainer = document.getElementById('target-usage-status-container');
         if (targetUsageStatusContainer) {
