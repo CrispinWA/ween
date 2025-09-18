@@ -2413,6 +2413,45 @@ body {
     pointer-events: none;
   }
 
+  /* Day Container with Arrows */
+  .plan-duration-day-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .plan-duration-day-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-mid-gray);
+    font-size: var(--font-size-xlarge);
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px;
+    margin: -4px;
+  }
+
+  .plan-duration-day-container:hover .plan-duration-day-arrow {
+    opacity: 1;
+  }
+
+  .plan-duration-day-arrow-left {
+    left: 8px;
+  }
+
+  .plan-duration-day-arrow-right {
+    right: 8px;
+  }
+
+  .plan-duration-day-text {
+    pointer-events: none;
+  }
+
   /* Year Container with Arrows */
   .plan-duration-year-container {
     position: relative;
@@ -3433,20 +3472,40 @@ body {
   }
   
   /* Make arrows always visible in mobile (no hover) */
+  .plan-duration-day-arrow,
   .plan-duration-month-arrow,
   .plan-duration-year-arrow {
     opacity: 1 !important;
   }
   
   /* Spread out arrows more in mobile */
+  .plan-duration-day-arrow-left,
   .plan-duration-month-arrow-left,
   .plan-duration-year-arrow-left {
     left: 0px; /* Reduced from 8px */
   }
   
+  .plan-duration-day-arrow-right,
   .plan-duration-month-arrow-right,
   .plan-duration-year-arrow-right {
     right: 0px; /* Reduced from 8px */
+  }
+  
+  /* Always show savings made hstack in mobile */
+  .costing-hstack-2-content {
+    width: auto !important;
+    opacity: 1 !important;
+  }
+  
+  /* Always show savings content elements in mobile */
+  .savings-amount {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  .savings-label {
+    opacity: 0.5 !important;
+    transform: translateY(0) !important;
   }
   
   .target-usage-subtitle {

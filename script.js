@@ -3699,11 +3699,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Function to update date capsules based on weeks
   function updateDateCapsules(weeks) {
-    const dayCapsule = document.getElementById('plan-duration-day-capsule');
+    const dayText = document.querySelector('.plan-duration-day-text');
     const monthText = document.querySelector('.plan-duration-month-text');
     const yearText = document.querySelector('.plan-duration-year-text');
     
-    if (!dayCapsule || !monthText || !yearText) return;
+    if (!dayText || !monthText || !yearText) return;
     
     // Calculate target date (today + weeks)
     const today = new Date();
@@ -3724,14 +3724,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const monthAbbr = monthAbbreviations[month];
     
     // Update the capsules
-    dayCapsule.textContent = dayWithOrdinal;
+    dayText.textContent = dayWithOrdinal;
     monthText.textContent = monthAbbr;
     yearText.textContent = year;
     
     // Store the target date and month index for future reference
-    dayCapsule.dataset.targetDate = targetDate.toISOString();
-    dayCapsule.dataset.monthIndex = month;
-    dayCapsule.dataset.day = day;
+    dayText.dataset.targetDate = targetDate.toISOString();
+    dayText.dataset.monthIndex = month;
+    dayText.dataset.day = day;
     monthText.dataset.monthIndex = month;
     yearText.dataset.targetDate = targetDate.toISOString();
     yearText.dataset.year = year;
@@ -3767,51 +3767,28 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to initialize editable date functionality
   function initializeEditableDates() {
     const dayCapsule = document.getElementById('plan-duration-day-capsule');
+    const dayText = document.querySelector('.plan-duration-day-text');
     const monthText = document.querySelector('.plan-duration-month-text');
     const yearText = document.querySelector('.plan-duration-year-text');
+    const dayLeftArrow = document.querySelector('.plan-duration-day-arrow-left');
+    const dayRightArrow = document.querySelector('.plan-duration-day-arrow-right');
     const monthLeftArrow = document.querySelector('.plan-duration-month-arrow-left');
     const monthRightArrow = document.querySelector('.plan-duration-month-arrow-right');
     const yearLeftArrow = document.querySelector('.plan-duration-year-arrow-left');
     const yearRightArrow = document.querySelector('.plan-duration-year-arrow-right');
 
-    // Day capsule input handling
-    if (dayCapsule) {
-      dayCapsule.addEventListener('focus', function() {
-        // Clear the value when focusing for editing
-        this.textContent = '';
+    // Day navigation arrows
+    if (dayLeftArrow) {
+      dayLeftArrow.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateDay(-1);
       });
+    }
 
-      dayCapsule.addEventListener('input', function() {
-        const inputValue = this.textContent.replace(/\D/g, ''); // Remove non-digits
-        const day = parseInt(inputValue);
-        
-        if (inputValue && !isNaN(day)) {
-          const monthIndex = parseInt(monthText.dataset.monthIndex || 0);
-          const year = parseInt(yearText.dataset.year || new Date().getFullYear());
-          const maxDays = getDaysInMonth(monthIndex, year);
-          
-          // Constrain day to valid range
-          const constrainedDay = Math.max(1, Math.min(day, maxDays));
-          this.textContent = constrainedDay;
-          this.dataset.day = constrainedDay;
-        }
-      });
-
-      dayCapsule.addEventListener('blur', function() {
-        // Add ordinal suffix when blurring
-        const day = parseInt(this.dataset.day || this.textContent.replace(/\D/g, ''));
-        if (day && !isNaN(day)) {
-          this.textContent = getOrdinalSuffix(day);
-          // Validate against min/max limits after setting the day
-          validateDateAgainstLimits();
-        } else {
-          // Reset to current calculated value if empty
-          const displayCapsule = document.getElementById('plan-duration-display');
-          if (displayCapsule && displayCapsule.dataset.currentWeeks) {
-            const weeks = parseInt(displayCapsule.dataset.currentWeeks);
-            updateDateCapsules(weeks);
-          }
-        }
+    if (dayRightArrow) {
+      dayRightArrow.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateDay(1);
       });
     }
 
@@ -3901,23 +3878,47 @@ document.addEventListener('DOMContentLoaded', function() {
     validateDayForCurrentDate();
   }
 
+  // Function to navigate days by weeks (same as plan duration plus/minus)
+  function navigateDay(direction) {
+    const displayCapsule = document.getElementById('plan-duration-display');
+    
+    if (!displayCapsule || !displayCapsule.dataset.recommendedWeeks) return;
+    
+    const recommendedWeeks = parseInt(displayCapsule.dataset.recommendedWeeks);
+    const currentWeeks = parseInt(displayCapsule.dataset.currentWeeks || recommendedWeeks);
+    const minWeeks = Math.ceil(recommendedWeeks / 2);
+    const maxWeeks = Math.floor(recommendedWeeks * 1.5);
+    
+    // Calculate new weeks (direction: -1 for left arrow, +1 for right arrow)
+    const newWeeks = currentWeeks + direction;
+    
+    // Constrain to valid range
+    if (newWeeks >= minWeeks && newWeeks <= maxWeeks) {
+      displayCapsule.dataset.currentWeeks = newWeeks;
+      displayCapsule.textContent = newWeeks + ' weeks';
+      
+      // Update slider position and date capsules
+      updateSliderPosition(newWeeks, recommendedWeeks);
+    }
+  }
+
   // Function to validate day for current month/year
   function validateDayForCurrentDate() {
-    const dayCapsule = document.getElementById('plan-duration-day-capsule');
+    const dayText = document.querySelector('.plan-duration-day-text');
     const monthText = document.querySelector('.plan-duration-month-text');
     const yearText = document.querySelector('.plan-duration-year-text');
     
-    if (!dayCapsule || !monthText || !yearText) return;
+    if (!dayText || !monthText || !yearText) return;
     
-    const currentDay = parseInt(dayCapsule.dataset.day || dayCapsule.textContent.replace(/\D/g, ''));
+    const currentDay = parseInt(dayText.dataset.day || dayText.textContent.replace(/\D/g, ''));
     const monthIndex = parseInt(monthText.dataset.monthIndex || 0);
     const year = parseInt(yearText.dataset.year || new Date().getFullYear());
     const maxDays = getDaysInMonth(monthIndex, year);
     
     if (currentDay > maxDays) {
       const constrainedDay = maxDays;
-      dayCapsule.textContent = getOrdinalSuffix(constrainedDay);
-      dayCapsule.dataset.day = constrainedDay;
+      dayText.textContent = getOrdinalSuffix(constrainedDay);
+      dayText.dataset.day = constrainedDay;
     }
     
     // Validate against min/max date limits
@@ -3926,12 +3927,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Function to validate date against min/max week limits
   function validateDateAgainstLimits() {
-    const dayCapsule = document.getElementById('plan-duration-day-capsule');
+    const dayText = document.querySelector('.plan-duration-day-text');
     const monthText = document.querySelector('.plan-duration-month-text');
     const yearText = document.querySelector('.plan-duration-year-text');
     const displayCapsule = document.getElementById('plan-duration-display');
     
-    if (!dayCapsule || !monthText || !yearText || !displayCapsule || !displayCapsule.dataset.recommendedWeeks) return;
+    if (!dayText || !monthText || !yearText || !displayCapsule || !displayCapsule.dataset.recommendedWeeks) return;
     
     const recommendedWeeks = parseInt(displayCapsule.dataset.recommendedWeeks);
     const minWeeks = Math.ceil(recommendedWeeks / 2);
@@ -3946,7 +3947,7 @@ document.addEventListener('DOMContentLoaded', function() {
     maxDate.setDate(today.getDate() + (maxWeeks * 7));
     
     // Get current entered date
-    const currentDay = parseInt(dayCapsule.dataset.day || dayCapsule.textContent.replace(/\D/g, ''));
+    const currentDay = parseInt(dayText.dataset.day || dayText.textContent.replace(/\D/g, ''));
     const monthIndex = parseInt(monthText.dataset.monthIndex || 0);
     const year = parseInt(yearText.dataset.year || new Date().getFullYear());
     
@@ -3962,8 +3963,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
                                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       
-      dayCapsule.textContent = getOrdinalSuffix(minDay);
-      dayCapsule.dataset.day = minDay;
+      dayText.textContent = getOrdinalSuffix(minDay);
+      dayText.dataset.day = minDay;
       monthText.textContent = monthAbbreviations[minMonth];
       monthText.dataset.monthIndex = minMonth;
       yearText.textContent = minYear;
@@ -3984,8 +3985,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
                                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       
-      dayCapsule.textContent = getOrdinalSuffix(maxDay);
-      dayCapsule.dataset.day = maxDay;
+      dayText.textContent = getOrdinalSuffix(maxDay);
+      dayText.dataset.day = maxDay;
       monthText.textContent = monthAbbreviations[maxMonth];
       monthText.dataset.monthIndex = maxMonth;
       yearText.textContent = maxYear;
