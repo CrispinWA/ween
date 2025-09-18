@@ -1582,6 +1582,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetUsageTickBox = document.getElementById('target-usage-tick-box');
     const quitLevelText = document.querySelector('.quit-level-text');
     const sliderPercentageText = document.getElementById('slider-percentage-text');
+    const levelLabels = document.getElementById('target-usage-level-labels');
     
     // Define colors for each level (0-indexed)
     const levelColors = [
@@ -1598,6 +1599,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update slider level text
     sliderLevelText.textContent = `Level ${activeLevelIndex + 1}`;
     sliderLevelText.style.color = activeColor;
+    
+    // Hide level labels when a level is selected
+    if (levelLabels) {
+      levelLabels.style.display = 'none';
+    }
     
     // Update slider rectangle border color
     if (sliderRectangle) {
@@ -2761,6 +2767,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetUsageRecommendation = document.querySelector('.target-usage-recommendation');
     const targetUsagePicker = document.querySelector('.target-usage-picker');
     const slider = document.getElementById('target-usage-slider');
+    const levelLabels = document.getElementById('target-usage-level-labels');
     
     if (targetUsageSubtitle) {
       targetUsageSubtitle.classList.remove('hidden');
@@ -2780,6 +2787,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize percentage calculation for default Level 1 (index 0)
     updatePercentageReduction(0);
+    
+    // Show level labels when target usage section is first opened
+    if (levelLabels) {
+      levelLabels.style.display = 'flex';
+    }
   }
   
   // Function to hide Target Usage elements

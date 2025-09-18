@@ -2779,6 +2779,46 @@ body {
     display: none;
   }
 
+  /* Target usage level labels */
+  .target-usage-level-labels {
+    display: flex;
+    gap: 0;
+    width: 100%;
+    height: 40px; /* Same height as target-usage-bottom-rectangle */
+    margin-top: 0; /* Top-aligned with target-usage-bottom-rectangle */
+  }
+
+  .level-label-box {
+    flex: 1;
+    display: flex;
+    align-items: center; /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
+    color: var(--color-mid-gray);
+    font-size: var(--font-size-small);
+  }
+
+  /* Mobile adjustments for level labels */
+  @media (max-width: 768px) {
+    .level-label-box {
+      font-size: var(--font-size-xsmall);
+    }
+    
+    /* Hide "Level" text and show only numbers in mobile */
+    .level-label-box:nth-child(1)::before { content: "1"; }
+    .level-label-box:nth-child(2)::before { content: "2"; }
+    .level-label-box:nth-child(3)::before { content: "3"; }
+    .level-label-box:nth-child(4)::before { content: "4"; }
+    
+    .level-label-box {
+      font-size: 0; /* Hide the original text */
+    }
+    
+    .level-label-box::before {
+      font-size: var(--font-size-xsmall);
+      color: var(--color-mid-gray);
+    }
+  }
+
   
   .slider-vstack {
     position: relative;
