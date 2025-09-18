@@ -903,6 +903,13 @@ body {
   transition: color 0.3s ease;
 }
 
+/* Mobile adjustments for Plan Duration header */
+@media (max-width: 768px) {
+  .plan-duration-header {
+    font-size: var(--font-size-medium);
+  }
+}
+
 /* Plan Duration header color states - using data attributes */
 /* Default state - gray */
 .plan-duration-header {
