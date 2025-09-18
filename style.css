@@ -1788,6 +1788,7 @@ body {
     height: 16px;
     display: block;
     transition: transform 0.3s ease;
+    margin-left: 4px; /* 4px gap between text and arrow */
   }
   
   /* Rotate triangle when dropdown is open */

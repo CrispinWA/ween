@@ -725,9 +725,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Bottle minus button click handler
   bottleMinusCapsule.addEventListener('click', function() {
-    // Round to nearest 0.5, then subtract 0.5
-    let roundedValue = Math.round(bottleCurrentValue * 2) / 2; // Round to nearest 0.5
-    let newValue = roundedValue - 0.5;
+    // Round to nearest 0.1, then subtract 0.1
+    let roundedValue = Math.round(bottleCurrentValue * 10) / 10; // Round to nearest 0.1
+    let newValue = roundedValue - 0.1;
     
     // Enforce minimum of 0.1
     if (newValue < 0.1) {
@@ -744,9 +744,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Bottle plus button click handler
   bottlePlusCapsule.addEventListener('click', function() {
-    // Round to nearest 0.5, then add 0.5
-    let roundedValue = Math.round(bottleCurrentValue * 2) / 2; // Round to nearest 0.5
-    bottleCurrentValue = roundedValue + 0.5;
+    // Round to nearest 0.1, then add 0.1
+    let roundedValue = Math.round(bottleCurrentValue * 10) / 10; // Round to nearest 0.1
+    bottleCurrentValue = roundedValue + 0.1;
     bottleMiddleCapsule.value = bottleCurrentValue;
     bottleMiddleCapsule.style.color = 'var(--color-dark-gray)';
     bottleMiddleCapsule.style.borderColor = 'var(--color-dark-gray)';
@@ -887,10 +887,10 @@ document.addEventListener('DOMContentLoaded', function() {
         podBottleSizeHstack.classList.remove('show');
 
       } else if (selectedValue === 'Vuse') {
-        // For Vuse, show "Other" capsule with triangle AND show strength input
+        // For Vuse, show "Other" capsule with first option pre-populated AND show strength input
         podOtherCapsule.classList.add('show');
-        podOtherCapsule.innerHTML = '<svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)"/></svg>';
-        podOtherCapsule.classList.remove('selected'); // Reset selection state
+        podOtherCapsule.innerHTML = '<span class="pod-other-text">Ultra</span><svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)"/></svg>';
+        podOtherCapsule.classList.add('selected'); // Mark as selected since it's pre-populated
         
         // Show strength input for Vuse
         const podStrengthHstack = document.getElementById('pod-strength-hstack');
@@ -903,11 +903,26 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reset second dropdown state
         isSecondDropdownOpen = false;
         
-      } else {
-        // For Lost Mary or Elf Bar, show "Other" capsule with triangle
+      } else if (selectedValue === 'Lost Mary') {
+        // For Lost Mary, show "Other" capsule with first option pre-populated
         podOtherCapsule.classList.add('show');
-        podOtherCapsule.innerHTML = '<svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)"/></svg>';
-        podOtherCapsule.classList.remove('selected'); // Reset selection state
+        podOtherCapsule.innerHTML = '<span class="pod-other-text">BM600</span><svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)"/></svg>';
+        podOtherCapsule.classList.add('selected'); // Mark as selected since it's pre-populated
+        
+        // Hide strength and pod size inputs
+        const podStrengthHstack = document.getElementById('pod-strength-hstack');
+        const podBottleSizeHstack = document.getElementById('pod-bottle-size-hstack');
+        podStrengthHstack.classList.remove('show');
+        podBottleSizeHstack.classList.remove('show');
+        
+        // Reset second dropdown state
+        isSecondDropdownOpen = false;
+        
+      } else if (selectedValue === 'Elf Bar') {
+        // For Elf Bar, show "Other" capsule with first option pre-populated
+        podOtherCapsule.classList.add('show');
+        podOtherCapsule.innerHTML = '<span class="pod-other-text">600</span><svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)"/></svg>';
+        podOtherCapsule.classList.add('selected'); // Mark as selected since it's pre-populated
         
         // Hide strength and pod size inputs
         const podStrengthHstack = document.getElementById('pod-strength-hstack');
@@ -991,8 +1006,8 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Only allow selection if parent type matches current selection
       if (parentType === selectedPodType) {
-        // Update "Other" capsule content with proper styling
-        podOtherCapsule.innerHTML = `<span class="pod-other-text">${selectedValue}</span>`;
+        // Update "Other" capsule content with proper styling and arrow
+        podOtherCapsule.innerHTML = `<span class="pod-other-text">${selectedValue}</span><svg class="pod-dropdown-triangle" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2,6 L 8,12 L 14,6 Z" fill="var(--color-mid-gray)"/></svg>`;
         podOtherCapsule.classList.add('selected');
         
         // Close second dropdown
@@ -1161,9 +1176,9 @@ document.addEventListener('DOMContentLoaded', function() {
           // Round to 0.1 precision
           let roundedValue = Math.round(numValue * 10) / 10;
           
-          // Constrain to 0.5-10 range
-          if (roundedValue < 0.5) {
-            value = '0.5';
+          // Constrain to 0.1-10 range
+          if (roundedValue < 0.1) {
+            value = '0.1';
           } else if (roundedValue > 10) {
             value = '10';
           } else {
