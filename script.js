@@ -2875,10 +2875,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hide the confirm button itself
         hideConfirmButton();
         
+        // Update current usage header color to closed (gray)
+        updateCurrentUsageHeaderColor(false);
+        
         // Show Target Usage elements only if target usage is not already completed
         const targetUsageTickBox = document.getElementById('target-usage-tick-box');
         if (!targetUsageTickBox || !targetUsageTickBox.classList.contains('active')) {
         showTargetUsageElements();
+        // Update target usage header color to open (black)
+        updateTargetUsageHeaderColor(true);
         }
         
         // Add confirmed class to plan section to reset gap
@@ -2911,10 +2916,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show the previously hidden completed elements
         showCompletedCurrentNicotineElements();
         
+        // Update current usage header color to open (black)
+        updateCurrentUsageHeaderColor(true);
+        
         // Hide Target Usage elements when editing, but only if target usage is not already being edited
         const targetUsagePicker = document.querySelector('.target-usage-picker');
         if (!targetUsagePicker || targetUsagePicker.classList.contains('hidden')) {
         hideTargetUsageElements();
+        // Update target usage header color to closed (gray)
+        updateTargetUsageHeaderColor(false);
         }
         
         // Remove confirmed class from plan section to restore gap
@@ -3115,6 +3125,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update the blue rectangle with the selected level value
         updateTargetUsageStatusRectangle();
+        
+        // Update target usage header color to closed (gray)
+        updateTargetUsageHeaderColor(false);
+        
+        // Show Plan Duration elements
+        checkPlanDurationVisibility();
+        
+        // Set plan duration state to editing
+        const planDurationSection = document.querySelector('[data-plan-duration-state]');
+        if (planDurationSection) {
+          planDurationSection.setAttribute('data-plan-duration-state', 'editing');
+        }
       });
     }
     
@@ -3148,6 +3170,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (targetUsageConfirmButtonContainer) {
           targetUsageConfirmButtonContainer.classList.remove('hidden');
         }
+        
+        // Update target usage header color to open (black)
+        updateTargetUsageHeaderColor(true);
       });
     }
   }
@@ -3211,6 +3236,40 @@ document.addEventListener('DOMContentLoaded', function() {
       targetUsageConfirmButtonContainer.classList.remove('hidden');
     }
   }
+
+  // Function to update current usage header color
+  function updateCurrentUsageHeaderColor(isOpen) {
+    const currentUsageHeader = document.querySelector('.current-nicotine-header-hstack .plan-header');
+    if (currentUsageHeader) {
+      if (isOpen) {
+        currentUsageHeader.classList.remove('current-usage-closed');
+        currentUsageHeader.classList.add('current-usage-open');
+      } else {
+        currentUsageHeader.classList.remove('current-usage-open');
+        currentUsageHeader.classList.add('current-usage-closed');
+      }
+    }
+  }
+
+  // Function to update target usage header color
+  function updateTargetUsageHeaderColor(isOpen) {
+    // Find the target usage header (not the plan duration one)
+    const targetUsageSections = document.querySelectorAll('.target-usage-section');
+    for (let section of targetUsageSections) {
+      const header = section.querySelector('.target-usage-header');
+      if (header && header.textContent.trim() === 'Target Usage') {
+        if (isOpen) {
+          header.classList.remove('target-usage-closed');
+          header.classList.add('target-usage-open');
+        } else {
+          header.classList.remove('target-usage-open');
+          header.classList.add('target-usage-closed');
+        }
+        break;
+      }
+    }
+  }
+
 
   // Function to check if mobile elements should be visible after resize
   function checkMobileElementsVisibility() {
@@ -3950,6 +4009,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Check mobile elements visibility on page load
   checkMobileElementsVisibility();
+  
+  // Initialize current usage header color (starts open/black)
+  updateCurrentUsageHeaderColor(true);
+  
+  // Initialize target usage header color (starts closed/gray)
+  updateTargetUsageHeaderColor(false);
+  
   
   
   // Initialize the plan duration controls
@@ -5717,6 +5783,13 @@ function initializePlanDurationConfirmButton() {
       if (tickBox) {
         tickBox.classList.add('active');
       }
+      
+      // Set plan duration state to completed
+      const planDurationSection = document.querySelector('[data-plan-duration-state]');
+      if (planDurationSection) {
+        planDurationSection.setAttribute('data-plan-duration-state', 'completed');
+      }
+      
     });
   }
 
@@ -5753,6 +5826,13 @@ function initializePlanDurationConfirmButton() {
       if (tickBox) {
         tickBox.classList.remove('active');
       }
+      
+      // Set plan duration state to editing
+      const planDurationSection = document.querySelector('[data-plan-duration-state]');
+      if (planDurationSection) {
+        planDurationSection.setAttribute('data-plan-duration-state', 'editing');
+      }
+      
     });
   }
 }
@@ -5912,6 +5992,11 @@ function checkPlanDurationVisibility() {
   
   if (currentNicotineCompleted && targetUsageCompleted) {
     showPlanDurationContent();
+    // Set plan duration state to editing when it becomes visible
+    const planDurationSection = document.querySelector('[data-plan-duration-state]');
+    if (planDurationSection) {
+      planDurationSection.setAttribute('data-plan-duration-state', 'editing');
+    }
   } else {
     hidePlanDurationContent();
   }

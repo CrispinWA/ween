@@ -27,6 +27,7 @@
   --font-size-medium: 24px;
   --font-size-small: 20px;
   --font-size-xsmall: 16px;
+  --font-size-xxsmall: 12px;
   --icon-size-xlarge: 32px;
   --icon-size-large: 28px;
   --icon-size-medium: 24px;
@@ -871,6 +872,51 @@ body {
   font-weight: 440;
   margin: 0;
   white-space: nowrap; /* Prevent text wrapping */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Current usage header color states */
+.plan-header.current-usage-open {
+  color: var(--color-black);
+}
+
+.plan-header.current-usage-closed {
+  color: var(--color-mid-gray);
+}
+
+/* Target usage header color states */
+.target-usage-header.target-usage-open {
+  color: var(--color-black);
+}
+
+.target-usage-header.target-usage-closed {
+  color: var(--color-mid-gray);
+}
+
+/* Plan Duration Header - completely separate from Target Usage */
+.plan-duration-header {
+  color: var(--color-mid-gray); /* Start gray (closed) */
+  font-size: var(--font-size-large);
+  font-weight: 440;
+  margin: 0;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+/* Plan Duration header color states - using data attributes */
+/* Default state - gray */
+.plan-duration-header {
+  color: var(--color-mid-gray) !important;
+}
+
+/* When plan duration section is in editing state - black */
+.target-usage-section[data-plan-duration-state="editing"] .plan-duration-header {
+  color: var(--color-black) !important;
+}
+
+/* When plan duration section is in completed state - gray */
+.target-usage-section[data-plan-duration-state="completed"] .plan-duration-header {
+  color: var(--color-mid-gray) !important;
 }
 
 .plan-section {
@@ -3778,6 +3824,18 @@ body {
   /* Mobile adjustments for spacers */
   .spacer {
     min-width: 8px; /* Smaller minimum width on mobile */
+  }
+  
+  /* Mobile tickbox opacity adjustments */
+  /* Show tickboxes at 10% opacity before activation in mobile mode */
+  .tick-box {
+    opacity: 0.2;
+    transition: opacity 0.3s ease, all 0.3s ease;
+  }
+  
+  /* Show tickboxes at 100% opacity when activated in mobile mode */
+  .tick-box.active {
+    opacity: 1;
   }
   
   /* Mobile adjustments for plan sections */
