@@ -3159,6 +3159,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show Plan Duration elements
         checkPlanDurationVisibility();
         
+        // Mobile auto-scroll to center plan duration section
+        if (window.innerWidth <= 768) {
+          setTimeout(() => {
+            const planDurationSection = document.querySelector('[data-plan-duration-state]');
+            if (planDurationSection) {
+              planDurationSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+              });
+            }
+          }, 100); // Small delay to ensure plan duration section is visible
+        }
+        
         // Set plan duration state to editing
         const planDurationSection = document.querySelector('[data-plan-duration-state]');
         if (planDurationSection) {

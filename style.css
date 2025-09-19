@@ -47,6 +47,23 @@
 body {
   font-family: 'Outfit', sans-serif;
   font-weight: 440; /* Medium */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main container */
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content area should grow to push footer down */
+.content {
+  flex: 1;
 }
 
 /* Header container with horizontal layout */
@@ -93,6 +110,34 @@ body {
 /* Mail icon */
 .mail-icon {
   height: var(--icon-size-large); /* 28px */
+  width: auto;
+}
+
+/* Footer container with horizontal layout */
+.footer-container {
+  display: flex;
+  align-items: center;
+  padding: clamp(20px, 5vw, 60px); /* Same padding as header */
+  background-color: var(--color-light-gray); /* Light gray background */
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid var(--color-black-5); /* Top border instead of bottom */
+  position: relative;
+  z-index: 10; /* Higher than form */
+  height: 60px; /* Desktop height */
+}
+
+/* Footer email text */
+.footer-email {
+  color: var(--color-mid-gray);
+  font-size: var(--font-size-medium); /* Desktop font size */
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Footer W icon */
+.footer-w-icon {
+  height: var(--icon-size-medium); /* Desktop icon size */
   width: auto;
   display: block;
 }
@@ -3321,6 +3366,19 @@ body {
   /* Remove gap on mobile since there's no text */
   .get-in-touch-hstack {
     gap: 0;
+  }
+  
+  /* Footer mobile adjustments */
+  .footer-container {
+    height: 40px !important; /* Mobile height */
+  }
+  
+  .footer-email {
+    font-size: var(--font-size-xsmall) !important; /* Mobile font size */
+  }
+  
+  .footer-w-icon {
+    height: var(--icon-size-xsmall) !important; /* Mobile icon size */
   }
   
   /* Build Your Plan button mobile adjustments */
