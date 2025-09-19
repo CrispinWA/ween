@@ -217,7 +217,7 @@ body {
 .your-plan-right-vstack {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   flex: 1; /* 1/3 of available width */
 }
 
@@ -468,9 +468,34 @@ body {
 /* Graph Metrics HStack */
 .graph-metrics-hstack {
   display: flex;
-  align-items: flex-start;
-  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  flex: 1 1 0;
+}
+
+/* Graph Metrics Spacer */
+.graph-metrics-spacer {
+  flex: 1;
+}
+
+/* Graph Metrics To Icon */
+.graph-metrics-to-icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+}
+
+/* White Metric Rectangles */
+.white-metric-rectangle {
+  width: 172px;
+  height: 96px;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
 
 /* Bottom Rectangle Spacer */
@@ -482,7 +507,7 @@ body {
 .new-hstacks-vstack {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
 }
 
@@ -493,20 +518,98 @@ body {
   align-items: center;
   gap: 12px;
   width: 100%;
+  position: relative;
+  min-height: 40px; /* Ensure containers maintain height even when content is hidden */
 }
 
+
 .new-hstack-1 {
-  margin-top: -24px;
+  margin-top: 0px; /* Move hstacks down by reducing negative margin */
+}
+
+/* Nicotine and Costing Mode Content */
+.nicotine-hstack-1-content,
+.nicotine-hstack-2-content,
+.costing-hstack-1-content,
+.costing-hstack-2-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Hide nicotine content when in costing mode */
+.costing-mode .nicotine-hstack-1-content,
+.costing-mode .nicotine-hstack-2-content {
+  display: none;
+}
+
+/* Hide costing content when in nicotine mode */
+.nicotine-mode .costing-hstack-1-content,
+.nicotine-mode .costing-hstack-2-content {
+  display: none;
+}
+
+/* Hide reduce-metric icon in costing mode */
+.costing-mode .costing-hstack-icon {
+  display: none;
+}
+
+/* Costing hstack 2 sub-content */
+.costing-hstack-2-total-cost,
+.costing-hstack-2-savings {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Show total cost by default, hide savings */
+.costing-hstack-2-savings {
+  display: none;
+}
+
+/* When current spending is visible, show savings and hide total cost */
+.spending-visible .costing-hstack-2-total-cost {
+  display: none;
+}
+
+.spending-visible .costing-hstack-2-savings {
+  display: flex;
+}
+
+/* Savings vstack styling */
+.savings-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+/* Red text for savings amount */
+.new-hstack-text-red {
+  color: var(--color-red);
+  font-size: var(--font-size-large);
+  margin-left: 8px;
+}
+
+/* "vs current spending" text */
+.savings-vs-text {
+  color: var(--color-red);
+  font-size: var(--font-size-small);
+  opacity: 0.5;
 }
 
 .new-hstack-icon {
-  width: 21px;
+  width: 24px;
   height: auto;
+  margin-left: 0px;
 }
 
 .new-hstack-2 .new-hstack-icon {
-  width: 24px;
+  width: 28px;
 }
+
 
 .new-hstack-text {
   font-size: var(--font-size-large);
@@ -516,10 +619,13 @@ body {
 
 .new-hstack-text-gray {
   color: var(--color-mid-gray);
+  font-size: var(--font-size-medium);
 }
 
 .new-hstack-text-dark {
   color: var(--color-dark-gray);
+  font-size: var(--font-size-large);
+  margin-left: 8px; /* Increase gap from mid gray text */
 }
 
 .costing-text-medium {
@@ -573,27 +679,41 @@ body {
   transform: translateY(0);
 }
 
-/* Costing Mode Content */
-.costing-hstack-1-content,
-.costing-hstack-2-content {
-  display: none; /* Hidden by default, shown via JavaScript */
-  align-items: center;
-  gap: 8px;
+
+/* Three Rectangle VStack */
+.three-rectangle-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
 }
 
-.costing-hstack-2-content {
-  align-items: flex-start; /* Top align for savings content */
-  width: 0;
-  opacity: 0;
-  overflow: hidden;
-  min-height: 40px; /* Maintain consistent height */
-  transition: width 0.3s ease, opacity 0.3s ease;
+/* Individual Rectangles */
+.rectangle-1,
+.rectangle-2,
+.rectangle-3 {
+  background-color: var(--color-light-gray);
+  border-radius: 28px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.costing-hstack-2-content.visible {
-  width: auto;
-  opacity: 1;
+.rectangle-1 {
+  height: 112px;
+}
+
+.rectangle-2 {
+  height: 156px;
+  padding: 24px;
+}
+
+.rectangle-3 {
+  height: 92px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 /* Graph Metric Rectangles */
@@ -636,14 +756,14 @@ body {
 
 /* Order Button */
 .order-button {
-  width: calc(100% + 32px);
+  width: 100%;
   height: 76px;
   background-color: white;
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 24px;
   display: flex;
   align-items: center;
-  margin: -16px;
+  margin: 0;
   transition: box-shadow 0.3s ease;
   cursor: pointer;
 }
@@ -4124,6 +4244,22 @@ body {
   .new-hstack-text {
     font-size: var(--font-size-small) !important; /* Smaller font for hstack text */
   }
+  
+  .new-hstack-text-gray {
+    font-size: var(--font-size-small) !important; /* Smaller font for gray text in mobile */
+  }
+  
+          .new-hstack-text-dark {
+            font-size: var(--font-size-small) !important; /* Smaller font for dark text in mobile */
+          }
+          
+          .new-hstack-text-red {
+            font-size: var(--font-size-small) !important; /* Smaller font for red text in mobile */
+          }
+          
+          .savings-vs-text {
+            font-size: var(--font-size-xsmall) !important; /* Smaller font for vs text in mobile */
+          }
   
   .new-hstack-icon {
     width: var(--icon-size-small) !important; /* Smaller icons for hstacks */

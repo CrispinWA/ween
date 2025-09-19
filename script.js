@@ -5939,11 +5939,18 @@ function initializePlanDurationVisibility() {
     // Function to update selection state
     function updateSelectionState() {
       const isRightAligned = whiteRectangle.classList.contains('right-aligned');
+      const rightVstack = document.querySelector('.your-plan-right-vstack');
       
       if (isRightAligned) {
         // White rectangle is on the right - costing is selected
         rightTopRectangle.classList.remove('nicotine-selected');
         rightTopRectangle.classList.add('costing-selected');
+        
+        // Add costing mode class to right vstack
+        if (rightVstack) {
+          rightVstack.classList.remove('nicotine-mode');
+          rightVstack.classList.add('costing-mode');
+        }
         
         // Update title
         yourPlanTitleMain.textContent = 'Weekly Bill';
@@ -5964,6 +5971,12 @@ function initializePlanDurationVisibility() {
         // White rectangle is on the left - nicotine is selected
         rightTopRectangle.classList.remove('costing-selected');
         rightTopRectangle.classList.add('nicotine-selected');
+        
+        // Add nicotine mode class to right vstack
+        if (rightVstack) {
+          rightVstack.classList.remove('costing-mode');
+          rightVstack.classList.add('nicotine-mode');
+        }
         
         // Update title
         yourPlanTitleMain.textContent = 'Nicotine Allowance';
@@ -6296,6 +6309,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (costingHstack2) {
         costingHstack2.classList.add('visible');
       }
+      
+      // Add spending-visible class to switch from total cost to savings made
+      const rightVstack = document.querySelector('.your-plan-right-vstack');
+      if (rightVstack) {
+        rightVstack.classList.add('spending-visible');
+      }
     }
     
     // Hide arms and labels when showing spending line in costing mode
@@ -6393,6 +6412,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const costingHstack2 = document.querySelector('.costing-hstack-2-content');
       if (costingHstack2) {
         costingHstack2.classList.remove('visible');
+      }
+      
+      // Remove spending-visible class to switch back from savings made to total cost
+      const rightVstack = document.querySelector('.your-plan-right-vstack');
+      if (rightVstack) {
+        rightVstack.classList.remove('spending-visible');
       }
     }
     
@@ -6737,6 +6762,24 @@ document.addEventListener('DOMContentLoaded', function() {
     return (initialCost + finalCost) / 2;
   }
 
+  // Function to calculate total plan cost (sum from week 1 to plan duration)
+  function calculateTotalPlanCost() {
+    if (!graphConfig || !graphConfig.isCostingMode) return 0;
+    
+    const costingParams = calculateCostingParams(graphConfig.a, graphConfig.b, graphConfig.c);
+    const { ac, bc, cc } = costingParams;
+    
+    // Calculate total plan cost (sum from week 1 to cc)
+    let totalPlanCost = 0;
+    for (let week = 1; week <= cc; week++) {
+      // Use the costing curve formula C(x, ac, bc, cc)
+      const weekCost = (6 * (bc - ac) / Math.pow(cc, 3)) * (Math.pow(week, 3) / 3 - cc * Math.pow(week, 2) / 2) + bc;
+      totalPlanCost += weekCost;
+    }
+    
+    return totalPlanCost;
+  }
+
 
   // Function to update new hstacks content
   function updateNewHstacks() {
@@ -6783,6 +6826,13 @@ document.addEventListener('DOMContentLoaded', function() {
       if (averageBillElement) {
         const averageBill = calculateAverageBill();
         averageBillElement.textContent = `£${averageBill.toFixed(2)}`;
+      }
+      
+      // Update total bill value
+      const totalBillElement = document.getElementById('total-bill-amount');
+      if (totalBillElement) {
+        const totalBill = calculateTotalPlanCost();
+        totalBillElement.textContent = `£${totalBill.toFixed(2)}`;
       }
       
       // Update savings value - using plan builder values and hidden current spending

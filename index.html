@@ -649,70 +649,90 @@
                     <div class="your-plan-vertical-spacer"></div>
                   </div>
                 </div>
-                <div class="your-plan-rectangle your-plan-large-rectangle">
-                  <!-- Current Spending Display -->
-                  <div style="padding: 16px; color: var(--color-dark-gray); font-size: var(--font-size-medium);">
-                    <div><strong>Current Spending:</strong> <span id="current-spending-display">£0 /week</span></div>
-                  </div>
-                  
-                  <!-- Bottom Rectangle VStack -->
-                  <div class="bottom-rectangle-vstack">
-                    <!-- Graph Metrics HStack -->
+                <!-- Current Spending Display (Hidden) -->
+                <div style="padding: 0; margin: 0; width: 0; height: 0; overflow: hidden; color: var(--color-dark-gray); font-size: var(--font-size-medium);">
+                  <div><strong>Current Spending:</strong> <span id="current-spending-display">£0 /week</span></div>
+                </div>
+                
+                <!-- Three Rectangle VStack -->
+                <div class="three-rectangle-vstack">
+                  <!-- Rectangle 1: Graph Metrics -->
+                  <div class="rectangle-1">
                     <div class="graph-metrics-hstack">
-                      <div class="graph-metric-rectangle">
+                      <div class="white-metric-rectangle">
                         <div class="graph-metric-content">
                           <div class="graph-metric-top-text" id="left-metric-top">Baseline</div>
                           <div class="graph-metric-bottom-text" id="left-metric-bottom">0mg /day</div>
                         </div>
                       </div>
-                      <div class="graph-metric-rectangle">
+                      <div class="graph-metrics-spacer"></div>
+                      <img src="assets/to.svg" alt="To" class="graph-metrics-to-icon">
+                      <div class="graph-metrics-spacer"></div>
+                      <div class="white-metric-rectangle">
                         <div class="graph-metric-content">
                           <div class="graph-metric-top-text" id="right-metric-top">Target Level 1</div>
                           <div class="graph-metric-bottom-text" id="right-metric-bottom">0mg /day</div>
                         </div>
                       </div>
                     </div>
-                    
-                    <!-- Spacer -->
-                    <div class="bottom-rectangle-spacer"></div>
-                    
-                    <!-- New HStacks VStack -->
+                  </div>
+                  
+                  <!-- Rectangle 2: HStacks -->
+                  <div class="rectangle-2">
                     <div class="new-hstacks-vstack">
                       <!-- New HStack 1 -->
                       <div class="new-hstack-1">
-                        <img src="assets/reduce-metric.svg" alt="Reduce" class="new-hstack-icon">
-                        <div class="new-hstack-text">
-                          <span class="new-hstack-text-gray">Reduces usage by <span class="new-hstack-text-dark" id="reduction-percentage">0%</span></span>
+                        <!-- Nicotine Mode Content -->
+                        <div class="nicotine-hstack-1-content">
+                          <div class="new-hstack-text">
+                            <span class="new-hstack-text-gray">Reduces usage by <span class="new-hstack-text-dark" id="reduction-percentage">0%</span></span>
+                          </div>
+                          <img src="assets/reduce-metric.svg" alt="Reduce" class="new-hstack-icon">
                         </div>
-        <!-- Costing Mode Content -->
-        <div class="costing-hstack-1-content hidden">
-          <span class="costing-text-medium">Average bill</span>
-          <span class="costing-text-large" id="average-bill-amount">£0.00</span>
-          <span class="costing-text-medium">/week</span>
-        </div>
+                        <!-- Costing Mode Content -->
+                        <div class="costing-hstack-1-content">
+                          <div class="new-hstack-text">
+                            <span class="new-hstack-text-gray">Average bill <span class="new-hstack-text-dark" id="average-bill-amount">£0.00</span><span class="new-hstack-text-dark"> /week</span></span>
+                          </div>
+                          <img src="assets/reduce-metric.svg" alt="Reduce" class="new-hstack-icon costing-hstack-icon">
+                        </div>
                       </div>
                       
                       <!-- New HStack 2 -->
                       <div class="new-hstack-2">
-                        <img src="assets/calendar-metric.svg" alt="Calendar" class="new-hstack-icon">
-                        <div class="new-hstack-text">
-                          <span class="new-hstack-text-gray">By <span class="new-hstack-text-dark" id="target-date">1st Jan 2024</span></span>
+                        <!-- Nicotine Mode Content -->
+                        <div class="nicotine-hstack-2-content">
+                          <div class="new-hstack-text">
+                            <span class="new-hstack-text-gray">By <span class="new-hstack-text-dark" id="target-date">1st Jan 2024</span></span>
+                          </div>
+                          <img src="assets/calendar-metric.svg" alt="Calendar" class="new-hstack-icon">
                         </div>
                         <!-- Costing Mode Content -->
-                        <div class="costing-hstack-2-content hidden">
-                          <span class="costing-text-medium">Savings made</span>
-                          <div class="savings-vstack">
-                            <span class="savings-amount" id="savings-amount">£0.00</span>
-                            <span class="savings-label">vs current spending</span>
+                        <div class="costing-hstack-2-content">
+                          <!-- Total Cost Version (default) -->
+                          <div class="costing-hstack-2-total-cost">
+                            <div class="new-hstack-text">
+                              <span class="new-hstack-text-gray">Total cost <span class="new-hstack-text-dark" id="total-bill-amount">£0.00</span></span>
+                            </div>
+                            <img src="assets/calendar-metric.svg" alt="Calendar" class="new-hstack-icon costing-hstack-icon">
+                          </div>
+                          <!-- Savings Made Version (when current spending is shown) -->
+                          <div class="costing-hstack-2-savings">
+                            <div class="savings-vstack">
+                              <div class="new-hstack-text">
+                                <span class="new-hstack-text-gray">Savings made <span class="new-hstack-text-red" id="savings-amount">£0.00</span></span>
+                              </div>
+                              <div class="savings-vs-text">vs current spending</div>
+                            </div>
+                            <img src="assets/calendar-metric.svg" alt="Calendar" class="new-hstack-icon costing-hstack-icon">
                           </div>
                         </div>
                       </div>
                     </div>
-                    
-                    <!-- Spacer -->
-                    <div class="bottom-rectangle-spacer"></div>
-                    
-                    <!-- Order Button -->
+                  </div>
+                  
+                  <!-- Rectangle 3: Order Button -->
+                  <div class="rectangle-3">
                     <div class="order-button">
                       <div class="order-button-hstack">
                         <div class="order-button-vstack">
