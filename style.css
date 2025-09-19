@@ -4263,6 +4263,22 @@ body {
   
   .new-hstack-icon {
     width: var(--icon-size-small) !important; /* Smaller icons for hstacks */
+    margin-left: -4px !important; /* Negative margin in mobile */
+  }
+  
+  /* Mobile adjustments for rectangle-2 */
+  .rectangle-2 {
+    height: 120px !important; /* Reduced from 156px */
+  }
+  
+  /* Mobile adjustments for hstack gap */
+  .new-hstacks-vstack {
+    gap: 12px !important; /* Reduced from 20px */
+  }
+  
+  /* Mobile adjustments for white metric rectangles */
+  .white-metric-rectangle {
+    width: 140px !important; /* Reduced from 172px */
   }
   
   .new-hstack-2 .new-hstack-icon {
