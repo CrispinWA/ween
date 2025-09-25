@@ -34,13 +34,7 @@
     <clipPath id="clippath">
       <rect class="st0" width="426.0380554" height="94.5700684"/>
     </clipPath>
-    <pattern id="New_Pattern_Swatch_2" data-name="New Pattern Swatch 2" x="0" y="0" width="19.862069" height="19.862069" patternTransform="translate(-60.7648163 -14330.1060028) scale(1 -1)" patternUnits="userSpaceOnUse" viewBox="0 0 19.862069 19.862069">
-      <g>
-        <rect class="st0" y="0" width="19.862069" height="19.862069"/>
-        <rect class="st1" y="0" width="19.862069" height="19.862069"/>
-      </g>
-    </pattern>
-    <pattern id="New_Pattern_Swatch_11" data-name="New Pattern Swatch 11" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-54.2130966 -14349.7957001) scale(1 -1)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+    <pattern id="New_Pattern_Swatch_2" data-name="New Pattern Swatch 2" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-49.6613388 15519.9868622)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
       <g>
         <rect class="st0" width="19.8620682" height="19.8620682"/>
         <g>
@@ -49,12 +43,27 @@
         </g>
       </g>
     </pattern>
-    <pattern id="New_Pattern_Swatch_12" data-name="New Pattern Swatch 12" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-54.2130966 -14349.7957001) scale(1 -1)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+    <pattern id="New_Pattern_Swatch_11" data-name="New Pattern Swatch 11" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-43.1096191 15539.6763153)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
       <g>
         <rect class="st0" width="19.8620682" height="19.8620682"/>
         <g>
           <rect class="st0" width="19.8620682" height="19.8620682"/>
-          <rect class="st1" width="19.8620682" height="19.8620682"/>
+          <g>
+            <rect class="st0" width="19.8620682" height="19.8620682"/>
+            <rect class="st1" width="19.8620682" height="19.8620682"/>
+          </g>
+        </g>
+      </g>
+    </pattern>
+    <pattern id="New_Pattern_Swatch_12" data-name="New Pattern Swatch 12" x="0" y="0" width="19.8620682" height="19.8620682" patternTransform="translate(-43.1096191 15539.6763153)" patternUnits="userSpaceOnUse" viewBox="0 0 19.8620682 19.8620682">
+      <g>
+        <rect class="st0" width="19.8620682" height="19.8620682"/>
+        <g>
+          <rect class="st0" width="19.8620682" height="19.8620682"/>
+          <g>
+            <rect class="st0" width="19.8620682" height="19.8620682"/>
+            <rect class="st1" width="19.8620682" height="19.8620682"/>
+          </g>
         </g>
       </g>
     </pattern>
